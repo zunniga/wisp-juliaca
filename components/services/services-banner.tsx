@@ -17,7 +17,7 @@ export default function ServicesBanner() {
 
       <div className="container-custom relative z-10">
         <div className="max-w-2xl text-white">
-          <h1 className="heading-xl mb-4">Our Services</h1>
+          <h1 className="heading-xl mb-4">Diplomados</h1>
           <p className="text-lg md:text-xl text-white/90">
             Discovesssr our comprehensive range of beauty and grooming services designed for both men and women.
           </p>

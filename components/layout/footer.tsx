@@ -127,23 +127,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* Newsletter Subscription */}
-        <div className="border-t border-gray-800 pt-10 pb-8 mb-8">
-          <div className="max-w-2xl mx-auto text-center">
-            <h3 className="text-xl font-semibold mb-4">Subscribe to Our Newsletter</h3>
-            <p className="text-gray-400 mb-6">Stay updated with our latest offers and beauty tips.</p>
-            <form className="flex flex-col sm:flex-row gap-4">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="flex-grow px-4 py-3 rounded-full bg-gray-800 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-primary"
-              />
-              <button type="submit" className="btn-primary">
-                Subscribe
-              </button>
-            </form>
-          </div>
-        </div>
+        
 
         {/* Copyright */}
         <div className="text-center text-gray-500 text-sm">

@@ -13,7 +13,7 @@ export default function AboutPage() {
     <>
       <div className="bg-gradient-to-r from-primary to-primary-light py-20 mb-12">
         <div className="container-custom">
-          <h1 className="heading-xl text-white text-center mb-4">About Glow Salon</h1>
+          <h1 className="heading-xl text-white text-center mb-4">NOSOTROS</h1>
           <p className="text-xl text-white/90 text-center max-w-2xl mx-auto">
             Discover our story, our passion for beauty, and our commitment to excellence.
           </p>

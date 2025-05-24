@@ -7,42 +7,42 @@ import { ChevronLeft, ChevronRight, Star } from "lucide-react"
 const testimonials = [
   {
     id: 1,
-    name: "Priya Sharma",
-    role: "Regular Customer",
+    name: "María González",
+    role: "Asistente de Enfermería",
     image:
       "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
     quote:
-      "I've been coming to Glow Salon for over a year now, and I'm always impressed with their hair coloring services. The stylists understand exactly what I want!",
+      "El programa de enfermería aquí es excepcional. Los profesores son muy dedicados y siempre están dispuestos a ayudar. He aprendido muchísimo y me siento preparada para mi carrera.",
     rating: 5,
   },
   {
     id: 2,
-    name: "Rohan Mehta",
-    role: "First-time Customer",
+    name: "Carlos Rodríguez",
+    role: "Estudiante de Medicina",
     image:
       "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
     quote:
-      "Best haircut ever! The stylist took time to understand what I wanted and gave great suggestions. Will definitely be coming back.",
+      "Las instalaciones son de primera clase y el ambiente de aprendizaje es increíble. Los laboratorios están muy bien equipados y las clases son muy dinámicas e interactivas.",
     rating: 5,
   },
   {
     id: 3,
-    name: "Ananya Patel",
-    role: "Regular Customer",
+    name: "Ana Martínez",
+    role: "Técnico en Radiología",
     image:
       "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
     quote:
-      "Loved the nail art! The technicians are so creative and detail-oriented. My nails have never looked better.",
-    rating: 4,
+      "Lo que más me gusta es la atención personalizada. Los grupos son pequeños y cada estudiante recibe la atención que necesita para desarrollar sus habilidades al máximo.",
+    rating: 5,
   },
   {
     id: 4,
-    name: "Vikram Singh",
-    role: "Monthly Customer",
+    name: "Roberto Silva",
+    role: "Paramédico",
     image:
       "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
     quote:
-      "As a man who cares about grooming, I appreciate that this salon caters to both men and women. Great beard trimming and facial services!",
+      "La experiencia práctica que ofrecen es invaluable. Desde el primer semestre estás trabajando con casos reales y eso te prepara muy bien para el mundo laboral.",
     rating: 5,
   },
 ]
@@ -50,114 +50,295 @@ const testimonials = [
 export default function TestimonialsSection() {
   const [currentIndex, setCurrentIndex] = useState(0)
   const [autoplay, setAutoplay] = useState(true)
+  const [isTransitioning, setIsTransitioning] = useState(false)
+
+  const changeTestimonial = (newIndex: number) => {
+    if (isTransitioning) return
+
+    setIsTransitioning(true)
+
+    // After animation completes, change the index
+    setTimeout(() => {
+      setCurrentIndex(newIndex)
+      setIsTransitioning(false)
+    }, 300)
+  }
 
   useEffect(() => {
     let interval: NodeJS.Timeout
 
     if (autoplay) {
       interval = setInterval(() => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
-      }, 5000)
+        const nextIndex = (currentIndex + 1) % testimonials.length
+        changeTestimonial(nextIndex)
+      }, 3000)
     }
 
     return () => clearInterval(interval)
-  }, [autoplay])
+  }, [autoplay, currentIndex])
 
   const handlePrev = () => {
     setAutoplay(false)
-    setCurrentIndex((prevIndex) => (prevIndex - 1 + testimonials.length) % testimonials.length)
+    const prevIndex = (currentIndex - 1 + testimonials.length) % testimonials.length
+    changeTestimonial(prevIndex)
+
+    // Reactivar autoplay después de 5 segundos
+    setTimeout(() => {
+      setAutoplay(true)
+    }, 5000)
   }
 
   const handleNext = () => {
     setAutoplay(false)
-    setCurrentIndex((prevIndex) => (prevIndex + 1) % testimonials.length)
+    const nextIndex = (currentIndex + 1) % testimonials.length
+    changeTestimonial(nextIndex)
+
+    // Reactivar autoplay después de 5 segundos
+    setTimeout(() => {
+      setAutoplay(true)
+    }, 5000)
+  }
+
+  const getVisibleTestimonials = () => {
+    const extendedTestimonials = [...testimonials, ...testimonials]
+    // On mobile, show only one testimonial
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      return [extendedTestimonials[currentIndex]]
+    }
+    // On desktop, show two testimonials
+    return [extendedTestimonials[currentIndex], extendedTestimonials[currentIndex + 1]]
   }
 
   return (
-    <section className="salon-section bg-gradient-to-br from-primary/5 to-secondary/5 relative overflow-hidden animate-fadeIn">
-      {/* Decorative Pattern */}
-      <div className="absolute inset-0 pointer-events-none opacity-30">
-        <div className="absolute inset-0 bg-salon-pattern"></div>
-      </div>
+    <section className="relative">
+      {/* Main content area */}
+      <div className="bg-gray-50 relative">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
+          <div className="max-w-7xl mx-auto">
+            {/* Mobile and Tablet Layout */}
+            <div className="lg:hidden">
+              {/* Header */}
+              <div className="text-center mb-8 sm:mb-12">
+                <div className="flex items-center justify-center mb-4">
+                  <span className="text-blue-600 font-semibold text-xs sm:text-sm tracking-wider uppercase">
+                    TESTIMONIOS
+                  </span>
+                  <div className="ml-3 w-8 sm:w-12 h-0.5 bg-blue-600"></div>
+                </div>
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
+                  Lo Que Los Estudiantes
+                  <br />
+                  Dicen Sobre Nosotros
+                </h2>
+                <div className="flex items-center justify-center">
+                  <div
+                    className={`w-2 h-2 rounded-full mr-2 transition-colors ${autoplay ? "bg-green-500" : "bg-gray-400"}`}
+                  ></div>
+                  <span className="text-xs text-gray-500">{autoplay ? "Reproducción automática" : "Manual"}</span>
+                </div>
+              </div>
 
-      <div className="container-custom relative z-10">
-        <div className="salon-section-title">
-          <h2 className="heading-lg">What Our Customers Say</h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Don't just take our word for it. Here's what our clients have to say about their experiences at Glow Unisex
-            Salon.
-          </p>
-        </div>
-
-        <div className="relative max-w-4xl mx-auto">
-          <div className="overflow-hidden">
-            <div
-              className="flex transition-transform duration-500 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * 100}%)` }}
-            >
-              {testimonials.map((testimonial) => (
-                <div key={testimonial.id} className="w-full flex-shrink-0 px-4">
-                  <div className="salon-card p-8 shadow-salon">
-                    <div className="flex flex-col md:flex-row md:items-center mb-6">
-                      <div className="relative w-16 h-16 rounded-full overflow-hidden mb-4 md:mb-0 md:mr-4">
-                        <Image
-                          src={testimonial.image || "/placeholder.svg"}
-                          alt={testimonial.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div>
-                        <h3 className="font-bold text-lg">{testimonial.name}</h3>
-                        <p className="text-gray-600 text-sm">{testimonial.role}</p>
-                        <div className="flex text-secondary mt-1">
-                          {[...Array(5)].map((_, i) => (
-                            <Star key={i} className="w-4 h-4" fill={i < testimonial.rating ? "currentColor" : "none"} />
-                          ))}
+              {/* Testimonials */}
+              <div className="relative overflow-hidden mb-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+                  {getVisibleTestimonials().map((testimonial, index) => (
+                    <div
+                      key={`${testimonial.id}-${currentIndex}-${index}`}
+                      className={`bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm relative transition-all duration-500 ease-in-out transform ${
+                        isTransitioning ? "translate-x-[-100%] blur-sm opacity-0" : "translate-x-0 blur-0 opacity-100"
+                      }`}
+                      style={{
+                        transitionDelay: `${index * 100}ms`,
+                      }}
+                    >
+                      {/* Purple quote icon */}
+                      <div className="absolute top-4 sm:top-6 right-4 sm:right-6">
+                        <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-purple-600 rounded-lg flex items-center justify-center">
+                          <svg
+                            className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
+                          </svg>
                         </div>
                       </div>
+
+                      {/* Profile section */}
+                      <div className="flex items-center mb-4 sm:mb-6">
+                        <div className="relative w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 rounded-full overflow-hidden mr-3 sm:mr-4 flex-shrink-0">
+                          <Image
+                            src={testimonial.image || "/placeholder.svg"}
+                            alt={testimonial.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-sm sm:text-base lg:text-lg text-gray-900">
+                            {testimonial.name}
+                          </h3>
+                          <p className="text-blue-600 text-xs sm:text-sm font-medium">{testimonial.role}</p>
+                        </div>
+                      </div>
+
+                      {/* Testimonial text */}
+                      <blockquote className="text-gray-600 leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm">
+                        {testimonial.quote}
+                      </blockquote>
+
+                      {/* Rating */}
+                      <div className="flex space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400"
+                            fill={i < testimonial.rating ? "currentColor" : "none"}
+                          />
+                        ))}
+                      </div>
                     </div>
-                    <div className="relative">
-                      <div className="absolute -top-2 -left-2 text-5xl text-primary opacity-20">"</div>
-                      <blockquote className="text-gray-700 italic relative z-10 pl-4">{testimonial.quote}</blockquote>
-                      <div className="absolute -bottom-4 -right-2 text-5xl text-primary opacity-20">"</div>
-                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Navigation arrows - Mobile */}
+              <div className="flex justify-center space-x-4">
+                <button
+                  onClick={handlePrev}
+                  disabled={isTransitioning}
+                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                  aria-label="Testimonio anterior"
+                >
+                  <ChevronLeft className="w-4 sm:w-5 h-4 sm:h-5" />
+                </button>
+                <button
+                  onClick={handleNext}
+                  disabled={isTransitioning}
+                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                  aria-label="Siguiente testimonio"
+                >
+                  <ChevronRight className="w-4 sm:w-5 h-4 sm:h-5" />
+                </button>
+              </div>
+
+              {/* Dots indicator */}
+              <div className="flex justify-center space-x-2 mt-6">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => changeTestimonial(index)}
+                    className={`w-2 h-2 rounded-full transition-colors ${
+                      index === currentIndex ? "bg-blue-600" : "bg-gray-300"
+                    }`}
+                    aria-label={`Ir al testimonio ${index + 1}`}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Layout */}
+            <div className="hidden lg:flex items-start justify-between">
+              {/* Left side - Title and Navigation */}
+              <div className="w-1/3 pr-8 xl:pr-12">
+                <div className="mb-6">
+                  <div className="flex items-center mb-4">
+                    <span className="text-blue-600 font-semibold text-sm tracking-wider uppercase">TESTIMONIOS</span>
+                    <div className="ml-3 w-12 h-0.5 bg-blue-600"></div>
+                  </div>
+                  <h2 className="text-3xl xl:text-4xl font-bold text-gray-900 leading-tight">
+                    Lo Que Los Estudiantes
+                    <br />
+                    Dicen Sobre Nosotros
+                  </h2>
+                  <div className="flex items-center mt-2">
+                    <div
+                      className={`w-2 h-2 rounded-full mr-2 transition-colors ${autoplay ? "bg-green-500" : "bg-gray-400"}`}
+                    ></div>
+                    <span className="text-xs text-gray-500">{autoplay ? "Reproducción automática" : "Manual"}</span>
                   </div>
                 </div>
-              ))}
+
+                {/* Navigation arrows */}
+                <div className="flex space-x-4 mt-8">
+                  <button
+                    onClick={handlePrev}
+                    disabled={isTransitioning}
+                    className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                    aria-label="Testimonio anterior"
+                  >
+                    <ChevronLeft className="w-5 h-5" />
+                  </button>
+                  <button
+                    onClick={handleNext}
+                    disabled={isTransitioning}
+                    className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                    aria-label="Siguiente testimonio"
+                  >
+                    <ChevronRight className="w-5 h-5" />
+                  </button>
+                </div>
+              
+              </div>
+
+              {/* Right side - Testimonials */}
+              <div className="w-2/3 relative overflow-hidden">
+                <div className="grid grid-cols-2 gap-6">
+                  {getVisibleTestimonials().map((testimonial, index) => (
+                    <div
+                      key={`${testimonial.id}-${currentIndex}-${index}`}
+                      className={`bg-white rounded-2xl p-6 xl:p-8 shadow-sm relative transition-all duration-500 ease-in-out transform ${
+                        isTransitioning ? "translate-x-[-100%] blur-sm opacity-0" : "translate-x-0 blur-0 opacity-100"
+                      }`}
+                      style={{
+                        transitionDelay: `${index * 100}ms`,
+                      }}
+                    >
+                      {/* Purple quote icon */}
+                      <div className="absolute top-6 right-6">
+                        <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
+                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
+                          </svg>
+                        </div>
+                      </div>
+
+                      {/* Profile section */}
+                      <div className="flex items-center mb-6">
+                        <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0">
+                          <Image
+                            src={testimonial.image || "/placeholder.svg"}
+                            alt={testimonial.name}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="font-bold text-lg text-gray-900">{testimonial.name}</h3>
+                          <p className="text-blue-600 text-sm font-medium">{testimonial.role}</p>
+                        </div>
+                      </div>
+
+                      {/* Testimonial text */}
+                      <blockquote className="text-gray-600 leading-relaxed mb-6 text-sm">
+                        {testimonial.quote}
+                      </blockquote>
+
+                      {/* Rating */}
+                      <div className="flex space-x-1">
+                        {[...Array(5)].map((_, i) => (
+                          <Star
+                            key={i}
+                            className="w-4 h-4 text-yellow-400"
+                            fill={i < testimonial.rating ? "currentColor" : "none"}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
-          </div>
-
-          <button
-            onClick={handlePrev}
-            className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-4 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-5 h-5" />
-          </button>
-
-          <button
-            onClick={handleNext}
-            className="absolute top-1/2 right-0 -translate-y-1/2 translate-x-4 bg-white rounded-full p-2 shadow-md hover:bg-gray-100 transition-colors"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-5 h-5" />
-          </button>
-
-          <div className="flex justify-center mt-6 space-x-2">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setAutoplay(false)
-                  setCurrentIndex(index)
-                }}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentIndex ? "bg-primary" : "bg-gray-300"
-                }`}
-                aria-label={`Go to testimonial ${index + 1}`}
-              />
-            ))}
           </div>
         </div>
       </div>

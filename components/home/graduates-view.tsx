@@ -1,0 +1,300 @@
+"use client"
+
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Star, Heart, ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useState, useEffect } from "react"
+
+const diplomados = [
+  {
+    id: 1,
+    title: "Diplomado en Marketing Digital",
+    description: "Estrategias avanzadas para el mundo digital",
+    image: "/placeholder.svg?height=300&width=200",
+    price: 450,
+    originalPrice: 600,
+    category: "Marketing",
+    rating: 4.8,
+    reviews: 156,
+    badge: "Oferta",
+    badgeColor: "bg-orange-500",
+  },
+  {
+    id: 2,
+    title: "Diplomado en Gestión de Proyectos",
+    description: "Metodologías ágiles y tradicionales",
+    image: "/placeholder.svg?height=300&width=200",
+    price: 520,
+    originalPrice: 650,
+    category: "Gestión",
+    rating: 4.9,
+    reviews: 203,
+    badge: "Popular",
+    badgeColor: "bg-green-500",
+  },
+  {
+    id: 3,
+    title: "Diplomado en Inteligencia Artificial",
+    description: "Machine Learning y Deep Learning aplicado",
+    image: "/placeholder.svg?height=300&width=200",
+    price: 680,
+    originalPrice: 850,
+    category: "Tecnología",
+    rating: 4.7,
+    reviews: 89,
+    badge: "Nuevo",
+    badgeColor: "bg-blue-500",
+  },
+  {
+    id: 4,
+    title: "Diplomado en Finanzas Corporativas",
+    description: "Análisis financiero y toma de decisiones",
+    image: "/placeholder.svg?height=300&width=200",
+    price: 590,
+    originalPrice: 750,
+    category: "Finanzas",
+    rating: 4.6,
+    reviews: 124,
+    badge: "Destacado",
+    badgeColor: "bg-purple-500",
+  },
+  {
+    id: 5,
+    title: "Diplomado en Recursos Humanos",
+    description: "Gestión del talento humano y liderazgo",
+    image: "/placeholder.svg?height=300&width=200",
+    price: 480,
+    originalPrice: 620,
+    category: "RRHH",
+    rating: 4.5,
+    reviews: 98,
+    badge: "Trending",
+    badgeColor: "bg-pink-500",
+  },
+  {
+    id: 6,
+    title: "Diplomado en Transformación Digital",
+    description: "Innovación y cambio organizacional",
+    image: "/placeholder.svg?height=300&width=200",
+    price: 650,
+    originalPrice: 800,
+    category: "Innovación",
+    rating: 4.8,
+    reviews: 167,
+    badge: "Premium",
+    badgeColor: "bg-yellow-500",
+  },
+]
+
+export default function DiplomadosDestacados() {
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+
+  // Número de tarjetas visibles según el tamaño de pantalla
+  const getVisibleCards = () => {
+    if (typeof window !== "undefined") {
+      if (window.innerWidth >= 1024) return 4 // lg: 4 tarjetas
+      if (window.innerWidth >= 768) return 2 // md: 2 tarjetas
+      return 1 // sm: 1 tarjeta
+    }
+    return 4
+  }
+
+  const [visibleCards, setVisibleCards] = useState(4)
+
+  useEffect(() => {
+    const handleResize = () => {
+      setVisibleCards(getVisibleCards())
+    }
+
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
+
+  const maxIndex = Math.max(0, diplomados.length - visibleCards)
+
+  // Auto-play del carrusel
+  useEffect(() => {
+    if (!isAutoPlaying) return
+
+    const interval = setInterval(() => {
+      setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
+    }, 4000) // Cambia cada 4 segundos
+
+    return () => clearInterval(interval)
+  }, [isAutoPlaying, maxIndex])
+
+  const goToPrevious = () => {
+    setIsAutoPlaying(false)
+    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1))
+    // Reanudar auto-play después de 10 segundos
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  const goToNext = () => {
+    setIsAutoPlaying(false)
+    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
+    // Reanudar auto-play después de 10 segundos
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  const goToSlide = (index: number) => {
+    setIsAutoPlaying(false)
+    setCurrentIndex(index)
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
+
+  return (
+    <section className="bg-slate-900 text-white py-16 px-4">
+      <div className="max-w-7xl mx-auto">
+        {/* Título y descripción centrados */}
+        <div className="text-center mb-12">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4">Diplomados Destacados</h2>
+          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+            Impulsa tu carrera profesional con nuestros diplomados de alta calidad. Programas diseñados por expertos
+            para desarrollar competencias clave en el mercado actual.
+          </p>
+        </div>
+
+        {/* Navegación y controles */}
+        <div className="flex justify-between items-center mb-8">
+          <div className="flex gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:bg-slate-800 disabled:opacity-50"
+              onClick={goToPrevious}
+              disabled={currentIndex === 0}
+            >
+              <ChevronLeft className="w-5 h-5" />
+            </Button>
+            <Button
+              variant="ghost"
+              size="icon"
+              className="text-white hover:bg-slate-800 disabled:opacity-50"
+              onClick={goToNext}
+              disabled={currentIndex === maxIndex}
+            >
+              <ChevronRight className="w-5 h-5" />
+            </Button>
+          </div>
+
+          {/* Indicadores de posición */}
+          <div className="flex gap-2">
+            {Array.from({ length: maxIndex + 1 }, (_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index === currentIndex ? "bg-white" : "bg-slate-600"
+                }`}
+                onClick={() => goToSlide(index)}
+              />
+            ))}
+          </div>
+
+          {/* Control de auto-play */}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="text-white hover:bg-slate-800"
+            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
+          >
+            {isAutoPlaying ? "Pausar" : "Reproducir"}
+          </Button>
+        </div>
+
+        {/* Contenedor del carrusel */}
+        <div className="relative overflow-hidden">
+          <div
+            className="flex transition-transform duration-500 ease-in-out"
+            style={{
+              transform: `translateX(-${currentIndex * (100 / visibleCards)}%)`,
+            }}
+            onMouseEnter={() => setIsAutoPlaying(false)}
+            onMouseLeave={() => setIsAutoPlaying(true)}
+          >
+            {diplomados.map((diplomado) => (
+              <div key={diplomado.id} className="flex-shrink-0 px-3" style={{ width: `${100 / visibleCards}%` }}>
+                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                  {/* Badge y botón favorito */}
+                  <div className="relative">
+                    <Badge className={`absolute top-3 left-3 ${diplomado.badgeColor} text-white z-10`}>
+                      {diplomado.badge}
+                    </Badge>
+                    <Button
+                      variant="ghost"
+                      size="icon"
+                      className="absolute top-3 right-3 text-gray-400 hover:text-red-500 bg-white/80 hover:bg-white z-10"
+                    >
+                      <Heart className="w-4 h-4" />
+                    </Button>
+
+                    {/* Imagen del diplomado */}
+                    <div className="aspect-[3/4] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                      <Image
+                        src={diplomado.image || "/placeholder.svg"}
+                        alt={diplomado.title}
+                        width={200}
+                        height={300}
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                  </div>
+
+                  {/* Contenido de la tarjeta */}
+                  <div className="p-4 text-slate-900">
+                    <h3 className="font-semibold text-lg mb-2 line-clamp-2">{diplomado.title}</h3>
+
+                    {/* Precio */}
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-2xl font-bold text-purple-600">${diplomado.price}.00</span>
+                      <span className="text-sm text-gray-500 line-through">${diplomado.originalPrice}.00</span>
+                    </div>
+
+                    {/* Categoría y calificación */}
+                    <div className="flex items-center justify-between text-sm mb-4">
+                      <span className="text-purple-600 font-medium">{diplomado.category}</span>
+                      <div className="flex items-center gap-1">
+                        <div className="flex">
+                          {[...Array(5)].map((_, i) => (
+                            <Star
+                              key={i}
+                              className={`w-4 h-4 ${
+                                i < Math.floor(diplomado.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                              }`}
+                            />
+                          ))}
+                        </div>
+                        <span className="text-gray-600">({diplomado.reviews})</span>
+                      </div>
+                    </div>
+
+                    {/* Botón de acción */}
+                    <Button asChild className="w-full bg-purple-600 hover:bg-purple-700">
+                      <Link href={`/diplomados/${diplomado.id}`}>Ver Detalles</Link>
+                    </Button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* Botón para ver todos */}
+        <div className="text-center mt-12">
+          <Button
+            asChild
+            variant="outline"
+            size="lg"
+            className="border-white text-white hover:bg-white hover:text-slate-900"
+          >
+            <Link href="/diplomados">Ver Todos los Diplomados</Link>
+          </Button>
+        </div>
+      </div>
+    </section>
+  )
+}

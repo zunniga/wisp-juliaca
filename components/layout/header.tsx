@@ -4,15 +4,23 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, Target, X } from "lucide-react";
 import Image from "next/image";
+import Switch from "@mui/material/Switch";
+import { FormControlLabel } from "@mui/material";
+import { useTheme } from "next-themes";
+import { ThemeSwitch } from "@/components/utils/ThemeSwitch";
 
 const navItems = [
   { name: "INICIO", href: "/" },
-  { name: "NOSOTROS", href: "/services" },
-  { name: "CERTIFICADOS", href: "/gallery" },
-  { name: "DIPLOMADOS", href: "/about" },
-  { name: "CURSOS", href: "/contact" },
+  { name: "NOSOTROS", href: "/about" },
+  {
+    name: "CERTIFICADOS",
+    href: "https://www.verycerts.com/certs",
+    target: "_blank",
+  },
+  { name: "DIPLOMADOS", href: "/services" },
+  { name: "CURSOS", href: "/gallery" },
   { name: "CONTÁCTANOS", href: "/contact" },
 ];
 
@@ -21,17 +29,23 @@ export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const pathname = usePathname();
 
+  const { resolvedTheme, setTheme } = useTheme();
+
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const toggleTheme = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
+  };
+
   return (
     <header
       className={`fixed w-full z-50 transition-all duration-300 animate-fadeIn ${
         isScrolled
-          ? "bg-white/20 backdrop-blur-md shadow-md py-2"
+          ? "bg-white/20 dark:bg-black backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-4"
       }`}
     >
@@ -57,6 +71,9 @@ export default function Header() {
               <Link
                 key={item.name}
                 href={item.href}
+                {...(item.target
+                  ? { target: item.target, rel: "noopener noreferrer" }
+                  : {})}
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-colors hover:scale-105 transform ${
                   pathname === item.href
                     ? "text-white bg-primary shadow-md"
@@ -66,9 +83,17 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button className="ml-8 bg-indigo-500 text-white shadow-md hover:bg-indigo-900 hover:shadow-lg rounded-sm">
-              <Link href="/booking">Book Now</Link>
-            </Button>
+            <ThemeSwitch />
+            {/* <FormControlLabel
+              control={
+                <MaterialUISwitch
+                  sx={{ m: 1 }}
+                  checked={resolvedTheme === "dark"}
+                  onChange={toggleTheme}
+                />
+              }
+              label=""
+            /> */}
           </nav>
 
           <Button
@@ -98,32 +123,9 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Button
-              asChild
-              variant="default"
-              className="w-full mt-4 animate-pulse hover:animate-none"
-            >
-              <Link
-                href="/booking"
-                className="flex items-center justify-center  text-white shadow-md  hover:bg-indigo-700 hover:shadow-lg rounded-sm"
-              >
-                <span>Book Now</span>
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="h-5 w-5 ml-2"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M17 8l4 4m0 0l-4 4m4-4H3"
-                  />
-                </svg>
-              </Link>
-            </Button>
+            <div className="flex justify-start ml-4">
+              <ThemeSwitch />
+            </div>
           </div>
         )}
       </div>

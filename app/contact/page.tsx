@@ -13,7 +13,7 @@ export default function ContactPage() {
     <>
       <div className="bg-gradient-to-r from-primary to-primary-light py-20 mb-12">
         <div className="container-custom">
-          <h1 className="heading-xl text-white text-center mb-4">Contact Us</h1>
+          <h1 className="heading-xl text-white text-center mb-4">CONTÁCTANOS</h1>
           <p className="text-xl text-white/90 text-center max-w-2xl mx-auto">
             We're here to answer any questions you may have about our services or to book your next appointment.
           </p>
