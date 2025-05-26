@@ -27,7 +27,7 @@ export default function Home() {
       <TestimonialsSection />
       <WhyChooseUsSection />
       <CounterNumbers />
-      <ContactView />
+      {/* <ContactView /> */}
     </>
   );
 }

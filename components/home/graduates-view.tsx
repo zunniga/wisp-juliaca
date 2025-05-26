@@ -148,12 +148,12 @@ export default function DiplomadosDestacados() {
   }
 
   return (
-    <section className="bg-slate-900 text-white py-16 px-4">
+    <section className="bg-gray-50 dark:bg-[#20252b] text-gray-900 dark:text-white py-16 px-4 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
-        {/* Título y descripción centrados */}
+        {/* Título y descripción */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4">Diplomados Destacados</h2>
-          <p className="text-lg text-slate-300 max-w-2xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Diplomados Destacados</h2>
+          <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
             Impulsa tu carrera profesional con nuestros diplomados de alta calidad. Programas diseñados por expertos
             para desarrollar competencias clave en el mercado actual.
           </p>
@@ -165,7 +165,7 @@ export default function DiplomadosDestacados() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:bg-slate-800 disabled:opacity-50"
+              className="text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
               onClick={goToPrevious}
               disabled={currentIndex === 0}
             >
@@ -174,7 +174,7 @@ export default function DiplomadosDestacados() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-white hover:bg-slate-800 disabled:opacity-50"
+              className="text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
               onClick={goToNext}
               disabled={currentIndex === maxIndex}
             >
@@ -188,7 +188,7 @@ export default function DiplomadosDestacados() {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-white" : "bg-slate-600"
+                  index === currentIndex ? "bg-[#006174] dark:bg-[#A1D302]" : "bg-gray-300 dark:bg-gray-600"
                 }`}
                 onClick={() => goToSlide(index)}
               />
@@ -199,7 +199,7 @@ export default function DiplomadosDestacados() {
           <Button
             variant="ghost"
             size="sm"
-            className="text-white hover:bg-slate-800"
+            className="text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             onClick={() => setIsAutoPlaying(!isAutoPlaying)}
           >
             {isAutoPlaying ? "Pausar" : "Reproducir"}
@@ -218,7 +218,7 @@ export default function DiplomadosDestacados() {
           >
             {diplomados.map((diplomado) => (
               <div key={diplomado.id} className="flex-shrink-0 px-3" style={{ width: `${100 / visibleCards}%` }}>
-                <div className="bg-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
+                <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   {/* Badge y botón favorito */}
                   <div className="relative">
                     <Badge className={`absolute top-3 left-3 ${diplomado.badgeColor} text-white z-10`}>
@@ -227,13 +227,13 @@ export default function DiplomadosDestacados() {
                     <Button
                       variant="ghost"
                       size="icon"
-                      className="absolute top-3 right-3 text-gray-400 hover:text-red-500 bg-white/80 hover:bg-white z-10"
+                      className="absolute top-3 right-3 text-gray-400 hover:text-red-500 dark:hover:text-red-400 bg-white/80 dark:bg-gray-800/80 hover:bg-white dark:hover:bg-gray-800 z-10"
                     >
                       <Heart className="w-4 h-4" />
                     </Button>
 
                     {/* Imagen del diplomado */}
-                    <div className="aspect-[3/4] bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                    <div className="aspect-[3/4] bg-gradient-to-br from-slate-100 to-slate-200 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
                       <Image
                         src={diplomado.image || "/placeholder.svg"}
                         alt={diplomado.title}
@@ -245,35 +245,46 @@ export default function DiplomadosDestacados() {
                   </div>
 
                   {/* Contenido de la tarjeta */}
-                  <div className="p-4 text-slate-900">
-                    <h3 className="font-semibold text-lg mb-2 line-clamp-2">{diplomado.title}</h3>
+                  <div className="p-4">
+                    <h3 className="font-semibold text-lg mb-2 line-clamp-2 text-gray-900 dark:text-white">
+                      {diplomado.title}
+                    </h3>
 
                     {/* Precio */}
                     <div className="flex items-center gap-2 mb-3">
-                      <span className="text-2xl font-bold text-purple-600">${diplomado.price}.00</span>
-                      <span className="text-sm text-gray-500 line-through">${diplomado.originalPrice}.00</span>
+                      <span className="text-2xl font-bold text-[#006174] dark:text-[#A1D302]">
+                        ${diplomado.price}.00
+                      </span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400 line-through">
+                        ${diplomado.originalPrice}.00
+                      </span>
                     </div>
 
                     {/* Categoría y calificación */}
                     <div className="flex items-center justify-between text-sm mb-4">
-                      <span className="text-purple-600 font-medium">{diplomado.category}</span>
+                      <span className="text-[#006174] dark:text-[#A1D302] font-medium">{diplomado.category}</span>
                       <div className="flex items-center gap-1">
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
                             <Star
                               key={i}
                               className={`w-4 h-4 ${
-                                i < Math.floor(diplomado.rating) ? "fill-yellow-400 text-yellow-400" : "text-gray-300"
+                                i < Math.floor(diplomado.rating)
+                                  ? "fill-yellow-400 text-yellow-400"
+                                  : "text-gray-300 dark:text-gray-500"
                               }`}
                             />
                           ))}
                         </div>
-                        <span className="text-gray-600">({diplomado.reviews})</span>
+                        <span className="text-gray-600 dark:text-gray-400">({diplomado.reviews})</span>
                       </div>
                     </div>
 
                     {/* Botón de acción */}
-                    <Button asChild className="w-full bg-purple-600 hover:bg-purple-700">
+                    <Button
+                      asChild
+                      className="w-full bg-[#006174] hover:bg-[#004d5a] dark:bg-[#A1D302] dark:hover:bg-[#8fb002] text-white dark:text-gray-900"
+                    >
                       <Link href={`/diplomados/${diplomado.id}`}>Ver Detalles</Link>
                     </Button>
                   </div>
@@ -289,7 +300,7 @@ export default function DiplomadosDestacados() {
             asChild
             variant="outline"
             size="lg"
-            className="border-white text-white hover:bg-white hover:text-slate-900"
+            className="border-[#006174] text-[#006174] hover:bg-[#006174] hover:text-white dark:border-[#A1D302] dark:text-[#A1D302] dark:hover:bg-[#A1D302] dark:hover:text-gray-900"
           >
             <Link href="/diplomados">Ver Todos los Diplomados</Link>
           </Button>

@@ -3,16 +3,16 @@ import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, Clock, Scissors } fr
 
 export default function Footer() {
   return (
-    <footer className="bg-gray-900 text-white pt-20 pb-10">
+    <footer className=" bg-gray-900 text-white pt-20 pb-10">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* About Glow Salon */}
           <div>
             <div className="flex items-center mb-6">
               <div className="w-10 h-10 bg-primary rounded-full flex items-center justify-center mr-3">
-                <Scissors className="h-5 w-5 text-white" />
+                <MapPin className="h-5 w-5 text-white" />
               </div>
-              <span className="text-2xl font-bold gradient-text">Glow Salon</span>
+              <span className="text-2xl font-bold gradient-text">Corporación Inalta</span>
             </div>
             <p className="text-gray-400 mb-6">
               Elevating beauty and style with our premium unisex salon services. Experience the glow today!
@@ -49,7 +49,7 @@ export default function Footer() {
           <div>
             <h3 className="text-lg font-semibold mb-6 flex items-center">
               <span className="w-8 h-0.5 bg-primary mr-3"></span>
-              Quick Links
+              Inalta
             </h3>
             <ul className="space-y-3">
               <li>
@@ -133,9 +133,9 @@ export default function Footer() {
         <div className="text-center text-gray-500 text-sm">
           <p>&copy; {new Date().getFullYear()} Glow Salon. All rights reserved.</p>
           <p className="mt-2">
-            <span className="inline-block">Made with ❤️ in India</span>
+            <span className="inline-block"></span>
             <span className="mx-2">|</span>
-            <span className="inline-block">सभी के लिए सुंदरता (Beauty for All)</span>
+            <span className="inline-block">Inalta - Todos los derechos resrvados</span>
           </p>
         </div>
       </div>

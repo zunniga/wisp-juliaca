@@ -239,14 +239,14 @@ export default function AutoCourseCarousel() {
   }
 
   return (
-    <section className="py-8 sm:py-12 lg:py-16 bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 min-h-screen">
+    <section className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-[#20252b] min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título y Descripción Centrados */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-[#A1D302] mb-4 sm:mb-6">
             Descubre Cursos Increíbles
           </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed px-4">
+          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed px-4">
             Explora nuestra colección completa de cursos profesionales diseñados para mejorar tus habilidades y avanzar
             en tu carrera. Aprende de expertos de la industria con proyectos prácticos y aplicaciones del mundo real.
           </p>
@@ -266,7 +266,7 @@ export default function AutoCourseCarousel() {
             >
               {courses.map((course) => (
                 <div key={course.id} className={`${getCardWidthClass()} flex-shrink-0 px-2 sm:px-3`}>
-                  <div className="bg-white rounded-2xl shadow-2xl overflow-hidden h-full">
+                  <div className="bg-white dark:bg-[#20252b] dark:border dark:border-[#006174]/20 rounded-2xl shadow-2xl overflow-hidden h-full">
                     {/* Imagen del Curso */}
                     <div className="relative">
                       <Image
@@ -291,7 +291,7 @@ export default function AutoCourseCarousel() {
                     {/* Contenido del Curso */}
                     <div className="p-3 sm:p-4 lg:p-5">
                       {/* Meta del Curso */}
-                      <div className="flex items-center gap-2 sm:gap-3 text-xs text-gray-500 mb-2">
+                      <div className="flex items-center gap-2 sm:gap-3 text-gray-500 dark:text-gray-200 mb-2">
                         <div className="flex items-center gap-1">
                           <BookOpen className="w-3 h-3" />
                           <span>{course.lessons} Lecciones</span>
@@ -303,20 +303,24 @@ export default function AutoCourseCarousel() {
                       </div>
 
                       {/* Título del Curso */}
-                      <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 mb-2 line-clamp-2 leading-tight">
+                      <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-[#A1D302] mb-2 line-clamp-2 leading-tight">
                         {course.title}
                       </h3>
 
                       {/* Descripción del Curso */}
-                      <p className="text-gray-600 mb-3 text-xs sm:text-sm line-clamp-2">{course.description}</p>
+                      <p className="text-gray-600 dark:text-gray-200 mb-3 text-xs sm:text-sm line-clamp-2">
+                        {course.description}
+                      </p>
 
                       {/* Precios */}
                       <div className="flex items-center gap-2 mb-3">
-                        <span className="text-base sm:text-lg font-bold text-purple-600">
+                        <span className="text-base sm:text-lg font-bold text-purple-600 dark:text-[#A1D302]">
                           {course.isFree ? "Gratis" : course.currentPrice}
                         </span>
                         {!course.isFree && (
-                          <span className="text-gray-400 line-through text-xs sm:text-sm">{course.originalPrice}</span>
+                          <span className="text-gray-400 dark:text-[#006174]/70 line-through text-xs sm:text-sm">
+                            {course.originalPrice}
+                          </span>
                         )}
                       </div>
 
@@ -330,7 +334,7 @@ export default function AutoCourseCarousel() {
                           className="rounded-full w-6 h-6 sm:w-8 sm:h-8"
                         />
                         <div className="flex-1 min-w-0">
-                          <p className="font-medium text-gray-900 text-xs sm:text-sm truncate">
+                          <p className="font-medium text-gray-900 dark:text-[#A1D302] text-xs sm:text-sm truncate">
                             {course.instructor.name}
                           </p>
                           <div className="flex items-center gap-1">
@@ -341,12 +345,14 @@ export default function AutoCourseCarousel() {
                                   className={`w-2 h-2 sm:w-2.5 sm:h-2.5 ${
                                     i < Math.floor(course.instructor.rating)
                                       ? "fill-yellow-400 text-yellow-400"
-                                      : "text-gray-300"
+                                      : "text-gray-300 dark:text-[#006174]/30"
                                   }`}
                                 />
                               ))}
                             </div>
-                            <span className="text-xs text-gray-500">({course.instructor.reviews})</span>
+                            <span className="text-xs text-gray-500 dark:text-[#006174]/70">
+                              ({course.instructor.reviews})
+                            </span>
                           </div>
                         </div>
                       </div>
@@ -361,18 +367,18 @@ export default function AutoCourseCarousel() {
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg z-10 w-8 h-8 sm:w-10 sm:h-10"
+            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-[#A1D302]/10 hover:bg-[#A1D302]/20 border-[#A1D302] dark:bg-[#006174]/20 dark:hover:bg-[#006174]/30 dark:border-[#006174] shadow-lg z-10 w-8 h-8 sm:w-10 sm:h-10"
             onClick={goToPrevious}
           >
-            <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4" />
+            <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4 text-[#A1D302] dark:text-[#A1D302]" />
           </Button>
           <Button
             variant="outline"
             size="icon"
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-white/90 hover:bg-white shadow-lg z-10 w-8 h-8 sm:w-10 sm:h-10"
+            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-[#A1D302]/10 hover:bg-[#A1D302]/20 border-[#A1D302] dark:bg-[#006174]/20 dark:hover:bg-[#006174]/30 dark:border-[#006174] shadow-lg z-10 w-8 h-8 sm:w-10 sm:h-10"
             onClick={goToNext}
           >
-            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4" />
+            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-[#A1D302] dark:text-[#A1D302]" />
           </Button>
 
           {/* Indicador de Puntos */}
@@ -382,8 +388,8 @@ export default function AutoCourseCarousel() {
                 key={index}
                 className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
                   Math.floor(currentIndex / cardsPerView) === index
-                    ? "bg-white scale-125"
-                    : "bg-white/50 hover:bg-white/75"
+                    ? "bg-[#A1D302] dark:bg-[#A1D302] scale-125"
+                    : "bg-[#006174]/30 hover:bg-[#006174]/50 dark:bg-[#006174]/50 dark:hover:bg-[#006174]/75"
                 }`}
                 onClick={() => goToSlide(index * cardsPerView)}
               />
@@ -392,7 +398,7 @@ export default function AutoCourseCarousel() {
 
           {/* Indicador de Auto-reproducción */}
           <div className="text-center mt-3 sm:mt-4">
-            <p className="text-white/60 text-xs sm:text-sm">
+            <p className="text-gray-500 dark:text-[#006174]/80 text-xs sm:text-sm">
               {isAutoPlaying
                 ? "Reproducción automática • Pasa el cursor para pausar"
                 : "Pausado • Aleja el cursor para reanudar"}

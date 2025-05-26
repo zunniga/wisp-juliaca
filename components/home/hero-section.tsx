@@ -98,13 +98,13 @@ export default function HeroSection() {
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
             Eleva tu{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A1D302] to-[#14a0bc]">
               Conocimiento y Carrera
             </span>
           </motion.h1>
 
           <motion.p
-            className="text-xl md:text-2xl mb-8 text-gray-200 leading-relaxed"
+            className="text-xl md:text-2xl mb-8 text-gray-200 dark:text-[#A1D302] leading-relaxed"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
@@ -127,7 +127,7 @@ export default function HeroSection() {
               asChild
               variant="outline"
               size="lg"
-              className="text-lg px-8 py-4 text-gray-800 border-white hover:bg-white/70"
+              className="text-lg px-8 py-4 text-[#006174] dark:text-[#A1D302] border-[#006174] dark:border-[#A1D302] hover:bg-[#006174]/10 dark:hover:bg-[#A1D302]/10"
             >
               <Link href="/contact">Contáctanos</Link>
             </Button>
@@ -174,7 +174,9 @@ export default function HeroSection() {
               transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
             >
               <div className="text-yellow-400 flex text-2xl">{"★★★★★"}</div>
-              <p className="text-sm text-gray-300">Más de 2,000 estudiantes graduados en cursos y diplomados</p>
+              <p className="text-sm text-gray-300">
+                Más de 2,000 estudiantes graduados en cursos y diplomados
+              </p>
             </motion.div>
           </motion.div>
         </div>

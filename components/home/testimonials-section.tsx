@@ -112,7 +112,7 @@ export default function TestimonialsSection() {
   return (
     <section className="relative">
       {/* Main content area */}
-      <div className="bg-gray-50 relative">
+      <div className="bg-gray-50 dark:bg-[#20252b] relative transition-colors duration-300">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <div className="max-w-7xl mx-auto">
             {/* Mobile and Tablet Layout */}
@@ -120,21 +120,25 @@ export default function TestimonialsSection() {
               {/* Header */}
               <div className="text-center mb-8 sm:mb-12">
                 <div className="flex items-center justify-center mb-4">
-                  <span className="text-blue-600 font-semibold text-xs sm:text-sm tracking-wider uppercase">
+                  <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs sm:text-sm tracking-wider uppercase transition-colors duration-300">
                     TESTIMONIOS
                   </span>
-                  <div className="ml-3 w-8 sm:w-12 h-0.5 bg-blue-600"></div>
+                  <div className="ml-3 w-8 sm:w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
                 </div>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 leading-tight mb-4">
+                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white leading-tight mb-4 transition-colors duration-300">
                   Lo Que Los Estudiantes
                   <br />
                   Dicen Sobre Nosotros
                 </h2>
                 <div className="flex items-center justify-center">
                   <div
-                    className={`w-2 h-2 rounded-full mr-2 transition-colors ${autoplay ? "bg-green-500" : "bg-gray-400"}`}
+                    className={`w-2 h-2 rounded-full mr-2 transition-colors duration-300 ${
+                      autoplay ? "bg-[#A1D302]" : "bg-gray-400 dark:bg-gray-500"
+                    }`}
                   ></div>
-                  <span className="text-xs text-gray-500">{autoplay ? "Reproducción automática" : "Manual"}</span>
+                  <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
+                    {autoplay ? "Reproducción automática" : "Manual"}
+                  </span>
                 </div>
               </div>
 
@@ -144,18 +148,18 @@ export default function TestimonialsSection() {
                   {getVisibleTestimonials().map((testimonial, index) => (
                     <div
                       key={`${testimonial.id}-${currentIndex}-${index}`}
-                      className={`bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm relative transition-all duration-500 ease-in-out transform ${
+                      className={`bg-white dark:bg-gray-800 rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 shadow-sm dark:shadow-lg relative transition-all duration-500 ease-in-out transform ${
                         isTransitioning ? "translate-x-[-100%] blur-sm opacity-0" : "translate-x-0 blur-0 opacity-100"
                       }`}
                       style={{
                         transitionDelay: `${index * 100}ms`,
                       }}
                     >
-                      {/* Purple quote icon */}
+                      {/* Quote icon with new colors */}
                       <div className="absolute top-4 sm:top-6 right-4 sm:right-6">
-                        <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-purple-600 rounded-lg flex items-center justify-center">
+                        <div className="w-8 sm:w-10 lg:w-12 h-8 sm:h-10 lg:h-12 bg-[#006174] dark:bg-[#A1D302] rounded-lg flex items-center justify-center transition-colors duration-300">
                           <svg
-                            className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white"
+                            className="w-4 sm:w-5 lg:w-6 h-4 sm:h-5 lg:h-6 text-white dark:text-[#20252b]"
                             fill="currentColor"
                             viewBox="0 0 24 24"
                           >
@@ -166,7 +170,7 @@ export default function TestimonialsSection() {
 
                       {/* Profile section */}
                       <div className="flex items-center mb-4 sm:mb-6">
-                        <div className="relative w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 rounded-full overflow-hidden mr-3 sm:mr-4 flex-shrink-0">
+                        <div className="relative w-12 sm:w-14 lg:w-16 h-12 sm:h-14 lg:h-16 rounded-full overflow-hidden mr-3 sm:mr-4 flex-shrink-0 ring-2 ring-[#A1D302] dark:ring-[#006174] transition-all duration-300">
                           <Image
                             src={testimonial.image || "/placeholder.svg"}
                             alt={testimonial.name}
@@ -175,15 +179,17 @@ export default function TestimonialsSection() {
                           />
                         </div>
                         <div>
-                          <h3 className="font-bold text-sm sm:text-base lg:text-lg text-gray-900">
+                          <h3 className="font-bold text-sm sm:text-base lg:text-lg text-gray-900 dark:text-white transition-colors duration-300">
                             {testimonial.name}
                           </h3>
-                          <p className="text-blue-600 text-xs sm:text-sm font-medium">{testimonial.role}</p>
+                          <p className="text-[#006174] dark:text-[#A1D302] text-xs sm:text-sm font-medium transition-colors duration-300">
+                            {testimonial.role}
+                          </p>
                         </div>
                       </div>
 
                       {/* Testimonial text */}
-                      <blockquote className="text-gray-600 leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm">
+                      <blockquote className="text-gray-600 dark:text-gray-300 leading-relaxed mb-4 sm:mb-6 text-xs sm:text-sm transition-colors duration-300">
                         {testimonial.quote}
                       </blockquote>
 
@@ -192,7 +198,7 @@ export default function TestimonialsSection() {
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className="w-3 sm:w-4 h-3 sm:h-4 text-yellow-400"
+                            className="w-3 sm:w-4 h-3 sm:h-4 text-[#A1D302] dark:text-yellow-400 transition-colors duration-300"
                             fill={i < testimonial.rating ? "currentColor" : "none"}
                           />
                         ))}
@@ -207,7 +213,7 @@ export default function TestimonialsSection() {
                 <button
                   onClick={handlePrev}
                   disabled={isTransitioning}
-                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 disabled:opacity-50 text-gray-600 dark:text-gray-300"
                   aria-label="Testimonio anterior"
                 >
                   <ChevronLeft className="w-4 sm:w-5 h-4 sm:h-5" />
@@ -215,7 +221,7 @@ export default function TestimonialsSection() {
                 <button
                   onClick={handleNext}
                   disabled={isTransitioning}
-                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                  className="w-10 sm:w-12 h-10 sm:h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 disabled:opacity-50 text-gray-600 dark:text-gray-300"
                   aria-label="Siguiente testimonio"
                 >
                   <ChevronRight className="w-4 sm:w-5 h-4 sm:h-5" />
@@ -228,8 +234,8 @@ export default function TestimonialsSection() {
                   <button
                     key={index}
                     onClick={() => changeTestimonial(index)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      index === currentIndex ? "bg-blue-600" : "bg-gray-300"
+                    className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                      index === currentIndex ? "bg-[#006174] dark:bg-[#A1D302]" : "bg-gray-300 dark:bg-gray-600"
                     }`}
                     aria-label={`Ir al testimonio ${index + 1}`}
                   />
@@ -243,19 +249,25 @@ export default function TestimonialsSection() {
               <div className="w-1/3 pr-8 xl:pr-12">
                 <div className="mb-6">
                   <div className="flex items-center mb-4">
-                    <span className="text-blue-600 font-semibold text-sm tracking-wider uppercase">TESTIMONIOS</span>
-                    <div className="ml-3 w-12 h-0.5 bg-blue-600"></div>
+                    <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-sm tracking-wider uppercase transition-colors duration-300">
+                      TESTIMONIOS
+                    </span>
+                    <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
                   </div>
-                  <h2 className="text-3xl xl:text-4xl font-bold text-gray-900 leading-tight">
+                  <h2 className="text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white leading-tight transition-colors duration-300">
                     Lo Que Los Estudiantes
                     <br />
                     Dicen Sobre Nosotros
                   </h2>
                   <div className="flex items-center mt-2">
                     <div
-                      className={`w-2 h-2 rounded-full mr-2 transition-colors ${autoplay ? "bg-green-500" : "bg-gray-400"}`}
+                      className={`w-2 h-2 rounded-full mr-2 transition-colors duration-300 ${
+                        autoplay ? "bg-[#A1D302]" : "bg-gray-400 dark:bg-gray-500"
+                      }`}
                     ></div>
-                    <span className="text-xs text-gray-500">{autoplay ? "Reproducción automática" : "Manual"}</span>
+                    <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
+                      {autoplay ? "Reproducción automática" : "Manual"}
+                    </span>
                   </div>
                 </div>
 
@@ -264,7 +276,7 @@ export default function TestimonialsSection() {
                   <button
                     onClick={handlePrev}
                     disabled={isTransitioning}
-                    className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                    className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 disabled:opacity-50 text-gray-600 dark:text-gray-300"
                     aria-label="Testimonio anterior"
                   >
                     <ChevronLeft className="w-5 h-5" />
@@ -272,13 +284,12 @@ export default function TestimonialsSection() {
                   <button
                     onClick={handleNext}
                     disabled={isTransitioning}
-                    className="w-12 h-12 rounded-full border-2 border-gray-300 flex items-center justify-center hover:border-blue-600 hover:text-blue-600 transition-colors bg-white disabled:opacity-50"
+                    className="w-12 h-12 rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 disabled:opacity-50 text-gray-600 dark:text-gray-300"
                     aria-label="Siguiente testimonio"
                   >
                     <ChevronRight className="w-5 h-5" />
                   </button>
                 </div>
-              
               </div>
 
               {/* Right side - Testimonials */}
@@ -287,17 +298,21 @@ export default function TestimonialsSection() {
                   {getVisibleTestimonials().map((testimonial, index) => (
                     <div
                       key={`${testimonial.id}-${currentIndex}-${index}`}
-                      className={`bg-white rounded-2xl p-6 xl:p-8 shadow-sm relative transition-all duration-500 ease-in-out transform ${
+                      className={`bg-white dark:bg-gray-800 rounded-2xl p-6 xl:p-8 shadow-sm dark:shadow-lg relative transition-all duration-500 ease-in-out transform ${
                         isTransitioning ? "translate-x-[-100%] blur-sm opacity-0" : "translate-x-0 blur-0 opacity-100"
                       }`}
                       style={{
                         transitionDelay: `${index * 100}ms`,
                       }}
                     >
-                      {/* Purple quote icon */}
+                      {/* Quote icon with new colors */}
                       <div className="absolute top-6 right-6">
-                        <div className="w-12 h-12 bg-purple-600 rounded-lg flex items-center justify-center">
-                          <svg className="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <div className="w-12 h-12 bg-[#006174] dark:bg-[#A1D302] rounded-lg flex items-center justify-center transition-colors duration-300">
+                          <svg
+                            className="w-6 h-6 text-white dark:text-[#20252b]"
+                            fill="currentColor"
+                            viewBox="0 0 24 24"
+                          >
                             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
                           </svg>
                         </div>
@@ -305,7 +320,7 @@ export default function TestimonialsSection() {
 
                       {/* Profile section */}
                       <div className="flex items-center mb-6">
-                        <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0">
+                        <div className="relative w-16 h-16 rounded-full overflow-hidden mr-4 flex-shrink-0 ring-2 ring-[#A1D302] dark:ring-[#006174] transition-all duration-300">
                           <Image
                             src={testimonial.image || "/placeholder.svg"}
                             alt={testimonial.name}
@@ -314,13 +329,17 @@ export default function TestimonialsSection() {
                           />
                         </div>
                         <div>
-                          <h3 className="font-bold text-lg text-gray-900">{testimonial.name}</h3>
-                          <p className="text-blue-600 text-sm font-medium">{testimonial.role}</p>
+                          <h3 className="font-bold text-lg text-gray-900 dark:text-white transition-colors duration-300">
+                            {testimonial.name}
+                          </h3>
+                          <p className="text-[#006174] dark:text-[#A1D302] text-sm font-medium transition-colors duration-300">
+                            {testimonial.role}
+                          </p>
                         </div>
                       </div>
 
                       {/* Testimonial text */}
-                      <blockquote className="text-gray-600 leading-relaxed mb-6 text-sm">
+                      <blockquote className="text-gray-600 dark:text-gray-300 leading-relaxed mb-6 text-sm transition-colors duration-300">
                         {testimonial.quote}
                       </blockquote>
 
@@ -329,7 +348,7 @@ export default function TestimonialsSection() {
                         {[...Array(5)].map((_, i) => (
                           <Star
                             key={i}
-                            className="w-4 h-4 text-yellow-400"
+                            className="w-4 h-4 text-[#A1D302] dark:text-yellow-400 transition-colors duration-300"
                             fill={i < testimonial.rating ? "currentColor" : "none"}
                           />
                         ))}
