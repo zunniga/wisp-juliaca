@@ -10,7 +10,7 @@ export default function HeroSection() {
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
       <div className="absolute inset-0 z-0">
         <Image
-          src="https://images.unsplash.com/photo-1560066984-138dadb4c035?w=1920&h=1080&fit=crop&crop=focalpoint&auto=format&q=80"
+          src="/image/background/bg-2.webp"
           alt="Luxurious salon interior"
           fill
           className="object-cover"
@@ -182,7 +182,8 @@ export default function HeroSection() {
         </div>
       </div>
 
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-background to-transparent"></div>
+      <div className="absolute bottom-0 left-0 right-0 h-24    bg-gradient-to-t from-[#A1D302]/20 to-transparent "></div>
+
     </section>
   )
 }

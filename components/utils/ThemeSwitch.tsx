@@ -21,7 +21,12 @@ export const ThemeSwitch = () => {
     <button
       type="button"
       onClick={toggleTheme}
-      className="rounded-full p-2 bg-transparent hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+      className={`
+    rounded-xl p-2 border transition-colors duration-300
+    shadow-sm hover:shadow-md
+    border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-800
+    dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-100
+  `}
       aria-label="Cambiar tema"
     >
       {isDark ? (

@@ -3,7 +3,7 @@ import { Facebook, Instagram, Twitter, MapPin, Phone, Mail, Clock, Scissors } fr
 
 export default function Footer() {
   return (
-    <footer className=" bg-gray-900 text-white pt-20 pb-10">
+    <footer className=" bg-gray-900 text-white pt-20 pb-20">
       <div className="container-custom">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
           {/* About Glow Salon */}
@@ -131,11 +131,11 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="text-center text-gray-500 text-sm">
-          <p>&copy; {new Date().getFullYear()} Glow Salon. All rights reserved.</p>
+          <p>&copy; {new Date().getFullYear()} Corporación Inalta. All rights reserved.</p>
           <p className="mt-2">
             <span className="inline-block"></span>
-            <span className="mx-2">|</span>
-            <span className="inline-block">Inalta - Todos los derechos resrvados</span>
+            {/* <span className="mx-2">|</span> */}
+            {/* <span className="inline-block">Inalta - Todos los derechos resrvados</span> */}
           </p>
         </div>
       </div>

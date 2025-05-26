@@ -1,18 +1,18 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Star, Heart, ChevronLeft, ChevronRight } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
-import { useState, useEffect } from "react"
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
+import { Star, Heart, ChevronLeft, ChevronRight } from "lucide-react";
+import Image from "next/image";
+import Link from "next/link";
+import { useState, useEffect } from "react";
 
 const diplomados = [
   {
     id: 1,
     title: "Diplomado en Marketing Digital",
     description: "Estrategias avanzadas para el mundo digital",
-    image: "/placeholder.svg?height=300&width=200",
+    image: "image/graduates/test.webp",
     price: 450,
     originalPrice: 600,
     category: "Marketing",
@@ -25,7 +25,7 @@ const diplomados = [
     id: 2,
     title: "Diplomado en Gestión de Proyectos",
     description: "Metodologías ágiles y tradicionales",
-    image: "/placeholder.svg?height=300&width=200",
+    image: "image/graduates/test.webp",
     price: 520,
     originalPrice: 650,
     category: "Gestión",
@@ -38,7 +38,7 @@ const diplomados = [
     id: 3,
     title: "Diplomado en Inteligencia Artificial",
     description: "Machine Learning y Deep Learning aplicado",
-    image: "/placeholder.svg?height=300&width=200",
+    image: "image/graduates/test.webp",
     price: 680,
     originalPrice: 850,
     category: "Tecnología",
@@ -51,7 +51,7 @@ const diplomados = [
     id: 4,
     title: "Diplomado en Finanzas Corporativas",
     description: "Análisis financiero y toma de decisiones",
-    image: "/placeholder.svg?height=300&width=200",
+    image: "image/graduates/test.webp",
     price: 590,
     originalPrice: 750,
     category: "Finanzas",
@@ -64,7 +64,7 @@ const diplomados = [
     id: 5,
     title: "Diplomado en Recursos Humanos",
     description: "Gestión del talento humano y liderazgo",
-    image: "/placeholder.svg?height=300&width=200",
+    image: "image/graduates/test.webp",
     price: 480,
     originalPrice: 620,
     category: "RRHH",
@@ -77,7 +77,7 @@ const diplomados = [
     id: 6,
     title: "Diplomado en Transformación Digital",
     description: "Innovación y cambio organizacional",
-    image: "/placeholder.svg?height=300&width=200",
+    image: "image/graduates/test.webp",
     price: 650,
     originalPrice: 800,
     category: "Innovación",
@@ -86,76 +86,81 @@ const diplomados = [
     badge: "Premium",
     badgeColor: "bg-yellow-500",
   },
-]
+];
 
 export default function DiplomadosDestacados() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
 
   // Número de tarjetas visibles según el tamaño de pantalla
   const getVisibleCards = () => {
     if (typeof window !== "undefined") {
-      if (window.innerWidth >= 1024) return 4 // lg: 4 tarjetas
-      if (window.innerWidth >= 768) return 2 // md: 2 tarjetas
-      return 1 // sm: 1 tarjeta
+      if (window.innerWidth >= 1024) return 4; // lg: 4 tarjetas
+      if (window.innerWidth >= 768) return 2; // md: 2 tarjetas
+      return 1; // sm: 1 tarjeta
     }
-    return 4
-  }
+    return 4;
+  };
 
-  const [visibleCards, setVisibleCards] = useState(4)
+  const [visibleCards, setVisibleCards] = useState(4);
 
   useEffect(() => {
     const handleResize = () => {
-      setVisibleCards(getVisibleCards())
-    }
+      setVisibleCards(getVisibleCards());
+    };
 
-    handleResize()
-    window.addEventListener("resize", handleResize)
-    return () => window.removeEventListener("resize", handleResize)
-  }, [])
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
-  const maxIndex = Math.max(0, diplomados.length - visibleCards)
+  const maxIndex = Math.max(0, diplomados.length - visibleCards);
 
   // Auto-play del carrusel
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
-    }, 4000) // Cambia cada 4 segundos
+      setCurrentIndex((prevIndex) =>
+        prevIndex >= maxIndex ? 0 : prevIndex + 1
+      );
+    }, 4000); // Cambia cada 4 segundos
 
-    return () => clearInterval(interval)
-  }, [isAutoPlaying, maxIndex])
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, maxIndex]);
 
   const goToPrevious = () => {
-    setIsAutoPlaying(false)
-    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1))
+    setIsAutoPlaying(false);
+    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1));
     // Reanudar auto-play después de 10 segundos
-    setTimeout(() => setIsAutoPlaying(true), 10000)
-  }
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
 
   const goToNext = () => {
-    setIsAutoPlaying(false)
-    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
+    setIsAutoPlaying(false);
+    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1));
     // Reanudar auto-play después de 10 segundos
-    setTimeout(() => setIsAutoPlaying(true), 10000)
-  }
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
 
   const goToSlide = (index: number) => {
-    setIsAutoPlaying(false)
-    setCurrentIndex(index)
-    setTimeout(() => setIsAutoPlaying(true), 10000)
-  }
+    setIsAutoPlaying(false);
+    setCurrentIndex(index);
+    setTimeout(() => setIsAutoPlaying(true), 10000);
+  };
 
   return (
     <section className="bg-gray-50 dark:bg-[#20252b] text-gray-900 dark:text-white py-16 px-4 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* Título y descripción */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">Diplomados Destacados</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+            Diplomados Destacados
+          </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Impulsa tu carrera profesional con nuestros diplomados de alta calidad. Programas diseñados por expertos
-            para desarrollar competencias clave en el mercado actual.
+            Impulsa tu carrera profesional con nuestros diplomados de alta
+            calidad. Programas diseñados por expertos para desarrollar
+            competencias clave en el mercado actual.
           </p>
         </div>
 
@@ -188,7 +193,9 @@ export default function DiplomadosDestacados() {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex ? "bg-[#006174] dark:bg-[#A1D302]" : "bg-gray-300 dark:bg-gray-600"
+                  index === currentIndex
+                    ? "bg-[#006174] dark:bg-[#A1D302]"
+                    : "bg-gray-300 dark:bg-gray-600"
                 }`}
                 onClick={() => goToSlide(index)}
               />
@@ -217,11 +224,17 @@ export default function DiplomadosDestacados() {
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
             {diplomados.map((diplomado) => (
-              <div key={diplomado.id} className="flex-shrink-0 px-3" style={{ width: `${100 / visibleCards}%` }}>
+              <div
+                key={diplomado.id}
+                className="flex-shrink-0 px-3"
+                style={{ width: `${100 / visibleCards}%` }}
+              >
                 <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   {/* Badge y botón favorito */}
                   <div className="relative">
-                    <Badge className={`absolute top-3 left-3 ${diplomado.badgeColor} text-white z-10`}>
+                    <Badge
+                      className={`absolute top-3 left-3 ${diplomado.badgeColor} text-white z-10`}
+                    >
                       {diplomado.badge}
                     </Badge>
                     <Button
@@ -262,7 +275,9 @@ export default function DiplomadosDestacados() {
 
                     {/* Categoría y calificación */}
                     <div className="flex items-center justify-between text-sm mb-4">
-                      <span className="text-[#006174] dark:text-[#A1D302] font-medium">{diplomado.category}</span>
+                      <span className="text-[#006174] dark:text-[#A1D302] font-medium">
+                        {diplomado.category}
+                      </span>
                       <div className="flex items-center gap-1">
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
@@ -276,7 +291,9 @@ export default function DiplomadosDestacados() {
                             />
                           ))}
                         </div>
-                        <span className="text-gray-600 dark:text-gray-400">({diplomado.reviews})</span>
+                        <span className="text-gray-600 dark:text-gray-400">
+                          ({diplomado.reviews})
+                        </span>
                       </div>
                     </div>
 
@@ -285,7 +302,9 @@ export default function DiplomadosDestacados() {
                       asChild
                       className="w-full bg-[#006174] hover:bg-[#004d5a] dark:bg-[#A1D302] dark:hover:bg-[#8fb002] text-white dark:text-gray-900"
                     >
-                      <Link href={`/diplomados/${diplomado.id}`}>Ver Detalles</Link>
+                      <Link href={`/diplomados/${diplomado.id}`}>
+                        Ver Detalles
+                      </Link>
                     </Button>
                   </div>
                 </div>
@@ -307,5 +326,5 @@ export default function DiplomadosDestacados() {
         </div>
       </div>
     </section>
-  )
+  );
 }

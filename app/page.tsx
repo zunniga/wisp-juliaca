@@ -7,7 +7,7 @@ import FirstSection from "@/components/home/first-section";
 import InstagramSection from "@/components/home/instagram-section";
 import CTASection from "@/components/home/cta-section";
 import CounterNumbers from "@/components/home/counter-number";
-import ContactView from "@/components/contact/contact-form";
+import ContactView from "@/components/home/contact-view";
 
 export const metadata: Metadata = {
   title: "INALTA",
@@ -27,7 +27,7 @@ export default function Home() {
       <TestimonialsSection />
       <WhyChooseUsSection />
       <CounterNumbers />
-      {/* <ContactView /> */}
+      <ContactView />
     </>
   );
 }

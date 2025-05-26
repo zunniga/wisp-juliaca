@@ -1,10 +1,10 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight, Clock, BookOpen, Star } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, Clock, BookOpen, Star } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 const courses = [
   {
@@ -13,7 +13,7 @@ const courses = [
     categoryColor: "bg-pink-500",
     title: "Curso básico para entender sobre software",
     description: "Aprende los fundamentos del desarrollo de software",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 23,
     duration: "1h 30min",
     originalPrice: "$67.00",
@@ -32,7 +32,7 @@ const courses = [
     categoryColor: "bg-blue-500",
     title: "Curso avanzado para entender sobre software",
     description: "Conceptos avanzados de ingeniería mecánica",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 29,
     duration: "2h 10min",
     originalPrice: "$67.00",
@@ -51,7 +51,7 @@ const courses = [
     categoryColor: "bg-red-500",
     title: "Curso completo para entender sobre soluciones",
     description: "Dominio del desarrollo full-stack",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 25,
     duration: "1h 40min",
     originalPrice: "$67.00",
@@ -70,7 +70,7 @@ const courses = [
     categoryColor: "bg-green-500",
     title: "Curso de diseño para entender sobre soluciones",
     description: "Crea diseños hermosos y funcionales",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 36,
     duration: "3h 40min",
     originalPrice: "$67.00",
@@ -89,7 +89,7 @@ const courses = [
     categoryColor: "bg-purple-500",
     title: "Fundamentos de Marketing Digital",
     description: "Domina las estrategias de marketing modernas",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 18,
     duration: "2h 20min",
     originalPrice: "$67.00",
@@ -108,7 +108,7 @@ const courses = [
     categoryColor: "bg-indigo-500",
     title: "Introducción a la Inteligencia Artificial",
     description: "Aprende los conceptos básicos de IA y Machine Learning",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 32,
     duration: "4h 15min",
     originalPrice: "$89.00",
@@ -127,7 +127,7 @@ const courses = [
     categoryColor: "bg-orange-500",
     title: "Fotografía Digital Profesional",
     description: "Técnicas avanzadas de fotografía y edición",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 28,
     duration: "3h 30min",
     originalPrice: "$75.00",
@@ -146,7 +146,7 @@ const courses = [
     categoryColor: "bg-teal-500",
     title: "Gestión Financiera Personal",
     description: "Aprende a manejar tus finanzas personales",
-    image: "/placeholder.svg?height=200&width=350",
+    image: "/image/courses/course.webp",
     lessons: 20,
     duration: "2h 45min",
     originalPrice: "$55.00",
@@ -159,84 +159,84 @@ const courses = [
       reviews: 34,
     },
   },
-]
+];
 
 // Hook personalizado para detectar el tamaño de pantalla
 function useResponsiveCardsPerView() {
-  const [cardsPerView, setCardsPerView] = useState(4)
+  const [cardsPerView, setCardsPerView] = useState(4);
 
   useEffect(() => {
     const updateCardsPerView = () => {
-      const width = window.innerWidth
+      const width = window.innerWidth;
       if (width < 640) {
-        setCardsPerView(1) // Móvil: 1 card
+        setCardsPerView(1); // Móvil: 1 card
       } else if (width < 768) {
-        setCardsPerView(1) // Móvil grande: 1 card
+        setCardsPerView(1); // Móvil grande: 1 card
       } else if (width < 1024) {
-        setCardsPerView(2) // Tablet: 2 cards
+        setCardsPerView(2); // Tablet: 2 cards
       } else if (width < 1280) {
-        setCardsPerView(3) // Desktop pequeño: 3 cards
+        setCardsPerView(3); // Desktop pequeño: 3 cards
       } else {
-        setCardsPerView(4) // Desktop grande: 4 cards
+        setCardsPerView(4); // Desktop grande: 4 cards
       }
-    }
+    };
 
-    updateCardsPerView()
-    window.addEventListener("resize", updateCardsPerView)
-    return () => window.removeEventListener("resize", updateCardsPerView)
-  }, [])
+    updateCardsPerView();
+    window.addEventListener("resize", updateCardsPerView);
+    return () => window.removeEventListener("resize", updateCardsPerView);
+  }, []);
 
-  return cardsPerView
+  return cardsPerView;
 }
 
 export default function AutoCourseCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
-  const cardsPerView = useResponsiveCardsPerView()
-  const maxIndex = Math.max(0, courses.length - cardsPerView)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const cardsPerView = useResponsiveCardsPerView();
+  const maxIndex = Math.max(0, courses.length - cardsPerView);
 
   // Resetear índice cuando cambia cardsPerView
   useEffect(() => {
     if (currentIndex > maxIndex) {
-      setCurrentIndex(0)
+      setCurrentIndex(0);
     }
-  }, [cardsPerView, maxIndex, currentIndex])
+  }, [cardsPerView, maxIndex, currentIndex]);
 
   // Auto-advance carousel every 5 seconds
   useEffect(() => {
-    if (!isAutoPlaying) return
+    if (!isAutoPlaying) return;
 
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => {
         if (prevIndex >= maxIndex) {
-          return 0 // Volver al inicio
+          return 0; // Volver al inicio
         }
-        return prevIndex + 1
-      })
-    }, 5000)
+        return prevIndex + 1;
+      });
+    }, 5000);
 
-    return () => clearInterval(interval)
-  }, [isAutoPlaying, maxIndex])
+    return () => clearInterval(interval);
+  }, [isAutoPlaying, maxIndex]);
 
   const goToPrevious = () => {
-    setCurrentIndex(currentIndex === 0 ? maxIndex : currentIndex - 1)
-  }
+    setCurrentIndex(currentIndex === 0 ? maxIndex : currentIndex - 1);
+  };
 
   const goToNext = () => {
-    setCurrentIndex(currentIndex >= maxIndex ? 0 : currentIndex + 1)
-  }
+    setCurrentIndex(currentIndex >= maxIndex ? 0 : currentIndex + 1);
+  };
 
   const goToSlide = (index: number) => {
-    setCurrentIndex(Math.min(index, maxIndex))
-  }
+    setCurrentIndex(Math.min(index, maxIndex));
+  };
 
   // Calcular el número de puntos indicadores
-  const totalDots = Math.ceil(courses.length / cardsPerView)
+  const totalDots = Math.ceil(courses.length / cardsPerView);
 
   // Función para obtener las clases de ancho responsive
   const getCardWidthClass = () => {
-    return "w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4"
-  }
+    return "w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4";
+  };
 
   return (
     <section className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-[#20252b] min-h-screen">
@@ -247,8 +247,10 @@ export default function AutoCourseCarousel() {
             Descubre Cursos Increíbles
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed px-4">
-            Explora nuestra colección completa de cursos profesionales diseñados para mejorar tus habilidades y avanzar
-            en tu carrera. Aprende de expertos de la industria con proyectos prácticos y aplicaciones del mundo real.
+            Explora nuestra colección completa de cursos profesionales diseñados
+            para mejorar tus habilidades y avanzar en tu carrera. Aprende de
+            expertos de la industria con proyectos prácticos y aplicaciones del
+            mundo real.
           </p>
         </div>
 
@@ -262,10 +264,17 @@ export default function AutoCourseCarousel() {
           <div className="overflow-hidden rounded-2xl">
             <div
               className="flex transition-transform duration-700 ease-in-out"
-              style={{ transform: `translateX(-${currentIndex * (100 / cardsPerView)}%)` }}
+              style={{
+                transform: `translateX(-${
+                  currentIndex * (100 / cardsPerView)
+                }%)`,
+              }}
             >
               {courses.map((course) => (
-                <div key={course.id} className={`${getCardWidthClass()} flex-shrink-0 px-2 sm:px-3`}>
+                <div
+                  key={course.id}
+                  className={`${getCardWidthClass()} flex-shrink-0 px-2 sm:px-3`}
+                >
                   <div className="bg-white dark:bg-[#20252b] dark:border dark:border-[#006174]/20 rounded-2xl shadow-2xl overflow-hidden h-full">
                     {/* Imagen del Curso */}
                     <div className="relative">
@@ -407,5 +416,5 @@ export default function AutoCourseCarousel() {
         </div>
       </div>
     </section>
-  )
+  );
 }

@@ -1,4 +1,5 @@
-import { Play, User, BookOpen, Check } from "lucide-react"
+import { Play, User, BookOpen, Check } from "lucide-react";
+import Image from "next/image";
 
 const FirstSection = () => {
   return (
@@ -13,8 +14,12 @@ const FirstSection = () => {
               <div className="w-12 h-12 bg-[#A1D302] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <Play className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Capacitación Virtual</h3>
-              <p className="text-gray-600 dark:text-gray-400">Con certificación incluida</p>
+              <h3 className="text-xl font-semibold mb-2">
+                Capacitación Virtual
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Con certificación incluida
+              </p>
             </div>
           </div>
 
@@ -25,8 +30,12 @@ const FirstSection = () => {
               <div className="w-12 h-12 bg-[#00a9bb] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
                 <User className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-xl font-semibold mb-2">Instructores Expertos</h3>
-              <p className="text-gray-600 dark:text-gray-400">Con certificación incluida</p>
+              <h3 className="text-xl font-semibold mb-2">
+                Instructores Expertos
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Con certificación incluida
+              </p>
             </div>
           </div>
 
@@ -38,7 +47,9 @@ const FirstSection = () => {
                 <BookOpen className="w-6 h-6 text-white" />
               </div>
               <h3 className="text-xl font-semibold mb-2">Cursos Flexibles</h3>
-              <p className="text-gray-600 dark:text-gray-400">Con certificación incluida</p>
+              <p className="text-gray-600 dark:text-gray-400">
+                Con certificación incluida
+              </p>
             </div>
           </div>
         </div>
@@ -49,9 +60,9 @@ const FirstSection = () => {
           <div className="relative">
             <div className="relative z-10">
               <img
-                src="/placeholder.svg?height=500&width=500&text=Estudiante+Online"
+                src="image/background/student.png"
                 alt="Online Learning"
-                className="w-full max-w-md mx-auto rounded-2xl"
+                className="w-full max-w-2xl mx-auto rounded-2xl"
               />
             </div>
             {/* Decorative shapes */}
@@ -90,7 +101,9 @@ const FirstSection = () => {
                   <div className="w-6 h-6 bg-[#00a9bb] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
                     <Check className="w-4 h-4 text-white" />
                   </div>
-                  <span className="text-gray-600 dark:text-gray-300">{item}</span>
+                  <span className="text-gray-600 dark:text-gray-300">
+                    {item}
+                  </span>
                 </div>
               ))}
             </div>
@@ -99,7 +112,9 @@ const FirstSection = () => {
               <button className="group relative px-8 py-4 bg-gradient-to-r from-[#A1D302] to-[#00a9bb] rounded-lg font-semibold text-white overflow-hidden transition-all duration-300 hover:shadow-lg hover:shadow-[#A1D302]/25">
                 <span className="relative z-10 flex items-center space-x-2">
                   <span>Conocer Más</span>
-                  <span className="group-hover:translate-x-1 transition-transform duration-300">→</span>
+                  <span className="group-hover:translate-x-1 transition-transform duration-300">
+                    →
+                  </span>
                 </span>
                 <div className="absolute inset-0 bg-gradient-to-r from-[#00a9bb] to-[#006174] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </button>
@@ -108,7 +123,7 @@ const FirstSection = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FirstSection
+export default FirstSection;

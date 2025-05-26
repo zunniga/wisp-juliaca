@@ -45,7 +45,7 @@ export default function Header() {
     <header
       className={`fixed w-full z-50 transition-all duration-300 animate-fadeIn ${
         isScrolled
-          ? "bg-white/20 dark:bg-black backdrop-blur-md shadow-md py-2"
+          ? "bg-black/30 dark:bg-[#111316] backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-4"
       }`}
     >
