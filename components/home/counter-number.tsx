@@ -100,7 +100,7 @@ const CounterItem: React.FC<CounterItemProps> = ({ icon, targetNumber, suffix, l
       </div>
 
       {/* Main icon container with enhanced styling */}
-      <div className="relative mb-4 p-4 rounded-xl bg-white/930 dark:bg-gray-800/95 border border-gray-200/60 dark:border-gray-700/60 group-hover:bg-white dark:group-hover:bg-gray-800 group-hover:shadow-2xl group-hover:shadow-[#006174]/20 dark:group-hover:shadow-[#A1D302]/20 transition-all duration-500 shadow-xl backdrop-blur-sm">
+      <div className="relative mb-4 p-4 rounded-xl bg-gray-200 dark:bg-[#0F172A] border border-gray-200/60 dark:border-gray-700/60 group-hover:bg-white dark:group-hover:bg-gray-800 group-hover:shadow-2xl group-hover:shadow-[#006174]/20 dark:group-hover:shadow-[#A1D302]/20 transition-all duration-500 shadow-xl backdrop-blur-sm">
         {/* Icon */}
         <div className="relative text-[#00A9BB] dark:text-[#A1D302] w-8 h-8 group-hover:scale-105 transition-all duration-300">
           {icon}

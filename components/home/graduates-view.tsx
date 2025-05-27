@@ -150,11 +150,11 @@ export default function DiplomadosDestacados() {
   };
 
   return (
-    <section className="bg-gray-50 dark:bg-[#20252b] text-gray-900 dark:text-white py-16 px-4 transition-colors duration-300">
+    <section className="bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white py-16 px-4 transition-colors duration-300">
       <div className="max-w-7xl mx-auto">
         {/* Título y descripción */}
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-6">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#006174] dark:text-[#A1D302] mb-6">
             Diplomados Destacados
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
@@ -317,9 +317,8 @@ export default function DiplomadosDestacados() {
         <div className="text-center mt-12">
           <Button
             asChild
-            variant="outline"
             size="lg"
-            className="border-[#006174] text-[#006174] hover:bg-[#006174] hover:text-white dark:border-[#A1D302] dark:text-[#A1D302] dark:hover:bg-[#A1D302] dark:hover:text-gray-900"
+            className="bg-gradient-to-r from-[#006174] to-[#00A9BB] hover:from-[#006174]/90 hover:to-[#00A9BB]/90 dark:from-[#739700]/70 dark:to-[#8eb902] dark:text-gray-100 text-white px-8 py-3 h-12 text-base font-medium rounded-2xl transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
           >
             <Link href="/diplomados">Ver Todos los Diplomados</Link>
           </Button>

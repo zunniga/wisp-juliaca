@@ -1,11 +1,12 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Textarea } from "@/components/ui/textarea"
-import { Facebook, Twitter, Instagram, Linkedin, GraduationCap, BookOpen } from "lucide-react"
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { FaFacebookF, FaInstagram, FaTiktok, FaWhatsapp } from "react-icons/fa";
+import { BookOpen, GraduationCap } from "lucide-react";
 
 const ContactView = () => {
   const [formData, setFormData] = useState({
@@ -14,24 +15,26 @@ const ContactView = () => {
     phone: "",
     subject: "",
     message: "",
-  })
+  });
 
-  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
+  const handleInputChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    const { name, value } = e.target;
     setFormData((prev) => ({
       ...prev,
       [name]: value,
-    }))
-  }
+    }));
+  };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    console.log("Formulario enviado:", formData)
+    e.preventDefault();
+    console.log("Formulario enviado:", formData);
     // Manejar envío del formulario aquí
-  }
+  };
 
   return (
-    <div className="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <div className="bg-gray-100 dark:bg-[#0F172A] transition-colors duration-300">
       <div className="container mx-auto px-4 py-8 lg:py-16">
         <div className="grid lg:grid-cols-2 gap-0 max-w-6xl mx-auto overflow-hidden rounded-3xl shadow-2xl">
           {/* Lado Izquierdo - Información de Contacto */}
@@ -62,39 +65,44 @@ const ContactView = () => {
 
             {/* Información adicional */}
             <div className="mb-8">
-              <h3 className="text-white text-lg font-semibold mb-3">¿Tienes dudas sobre nuestros programas?</h3>
+              <h3 className="text-white text-lg font-semibold mb-3">
+                ¿Tienes dudas sobre nuestros programas?
+              </h3>
               <p className="text-white/90 text-sm leading-relaxed">
-                Estamos aquí para ayudarte a encontrar el diplomado o curso perfecto para tu crecimiento profesional.
+                Estamos aquí para ayudarte a encontrar el diplomado o curso
+                perfecto para tu crecimiento profesional.
               </p>
             </div>
 
             {/* Iconos de Redes Sociales */}
             <div className="mt-auto">
-              <h3 className="text-white text-lg font-semibold mb-6">Síguenos en</h3>
+              <h3 className="text-white text-lg font-semibold mb-6">
+                Síguenos en
+              </h3>
               <div className="flex space-x-4">
                 <a
                   href="#"
-                  className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
-                  <Facebook className="w-5 h-5 text-white" />
+                  <FaFacebookF className="w-5 h-5 text-white" />
                 </a>
                 <a
                   href="#"
-                  className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
-                  <Twitter className="w-5 h-5 text-white" />
+                  <FaWhatsapp className="w-5 h-5 text-white" />
                 </a>
                 <a
                   href="#"
-                  className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
-                  <Instagram className="w-5 h-5 text-white" />
+                  <FaTiktok className="w-5 h-5 text-white" />
                 </a>
                 <a
                   href="#"
-                  className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12 bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
-                  <Linkedin className="w-5 h-5 text-white" />
+                  <FaInstagram className="w-5 h-5 text-white" />
                 </a>
               </div>
             </div>
@@ -110,8 +118,9 @@ const ContactView = () => {
                 </h1>
               </div>
               <p className="text-gray-600 dark:text-gray-300 mb-8 leading-relaxed">
-                ¿Interesado en nuestros programas educativos? Completa el formulario y te ayudaremos a encontrar el
-                diplomado o curso que mejor se adapte a tus objetivos profesionales.
+                ¿Interesado en nuestros programas educativos? Completa el
+                formulario y te ayudaremos a encontrar el diplomado o curso que
+                mejor se adapte a tus objetivos profesionales.
               </p>
 
               <form onSubmit={handleSubmit} className="space-y-6">
@@ -155,14 +164,23 @@ const ContactView = () => {
                     <select
                       name="subject"
                       value={formData.subject}
-                      onChange={(e) => setFormData((prev) => ({ ...prev, subject: e.target.value }))}
+                      onChange={(e) =>
+                        setFormData((prev) => ({
+                          ...prev,
+                          subject: e.target.value,
+                        }))
+                      }
                       className="h-12 w-full bg-gray-50 dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-md px-3 text-slate-900 dark:text-slate-100 focus:border-[#00A9BB] dark:focus:border-[#A1D302] focus:ring-[#00A9BB]/20 dark:focus:ring-[#A1D302]/20 transition-all duration-200"
                       required
                     >
                       <option value="">Selecciona un tema</option>
-                      <option value="diplomados">Información sobre Diplomados</option>
+                      <option value="diplomados">
+                        Información sobre Diplomados
+                      </option>
                       <option value="cursos">Cursos Disponibles</option>
-                      <option value="inscripciones">Proceso de Inscripción</option>
+                      <option value="inscripciones">
+                        Proceso de Inscripción
+                      </option>
                       <option value="becas">Becas y Financiamiento</option>
                       <option value="horarios">Horarios y Modalidades</option>
                       <option value="certificacion">Certificación</option>
@@ -185,7 +203,7 @@ const ContactView = () => {
 
                 <Button
                   type="submit"
-                  className="bg-gradient-to-r from-[#006174] to-[#00A9BB] hover:from-[#006174]/90 hover:to-[#00A9BB]/90 dark:from-[#739700] dark:text-gray-100 text-white px-8 py-3 h-12 text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                  className="bg-gradient-to-r from-[#006174] to-[#00A9BB] hover:from-[#006174]/90 hover:to-[#00A9BB]/90 dark:from-[#739700]/70 dark:to-[#8eb902] dark:text-gray-100 text-white px-8 py-3 h-12 text-base font-medium rounded-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
                 >
                   Enviar Consulta
                 </Button>
@@ -194,8 +212,8 @@ const ContactView = () => {
               {/* Información adicional */}
               <div className="mt-8 p-4 bg-[#A1D302]/10 dark:bg-[#A1D302]/20 rounded-lg border border-[#A1D302]/30 dark:border-[#A1D302]/40">
                 <p className="text-sm text-[#006174] dark:text-[#A1D302]">
-                  <strong>Tiempo de respuesta:</strong> Nos pondremos en contacto contigo en un plazo máximo de 24
-                  horas.
+                  <strong>Tiempo de respuesta:</strong> Nos pondremos en
+                  contacto contigo en un plazo máximo de 24 horas.
                 </p>
               </div>
             </div>
@@ -203,7 +221,7 @@ const ContactView = () => {
         </div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ContactView
+export default ContactView;

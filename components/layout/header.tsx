@@ -27,6 +27,8 @@ const navItems = [
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { theme } = useTheme();
+  const logoSrc = theme === "dark" ? "image/logo/inalta_logo_dark.png" : "image/logo/inalta_logo_main.png";
   const pathname = usePathname();
 
   const { resolvedTheme, setTheme } = useTheme();
@@ -45,7 +47,7 @@ export default function Header() {
     <header
       className={`fixed w-full z-50 transition-all duration-300 animate-fadeIn ${
         isScrolled
-          ? "bg-black/30 dark:bg-[#111316] backdrop-blur-md shadow-md py-2"
+          ? "bg-black/30 dark:bg-[#0F172A] backdrop-blur-md shadow-md py-2"
           : "bg-transparent py-4"
       }`}
     >
@@ -57,7 +59,7 @@ export default function Header() {
           >
             <div className="relative rounded-full overflow-hidden xl:w-44 xl:h-20 w-40 h-20 sm:w-20 sm:h-20 md:w-36 md:h-36">
               <Image
-                src="/inalta_logo_main.png"
+                 src={logoSrc}
                 alt="Inalta-Logo"
                 fill
                 className="object-contain"

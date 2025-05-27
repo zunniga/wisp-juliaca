@@ -239,11 +239,11 @@ export default function AutoCourseCarousel() {
   };
 
   return (
-    <section className="py-8 sm:py-12 lg:py-16 bg-white dark:bg-[#20252b] min-h-screen">
+    <section className="py-8 sm:py-12 lg:py-16 bg-gray-100  dark:bg-[#0F172A] min-h-screen">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título y Descripción Centrados */}
         <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-gray-900 dark:text-[#A1D302] mb-4 sm:mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#006174] dark:text-[#A1D302] mb-4 sm:mb-6">
             Descubre Cursos Increíbles
           </h2>
           <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed px-4">
@@ -408,9 +408,7 @@ export default function AutoCourseCarousel() {
           {/* Indicador de Auto-reproducción */}
           <div className="text-center mt-3 sm:mt-4">
             <p className="text-gray-500 dark:text-[#006174]/80 text-xs sm:text-sm">
-              {isAutoPlaying
-                ? "Reproducción automática • Pasa el cursor para pausar"
-                : "Pausado • Aleja el cursor para reanudar"}
+              {isAutoPlaying}
             </p>
           </div>
         </div>

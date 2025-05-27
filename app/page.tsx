@@ -12,7 +12,7 @@ import ContactView from "@/components/home/contact-view";
 export const metadata: Metadata = {
   title: "INALTA",
   icons: {
-    icon: "/prisma.png",
+    icon: "/icon-inalta.png",
   },
   description:
     "Corporación INALTA es una empresa dedicada a la enzeñanza de diplomas y cursos de alta calidad en el área de la salud y la educación. Contamos con un equipo de profesionales altamente capacitados y con amplia experiencia en el sector. Nuestro objetivo es brindar una formación integral y actualizada a nuestros estudiantes, para que puedan destacar en su campo laboral.",
