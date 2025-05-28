@@ -82,25 +82,25 @@ const ContactView = () => {
               <div className="flex space-x-4">
                 <a
                   href="#"
-                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
                   <FaFacebookF className="w-5 h-5 text-white" />
                 </a>
                 <a
                   href="#"
-                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
                   <FaWhatsapp className="w-5 h-5 text-white" />
                 </a>
                 <a
                   href="#"
-                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12  bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
                   <FaTiktok className="w-5 h-5 text-white" />
                 </a>
                 <a
                   href="#"
-                  className="w-12 h-12 bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-[#A1D302]/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
+                  className="w-12 h-12 bg-white/20 dark:bg-[#A1D302]/50 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:bg-[#A1D302]/50 transition-all duration-300 hover:scale-110"
                 >
                   <FaInstagram className="w-5 h-5 text-white" />
                 </a>
@@ -111,8 +111,15 @@ const ContactView = () => {
           {/* Lado Derecho - Formulario de Contacto */}
           <div className="bg-white dark:bg-gray-800 p-8 lg:p-12 transition-colors duration-300">
             <div className="max-w-md mx-auto lg:max-w-none">
+              <div className="flex items-center justify-start w-full mb-4 ml-12">
+                <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
+                  CONTÁCTANOS
+                </span>
+                <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
+              </div>
               <div className="flex items-center gap-3 mb-4">
                 <GraduationCap className="w-8 h-8 text-[#006174] dark:text-[#A1D302]" />
+
                 <h1 className="text-3xl lg:text-4xl font-bold text-gray-900 dark:text-white">
                   Consulta sobre Diplomados
                 </h1>

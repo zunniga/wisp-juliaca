@@ -243,6 +243,12 @@ export default function AutoCourseCarousel() {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         {/* Título y Descripción Centrados */}
         <div className="text-center mb-8 sm:mb-12">
+          <div className="flex items-center justify-center w-full mb-4">
+            <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
+              CURSOS
+            </span>
+            <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
+          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#006174] dark:text-[#A1D302] mb-4 sm:mb-6">
             Descubre Cursos Increíbles
           </h2>

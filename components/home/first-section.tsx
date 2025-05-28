@@ -1,19 +1,25 @@
-"use client"
+"use client";
 
-import { Play, User, BookOpen, Check } from "lucide-react"
-import { motion, useInView } from "framer-motion"
-import { useRef } from "react"
+import { Play, User, BookOpen, Check } from "lucide-react";
+import { motion, useInView } from "framer-motion";
+import { useRef } from "react";
 
 const FirstSection = () => {
-  const featuresRef = useRef(null)
-  const mainContentRef = useRef(null)
-  const imageRef = useRef(null)
-  const contentRef = useRef(null)
+  const featuresRef = useRef(null);
+  const mainContentRef = useRef(null);
+  const imageRef = useRef(null);
+  const contentRef = useRef(null);
 
-  const featuresInView = useInView(featuresRef, { once: true, margin: "-100px" })
-  const mainContentInView = useInView(mainContentRef, { once: true, margin: "-100px" })
-  const imageInView = useInView(imageRef, { once: true, margin: "-100px" })
-  const contentInView = useInView(contentRef, { once: true, margin: "-100px" })
+  const featuresInView = useInView(featuresRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const mainContentInView = useInView(mainContentRef, {
+    once: true,
+    margin: "-100px",
+  });
+  const imageInView = useInView(imageRef, { once: true, margin: "-100px" });
+  const contentInView = useInView(contentRef, { once: true, margin: "-100px" });
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -24,7 +30,7 @@ const FirstSection = () => {
         delayChildren: 0.1,
       },
     },
-  }
+  };
 
   const cardVariants = {
     hidden: {
@@ -43,7 +49,7 @@ const FirstSection = () => {
         duration: 0.6,
       },
     },
-  }
+  };
 
   const imageVariants = {
     hidden: {
@@ -62,7 +68,7 @@ const FirstSection = () => {
         duration: 0.8,
       },
     },
-  }
+  };
 
   const contentVariants = {
     hidden: { opacity: 0 },
@@ -73,7 +79,7 @@ const FirstSection = () => {
         delayChildren: 0.2,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: {
@@ -91,7 +97,7 @@ const FirstSection = () => {
         damping: 15,
       },
     },
-  }
+  };
 
   const checkItemVariants = {
     hidden: {
@@ -109,7 +115,7 @@ const FirstSection = () => {
         damping: 15,
       },
     },
-  }
+  };
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-[#0F172A] text-gray-800 dark:text-gray-100">
@@ -125,19 +131,23 @@ const FirstSection = () => {
           {/* Video Training Card */}
           <motion.div
             variants={cardVariants}
-            className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#A1D302] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
+            className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#00a9bb] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#A1D302]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#00a9bb]/10 to-transparent dark:from-[#A1D302]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
             <div className="relative z-10">
               <motion.div
-                className="w-12 h-12 bg-[#A1D302] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                className="w-12 h-12 bg-[#00a9bb] dark:bg-[#A1D302]/80 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}
               >
                 <Play className="w-6 h-6 text-white" />
               </motion.div>
-              <h3 className="text-xl font-semibold mb-2">Capacitación Virtual</h3>
-              <p className="text-gray-600 dark:text-gray-400">Con certificación incluida</p>
+              <h3 className="text-xl font-semibold mb-2">
+                Capacitación Virtual
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Con certificación incluida
+              </p>
             </div>
           </motion.div>
 
@@ -146,36 +156,42 @@ const FirstSection = () => {
             variants={cardVariants}
             className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#00a9bb] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#00a9bb]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#00a9bb]/10 dark:from-[#A1D302]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
             <div className="relative z-10">
               <motion.div
-                className="w-12 h-12 bg-[#00a9bb] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                className="w-12 h-12 bg-[#00a9bb] dark:bg-[#A1D302]/80 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}
               >
                 <User className="w-6 h-6 text-white" />
               </motion.div>
-              <h3 className="text-xl font-semibold mb-2">Instructores Expertos</h3>
-              <p className="text-gray-600 dark:text-gray-400">Con certificación incluida</p>
+              <h3 className="text-xl font-semibold mb-2">
+                Instructores Expertos
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">
+                Con certificación incluida
+              </p>
             </div>
           </motion.div>
 
           {/* Versatile Course Card */}
           <motion.div
             variants={cardVariants}
-            className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#006174] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
+            className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#00a9bb] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-[#006174]/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-[#006174]/10 to-transparent dark:from-[#A1D302]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
             <div className="relative z-10">
               <motion.div
-                className="w-12 h-12 bg-[#006174] rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
+                className="w-12 h-12 bg-[#00a9bb] dark:bg-[#A1D302]/80 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
                 whileHover={{ rotate: 360 }}
                 transition={{ duration: 0.5 }}
               >
                 <BookOpen className="w-6 h-6 text-white" />
               </motion.div>
               <h3 className="text-xl font-semibold mb-2">Cursos Flexibles</h3>
-              <p className="text-gray-600 dark:text-gray-400">Con certificación incluida</p>
+              <p className="text-gray-600 dark:text-gray-400">
+                Con certificación incluida
+              </p>
             </div>
           </motion.div>
         </motion.div>
@@ -188,7 +204,11 @@ const FirstSection = () => {
           className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
         >
           {/* Left Side - Image */}
-          <motion.div ref={imageRef} variants={imageVariants} className="relative">
+          <motion.div
+            ref={imageRef}
+            variants={imageVariants}
+            className="relative"
+          >
             <div className="relative z-10">
               <motion.img
                 src="image/background/student.png"
@@ -248,12 +268,18 @@ const FirstSection = () => {
             className="space-y-6"
           >
             <motion.div variants={itemVariants} className="inline-block">
-              <span className="px-4 py-2 bg-gray-200/80 dark:bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium border border-gray-300 dark:border-white/20 text-gray-700 dark:text-gray-200">
-                Nosotros
-              </span>
+              <div className="flex items-center mb-0">
+                <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
+                  NOSOTROS
+                </span>
+                <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
+              </div>
             </motion.div>
 
-            <motion.h1 variants={itemVariants} className="text-4xl lg:text-5xl font-bold leading-tight">
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl lg:text-5xl font-bold leading-tight"
+            >
               Bienvenido a{" "}
               <span className="relative">
                 Campus <span className="text-[#A1D302]">Virtual</span> Pro
@@ -267,7 +293,10 @@ const FirstSection = () => {
               </span>
             </motion.h1>
 
-            <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed">
+            <motion.p
+              variants={itemVariants}
+              className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed"
+            >
               Tu plataforma líder en educación online
             </motion.p>
 
@@ -277,7 +306,11 @@ const FirstSection = () => {
                 "Certificados avalados por instituciones reconocidas",
                 "Metodología práctica con casos reales del mercado",
               ].map((item, index) => (
-                <motion.div key={index} variants={checkItemVariants} className="flex items-center space-x-3 group">
+                <motion.div
+                  key={index}
+                  variants={checkItemVariants}
+                  className="flex items-center space-x-3 group"
+                >
                   <motion.div
                     className="w-6 h-6 bg-[#00a9bb] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                     whileHover={{ rotate: 360 }}
@@ -285,7 +318,9 @@ const FirstSection = () => {
                   >
                     <Check className="w-4 h-4 text-white" />
                   </motion.div>
-                  <span className="text-gray-600 dark:text-gray-300">{item}</span>
+                  <span className="text-gray-600 dark:text-gray-300">
+                    {item}
+                  </span>
                 </motion.div>
               ))}
             </motion.div>
@@ -301,7 +336,10 @@ const FirstSection = () => {
                   <motion.span
                     className="group-hover:translate-x-1 transition-transform duration-300"
                     animate={{ x: [0, 5, 0] }}
-                    transition={{ duration: 2, repeat: Number.POSITIVE_INFINITY }}
+                    transition={{
+                      duration: 2,
+                      repeat: Number.POSITIVE_INFINITY,
+                    }}
                   >
                     →
                   </motion.span>
@@ -313,7 +351,7 @@ const FirstSection = () => {
         </motion.div>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default FirstSection
+export default FirstSection;

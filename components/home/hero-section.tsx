@@ -99,7 +99,14 @@ export default function HeroSection() {
           >
             Eleva tu{" "}
             <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#A1D302] to-[#14a0bc]">
-              Conocimiento y Carrera
+              Conocimiento {" "} <br/>
+            </span>
+              <span className="text-transparent bg-clip-text bg-gradient-to-r text-white">
+             y Carrera
+
+
+
+             
             </span>
           </motion.h1>
 

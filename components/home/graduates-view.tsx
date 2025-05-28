@@ -1,11 +1,12 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
-import { Star, Heart, ChevronLeft, ChevronRight } from "lucide-react";
-import Image from "next/image";
-import Link from "next/link";
-import { useState, useEffect } from "react";
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { Star, Heart, ChevronLeft, ChevronRight } from "lucide-react"
+import Image from "next/image"
+import Link from "next/link"
+import { useState, useEffect } from "react"
+import { motion } from "framer-motion"
 
 const diplomados = [
   {
@@ -86,86 +87,108 @@ const diplomados = [
     badge: "Premium",
     badgeColor: "bg-yellow-500",
   },
-];
+]
 
 export default function DiplomadosDestacados() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
 
   // Número de tarjetas visibles según el tamaño de pantalla
   const getVisibleCards = () => {
     if (typeof window !== "undefined") {
-      if (window.innerWidth >= 1024) return 4; // lg: 4 tarjetas
-      if (window.innerWidth >= 768) return 2; // md: 2 tarjetas
-      return 1; // sm: 1 tarjeta
+      if (window.innerWidth >= 1024) return 4 // lg: 4 tarjetas
+      if (window.innerWidth >= 768) return 2 // md: 2 tarjetas
+      return 1 // sm: 1 tarjeta
     }
-    return 4;
-  };
+    return 4
+  }
 
-  const [visibleCards, setVisibleCards] = useState(4);
+  const [visibleCards, setVisibleCards] = useState(4)
 
   useEffect(() => {
     const handleResize = () => {
-      setVisibleCards(getVisibleCards());
-    };
+      setVisibleCards(getVisibleCards())
+    }
 
-    handleResize();
-    window.addEventListener("resize", handleResize);
-    return () => window.removeEventListener("resize", handleResize);
-  }, []);
+    handleResize()
+    window.addEventListener("resize", handleResize)
+    return () => window.removeEventListener("resize", handleResize)
+  }, [])
 
-  const maxIndex = Math.max(0, diplomados.length - visibleCards);
+  const maxIndex = Math.max(0, diplomados.length - visibleCards)
 
   // Auto-play del carrusel
   useEffect(() => {
-    if (!isAutoPlaying) return;
+    if (!isAutoPlaying) return
 
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex >= maxIndex ? 0 : prevIndex + 1
-      );
-    }, 4000); // Cambia cada 4 segundos
+      setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
+    }, 4000) // Cambia cada 4 segundos
 
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, maxIndex]);
+    return () => clearInterval(interval)
+  }, [isAutoPlaying, maxIndex])
 
   const goToPrevious = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1));
+    setIsAutoPlaying(false)
+    setCurrentIndex((prevIndex) => (prevIndex <= 0 ? maxIndex : prevIndex - 1))
     // Reanudar auto-play después de 10 segundos
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
 
   const goToNext = () => {
-    setIsAutoPlaying(false);
-    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1));
+    setIsAutoPlaying(false)
+    setCurrentIndex((prevIndex) => (prevIndex >= maxIndex ? 0 : prevIndex + 1))
     // Reanudar auto-play después de 10 segundos
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
 
   const goToSlide = (index: number) => {
-    setIsAutoPlaying(false);
-    setCurrentIndex(index);
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
+    setIsAutoPlaying(false)
+    setCurrentIndex(index)
+    setTimeout(() => setIsAutoPlaying(true), 10000)
+  }
 
   return (
-    <section className="bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white py-16 px-4 transition-colors duration-300">
+    <motion.section
+      className="bg-gray-100 dark:bg-[#0F172A] text-gray-900 dark:text-white py-16 px-4 transition-colors duration-300"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true, amount: 0.2 }}
+    >
       <div className="max-w-7xl mx-auto">
         {/* Título y descripción */}
-        <div className="text-center mb-12">
+        <motion.div
+          className="text-center mb-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
+          <div className="flex items-center justify-center w-full mb-4">
+            <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
+              DIPLOMADOS
+            </span>
+            <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
+          </div>
+
           <h2 className="text-4xl md:text-5xl font-bold text-[#006174] dark:text-[#A1D302] mb-6">
             Diplomados Destacados
           </h2>
           <p className="text-lg text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-            Impulsa tu carrera profesional con nuestros diplomados de alta
-            calidad. Programas diseñados por expertos para desarrollar
-            competencias clave en el mercado actual.
+            Impulsa tu carrera profesional con nuestros diplomados de alta calidad. Programas diseñados por expertos
+            para desarrollar competencias clave en el mercado actual.
           </p>
-        </div>
+        </motion.div>
 
         {/* Navegación y controles */}
-        <div className="flex justify-between items-center mb-8">
+        <motion.div
+          className="flex justify-between items-center mb-8"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.4 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
           <div className="flex gap-2">
             <Button
               variant="ghost"
@@ -193,9 +216,7 @@ export default function DiplomadosDestacados() {
               <button
                 key={index}
                 className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                  index === currentIndex
-                    ? "bg-[#006174] dark:bg-[#A1D302]"
-                    : "bg-gray-300 dark:bg-gray-600"
+                  index === currentIndex ? "bg-[#006174] dark:bg-[#A1D302]" : "bg-gray-300 dark:bg-gray-600"
                 }`}
                 onClick={() => goToSlide(index)}
               />
@@ -211,10 +232,16 @@ export default function DiplomadosDestacados() {
           >
             {isAutoPlaying ? "Pausar" : "Reproducir"}
           </Button>
-        </div>
+        </motion.div>
 
         {/* Contenedor del carrusel */}
-        <div className="relative overflow-hidden">
+        <motion.div
+          className="relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          transition={{ duration: 0.8, delay: 0.6 }}
+          viewport={{ once: true, amount: 0.3 }}
+        >
           <div
             className="flex transition-transform duration-500 ease-in-out"
             style={{
@@ -224,17 +251,24 @@ export default function DiplomadosDestacados() {
             onMouseLeave={() => setIsAutoPlaying(true)}
           >
             {diplomados.map((diplomado) => (
-              <div
+              <motion.div
                 key={diplomado.id}
                 className="flex-shrink-0 px-3"
                 style={{ width: `${100 / visibleCards}%` }}
+                initial={{ opacity: 0, y: 50, scale: 0.9 }}
+                whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                transition={{
+                  duration: 0.6,
+                  delay: diplomado.id * 0.1,
+                  ease: "easeOut",
+                }}
+                viewport={{ once: true, amount: 0.2 }}
+                whileHover={{ y: -5 }}
               >
                 <div className="bg-white dark:bg-gray-800 text-gray-900 dark:text-white rounded-lg overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105">
                   {/* Badge y botón favorito */}
                   <div className="relative">
-                    <Badge
-                      className={`absolute top-3 left-3 ${diplomado.badgeColor} text-white z-10`}
-                    >
+                    <Badge className={`absolute top-3 left-3 ${diplomado.badgeColor} text-white z-10`}>
                       {diplomado.badge}
                     </Badge>
                     <Button
@@ -275,9 +309,7 @@ export default function DiplomadosDestacados() {
 
                     {/* Categoría y calificación */}
                     <div className="flex items-center justify-between text-sm mb-4">
-                      <span className="text-[#006174] dark:text-[#A1D302] font-medium">
-                        {diplomado.category}
-                      </span>
+                      <span className="text-[#006174] dark:text-[#A1D302] font-medium">{diplomado.category}</span>
                       <div className="flex items-center gap-1">
                         <div className="flex">
                           {[...Array(5)].map((_, i) => (
@@ -291,9 +323,7 @@ export default function DiplomadosDestacados() {
                             />
                           ))}
                         </div>
-                        <span className="text-gray-600 dark:text-gray-400">
-                          ({diplomado.reviews})
-                        </span>
+                        <span className="text-gray-600 dark:text-gray-400">({diplomado.reviews})</span>
                       </div>
                     </div>
 
@@ -302,19 +332,23 @@ export default function DiplomadosDestacados() {
                       asChild
                       className="w-full bg-[#006174] hover:bg-[#004d5a] dark:bg-[#A1D302] dark:hover:bg-[#8fb002] text-white dark:text-gray-900"
                     >
-                      <Link href={`/diplomados/${diplomado.id}`}>
-                        Ver Detalles
-                      </Link>
+                      <Link href={`/diplomados/${diplomado.id}`}>Ver Detalles</Link>
                     </Button>
                   </div>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
-        </div>
+        </motion.div>
 
         {/* Botón para ver todos */}
-        <div className="text-center mt-12">
+        <motion.div
+          className="text-center mt-12"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
+          viewport={{ once: true, amount: 0.5 }}
+        >
           <Button
             asChild
             size="lg"
@@ -322,8 +356,8 @@ export default function DiplomadosDestacados() {
           >
             <Link href="/diplomados">Ver Todos los Diplomados</Link>
           </Button>
-        </div>
+        </motion.div>
       </div>
-    </section>
-  );
+    </motion.section>
+  )
 }
