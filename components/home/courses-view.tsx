@@ -1,10 +1,11 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Clock, BookOpen, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { useState, useEffect, useRef } from "react"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight, Clock, BookOpen, Star } from "lucide-react"
+import { Button } from "@/components/ui/button"
+import { Badge } from "@/components/ui/badge"
+import { motion, useInView } from "framer-motion"
 
 const courses = [
   {
@@ -19,12 +20,7 @@ const courses = [
     originalPrice: "$67.00",
     currentPrice: "$32.00",
     isFree: false,
-    instructor: {
-      name: "Miguel Jhon",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.8,
-      reviews: 44,
-    },
+    instructor: { name: "Miguel Jhon", avatar: "/placeholder.svg?height=40&width=40", rating: 4.8, reviews: 44 },
   },
   {
     id: 2,
@@ -38,12 +34,7 @@ const courses = [
     originalPrice: "$67.00",
     currentPrice: "$32.00",
     isFree: true,
-    instructor: {
-      name: "Rinis Jhon",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.9,
-      reviews: 44,
-    },
+    instructor: { name: "Rinis Jhon", avatar: "/placeholder.svg?height=40&width=40", rating: 4.9, reviews: 44 },
   },
   {
     id: 3,
@@ -57,12 +48,7 @@ const courses = [
     originalPrice: "$67.00",
     currentPrice: "$40.00",
     isFree: true,
-    instructor: {
-      name: "Miguel Jhon",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.7,
-      reviews: 44,
-    },
+    instructor: { name: "Miguel Jhon", avatar: "/placeholder.svg?height=40&width=40", rating: 4.7, reviews: 44 },
   },
   {
     id: 4,
@@ -76,12 +62,7 @@ const courses = [
     originalPrice: "$67.00",
     currentPrice: "$40.00",
     isFree: true,
-    instructor: {
-      name: "Miguel Robin",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.8,
-      reviews: 44,
-    },
+    instructor: { name: "Miguel Robin", avatar: "/placeholder.svg?height=40&width=40", rating: 4.8, reviews: 44 },
   },
   {
     id: 5,
@@ -95,12 +76,7 @@ const courses = [
     originalPrice: "$67.00",
     currentPrice: "$35.00",
     isFree: false,
-    instructor: {
-      name: "Sara Wilson",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.9,
-      reviews: 52,
-    },
+    instructor: { name: "Sara Wilson", avatar: "/placeholder.svg?height=40&width=40", rating: 4.9, reviews: 52 },
   },
   {
     id: 6,
@@ -114,12 +90,7 @@ const courses = [
     originalPrice: "$89.00",
     currentPrice: "$45.00",
     isFree: false,
-    instructor: {
-      name: "Carlos Mendez",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.9,
-      reviews: 67,
-    },
+    instructor: { name: "Carlos Mendez", avatar: "/placeholder.svg?height=40&width=40", rating: 4.9, reviews: 67 },
   },
   {
     id: 7,
@@ -133,12 +104,7 @@ const courses = [
     originalPrice: "$75.00",
     currentPrice: "$38.00",
     isFree: true,
-    instructor: {
-      name: "Ana García",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.8,
-      reviews: 89,
-    },
+    instructor: { name: "Ana García", avatar: "/placeholder.svg?height=40&width=40", rating: 4.8, reviews: 89 },
   },
   {
     id: 8,
@@ -152,273 +118,256 @@ const courses = [
     originalPrice: "$55.00",
     currentPrice: "$28.00",
     isFree: false,
-    instructor: {
-      name: "Roberto Silva",
-      avatar: "/placeholder.svg?height=40&width=40",
-      rating: 4.7,
-      reviews: 34,
-    },
+    instructor: { name: "Roberto Silva", avatar: "/placeholder.svg?height=40&width=40", rating: 4.7, reviews: 34 },
   },
-];
+]
 
-// Hook personalizado para detectar el tamaño de pantalla
-function useResponsiveCardsPerView() {
-  const [cardsPerView, setCardsPerView] = useState(4);
+// Restaurar el hook para responsividad
+function useCardsPerView() {
+  const [cardsPerView, setCardsPerView] = useState(1)
 
   useEffect(() => {
-    const updateCardsPerView = () => {
-      const width = window.innerWidth;
-      if (width < 640) {
-        setCardsPerView(1); // Móvil: 1 card
-      } else if (width < 768) {
-        setCardsPerView(1); // Móvil grande: 1 card
-      } else if (width < 1024) {
-        setCardsPerView(2); // Tablet: 2 cards
-      } else if (width < 1280) {
-        setCardsPerView(3); // Desktop pequeño: 3 cards
+    function updateCardsPerView() {
+      if (window.innerWidth >= 1024) {
+        setCardsPerView(4) // lg: 4 cards
+      } else if (window.innerWidth >= 768) {
+        setCardsPerView(3) // md: 3 cards
+      } else if (window.innerWidth >= 640) {
+        setCardsPerView(2) // sm: 2 cards
       } else {
-        setCardsPerView(4); // Desktop grande: 4 cards
+        setCardsPerView(1) // xs: 1 card
       }
-    };
+    }
 
-    updateCardsPerView();
-    window.addEventListener("resize", updateCardsPerView);
-    return () => window.removeEventListener("resize", updateCardsPerView);
-  }, []);
+    updateCardsPerView()
+    window.addEventListener("resize", updateCardsPerView)
+    return () => window.removeEventListener("resize", updateCardsPerView)
+  }, [])
 
-  return cardsPerView;
+  return cardsPerView
 }
 
 export default function AutoCourseCarousel() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-  const cardsPerView = useResponsiveCardsPerView();
-  const maxIndex = Math.max(0, courses.length - cardsPerView);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [isAutoPlaying, setIsAutoPlaying] = useState(true)
+  const cardsPerView = useCardsPerView()
+  const maxIndex = Math.max(0, courses.length - cardsPerView)
 
-  // Resetear índice cuando cambia cardsPerView
+  // Ref para detectar cuando el componente está en vista
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true, amount: 0.3 })
+
   useEffect(() => {
-    if (currentIndex > maxIndex) {
-      setCurrentIndex(0);
-    }
-  }, [cardsPerView, maxIndex, currentIndex]);
-
-  // Auto-advance carousel every 5 seconds
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-
+    if (!isAutoPlaying) return
     const interval = setInterval(() => {
-      setCurrentIndex((prevIndex) => {
-        if (prevIndex >= maxIndex) {
-          return 0; // Volver al inicio
-        }
-        return prevIndex + 1;
-      });
-    }, 5000);
+      setCurrentIndex((prev) => (prev >= maxIndex ? 0 : prev + 1))
+    }, 5000)
+    return () => clearInterval(interval)
+  }, [isAutoPlaying, maxIndex])
 
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, maxIndex]);
+  const navigate = (direction: "prev" | "next") => {
+    setCurrentIndex(
+      direction === "prev"
+        ? currentIndex === 0
+          ? maxIndex
+          : currentIndex - 1
+        : currentIndex >= maxIndex
+          ? 0
+          : currentIndex + 1,
+    )
+  }
 
-  const goToPrevious = () => {
-    setCurrentIndex(currentIndex === 0 ? maxIndex : currentIndex - 1);
-  };
+  const getCardWidth = () => {
+    return `${100 / cardsPerView}%`
+  }
 
-  const goToNext = () => {
-    setCurrentIndex(currentIndex >= maxIndex ? 0 : currentIndex + 1);
-  };
+  const getTranslateX = () => {
+    return -(currentIndex * (100 / cardsPerView))
+  }
 
-  const goToSlide = (index: number) => {
-    setCurrentIndex(Math.min(index, maxIndex));
-  };
+  const animations = {
+    container: {
+      hidden: { opacity: 0 },
+      visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.2 } },
+    },
+    item: {
+      hidden: { opacity: 0, y: 30 },
+      visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
+    },
+  }
 
-  // Calcular el número de puntos indicadores
-  const totalDots = Math.ceil(courses.length / cardsPerView);
-
-  // Función para obtener las clases de ancho responsive
-  const getCardWidthClass = () => {
-    return "w-full sm:w-full md:w-1/2 lg:w-1/3 xl:w-1/4";
-  };
+  useEffect(() => {
+    setCurrentIndex(0)
+  }, [cardsPerView])
 
   return (
-    <section className="py-8 sm:py-12 lg:py-16 bg-gray-100  dark:bg-[#0F172A] min-h-screen">
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        {/* Título y Descripción Centrados */}
-        <div className="text-center mb-8 sm:mb-12">
-          <div className="flex items-center justify-center w-full mb-4">
-            <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
-              CURSOS
-            </span>
-            <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
-          </div>
-          <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-[#006174] dark:text-[#A1D302] mb-4 sm:mb-6">
-            Descubre Cursos Increíbles
-          </h2>
-          <p className="text-base sm:text-lg lg:text-xl text-gray-600 dark:text-gray-200 max-w-3xl mx-auto leading-relaxed px-4">
-            Explora nuestra colección completa de cursos profesionales diseñados
-            para mejorar tus habilidades y avanzar en tu carrera. Aprende de
-            expertos de la industria con proyectos prácticos y aplicaciones del
-            mundo real.
-          </p>
+    <motion.section
+      ref={ref}
+      className="py-8 md:py-12 lg:py-16 bg-gray-100 dark:bg-[#0F172A]"
+      initial="hidden"
+      animate={isInView ? "visible" : "hidden"}
+      variants={animations.container}
+    >
+      {/* Header */}
+      <motion.div className="text-center mb-8 md:mb-12 px-4" variants={animations.item}>
+        <div className="container flex items-center justify-center mb-4">
+          <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase">
+            CURSOS
+          </span>
+          <div className="ml-3 w-8 md:w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302]"></div>
         </div>
+        <h2 className="text-2xl md:text-4xl lg:text-5xl font-bold text-[#006174] dark:text-[#A1D302] mb-4 md:mb-6">
+          Descubre Cursos Increíbles
+        </h2>
+        <p className="text-base md:text-xl text-gray-600 dark:text-gray-200 max-w-3xl mx-auto px-4">
+          Explora nuestra colección completa de cursos profesionales diseñados para mejorar tus habilidades.
+        </p>
+      </motion.div>
 
-        {/* Contenedor del Carousel */}
-        <div
-          className="relative"
-          onMouseEnter={() => setIsAutoPlaying(false)}
-          onMouseLeave={() => setIsAutoPlaying(true)}
-        >
-          {/* Cards de Cursos */}
-          <div className="overflow-hidden rounded-2xl">
-            <div
-              className="flex transition-transform duration-700 ease-in-out"
-              style={{
-                transform: `translateX(-${
-                  currentIndex * (100 / cardsPerView)
-                }%)`,
-              }}
-            >
-              {courses.map((course) => (
-                <div
-                  key={course.id}
-                  className={`${getCardWidthClass()} flex-shrink-0 px-2 sm:px-3`}
-                >
-                  <div className="bg-white dark:bg-[#20252b] dark:border dark:border-[#006174]/20 rounded-2xl shadow-2xl overflow-hidden h-full">
-                    {/* Imagen del Curso */}
-                    <div className="relative">
-                      <Image
-                        src={course.image || "/placeholder.svg"}
-                        alt={course.title}
-                        width={350}
-                        height={200}
-                        className="w-full h-32 sm:h-40 lg:h-48 object-cover"
-                      />
-                      <Badge
-                        className={`absolute top-2 sm:top-3 left-2 sm:left-3 ${course.categoryColor} text-white border-0 text-xs`}
-                      >
-                        {course.category}
+      {/* Carousel */}
+      <motion.div
+        className="relative px-4 md:px-8"
+        onMouseEnter={() => setIsAutoPlaying(false)}
+        onMouseLeave={() => setIsAutoPlaying(true)}
+        variants={animations.item}
+      >
+        <div className="container overflow-hidden rounded-2xl">
+          <motion.div
+            className="flex transition-transform duration-700 ease-in-out"
+            style={{ transform: `translateX(${getTranslateX()}%)` }}
+          >
+            {courses.map((course, index) => (
+              <motion.div
+                key={course.id}
+                className="flex-shrink-0 px-2 md:px-3"
+                style={{ width: getCardWidth() }}
+                whileHover={{ y: -10, transition: { duration: 0.3 } }}
+              >
+                <div className="bg-white dark:bg-[#20252b] dark:border dark:border-[#006174]/20 rounded-2xl shadow-2xl overflow-hidden h-full">
+                  <div className="relative">
+                    <Image
+                      src={course.image || "/placeholder.svg"}
+                      alt={course.title}
+                      width={350}
+                      height={200}
+                      className="w-full h-40 md:h-48 object-cover"
+                    />
+                    <Badge
+                      className={`absolute top-2 md:top-3 left-2 md:left-3 ${course.categoryColor} text-white border-0 text-xs`}
+                    >
+                      {course.category}
+                    </Badge>
+                    {course.isFree && (
+                      <Badge className="absolute top-2 md:top-3 right-2 md:right-3 bg-green-500 text-white border-0 text-xs">
+                        Gratis
                       </Badge>
-                      {course.isFree && (
-                        <Badge className="absolute top-2 sm:top-3 right-2 sm:right-3 bg-green-500 text-white border-0 text-xs">
-                          Gratis
-                        </Badge>
+                    )}
+                  </div>
+
+                  <div className="p-3 md:p-5">
+                    <div className="flex items-center gap-2 md:gap-3 text-gray-500 dark:text-gray-200 mb-2 text-xs md:text-sm">
+                      <div className="flex items-center gap-1">
+                        <BookOpen className="w-3 h-3" />
+                        <span>{course.lessons} Lecciones</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-3 h-3" />
+                        <span>{course.duration}</span>
+                      </div>
+                    </div>
+
+                    <h3 className="text-base md:text-lg font-bold text-gray-900 dark:text-[#A1D302] mb-2 line-clamp-2">
+                      {course.title}
+                    </h3>
+
+                    <p className="text-gray-600 dark:text-gray-200 mb-3 text-xs md:text-sm line-clamp-2">
+                      {course.description}
+                    </p>
+
+                    <div className="flex items-center gap-2 mb-3">
+                      <span className="text-base md:text-lg font-bold text-purple-600 dark:text-[#A1D302]">
+                        {course.isFree ? "Gratis" : course.currentPrice}
+                      </span>
+                      {!course.isFree && (
+                        <span className="text-gray-400 dark:text-[#006174]/70 line-through text-xs md:text-sm">
+                          {course.originalPrice}
+                        </span>
                       )}
                     </div>
 
-                    {/* Contenido del Curso */}
-                    <div className="p-3 sm:p-4 lg:p-5">
-                      {/* Meta del Curso */}
-                      <div className="flex items-center gap-2 sm:gap-3 text-gray-500 dark:text-gray-200 mb-2">
+                    <div className="flex items-center gap-2">
+                      <Image
+                        src={course.instructor.avatar || "/placeholder.svg"}
+                        alt={course.instructor.name}
+                        width={32}
+                        height={32}
+                        className="rounded-full w-6 h-6 md:w-8 md:h-8"
+                      />
+                      <div className="flex-1">
+                        <p className="font-medium text-gray-900 dark:text-[#A1D302] text-xs md:text-sm">
+                          {course.instructor.name}
+                        </p>
                         <div className="flex items-center gap-1">
-                          <BookOpen className="w-3 h-3" />
-                          <span>{course.lessons} Lecciones</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <Clock className="w-3 h-3" />
-                          <span>{course.duration}</span>
-                        </div>
-                      </div>
-
-                      {/* Título del Curso */}
-                      <h3 className="text-sm sm:text-base lg:text-lg font-bold text-gray-900 dark:text-[#A1D302] mb-2 line-clamp-2 leading-tight">
-                        {course.title}
-                      </h3>
-
-                      {/* Descripción del Curso */}
-                      <p className="text-gray-600 dark:text-gray-200 mb-3 text-xs sm:text-sm line-clamp-2">
-                        {course.description}
-                      </p>
-
-                      {/* Precios */}
-                      <div className="flex items-center gap-2 mb-3">
-                        <span className="text-base sm:text-lg font-bold text-purple-600 dark:text-[#A1D302]">
-                          {course.isFree ? "Gratis" : course.currentPrice}
-                        </span>
-                        {!course.isFree && (
-                          <span className="text-gray-400 dark:text-[#006174]/70 line-through text-xs sm:text-sm">
-                            {course.originalPrice}
-                          </span>
-                        )}
-                      </div>
-
-                      {/* Instructor */}
-                      <div className="flex items-center gap-2">
-                        <Image
-                          src={course.instructor.avatar || "/placeholder.svg"}
-                          alt={course.instructor.name}
-                          width={32}
-                          height={32}
-                          className="rounded-full w-6 h-6 sm:w-8 sm:h-8"
-                        />
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-gray-900 dark:text-[#A1D302] text-xs sm:text-sm truncate">
-                            {course.instructor.name}
-                          </p>
-                          <div className="flex items-center gap-1">
-                            <div className="flex">
-                              {[...Array(5)].map((_, i) => (
-                                <Star
-                                  key={i}
-                                  className={`w-2 h-2 sm:w-2.5 sm:h-2.5 ${
-                                    i < Math.floor(course.instructor.rating)
-                                      ? "fill-yellow-400 text-yellow-400"
-                                      : "text-gray-300 dark:text-[#006174]/30"
-                                  }`}
-                                />
-                              ))}
-                            </div>
-                            <span className="text-xs text-gray-500 dark:text-[#006174]/70">
-                              ({course.instructor.reviews})
-                            </span>
+                          <div className="flex">
+                            {[...Array(5)].map((_, i) => (
+                              <Star
+                                key={i}
+                                className={`w-2 h-2 md:w-2.5 md:h-2.5 ${
+                                  i < Math.floor(course.instructor.rating)
+                                    ? "fill-yellow-400 text-yellow-400"
+                                    : "text-gray-300 dark:text-[#006174]/30"
+                                }`}
+                              />
+                            ))}
                           </div>
+                          <span className="text-xs text-gray-500 dark:text-[#006174]/70">
+                            ({course.instructor.reviews})
+                          </span>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </motion.div>
+            ))}
+          </motion.div>
+        </div>
 
-          {/* Flechas de Navegación */}
+        {/* Navigation and Dots */}
+        <div className="flex items-center justify-center gap-4 mt-6 md:mt-8">
           <Button
             variant="outline"
             size="icon"
-            className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 bg-[#A1D302]/10 hover:bg-[#A1D302]/20 border-[#A1D302] dark:bg-[#006174]/20 dark:hover:bg-[#006174]/30 dark:border-[#006174] shadow-lg z-10 w-8 h-8 sm:w-10 sm:h-10"
-            onClick={goToPrevious}
+            className="rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:bg-white hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-100"
+            onClick={() => navigate("prev")}
           >
-            <ChevronLeft className="w-3 h-3 sm:w-4 sm:h-4 text-[#A1D302] dark:text-[#A1D302]" />
-          </Button>
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 bg-[#A1D302]/10 hover:bg-[#A1D302]/20 border-[#A1D302] dark:bg-[#006174]/20 dark:hover:bg-[#006174]/30 dark:border-[#006174] shadow-lg z-10 w-8 h-8 sm:w-10 sm:h-10"
-            onClick={goToNext}
-          >
-            <ChevronRight className="w-3 h-3 sm:w-4 sm:h-4 text-[#A1D302] dark:text-[#A1D302]" />
+            <ChevronLeft className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
           </Button>
 
-          {/* Indicador de Puntos */}
-          <div className="flex justify-center gap-1 sm:gap-2 mt-6 sm:mt-8">
-            {[...Array(totalDots)].map((_, index) => (
+          <div className="flex justify-center gap-1 md:gap-2">
+            {[...Array(Math.ceil(courses.length / cardsPerView))].map((_, index) => (
               <button
                 key={index}
-                className={`w-2 h-2 sm:w-3 sm:h-3 rounded-full transition-all duration-300 ${
+                className={`w-2 h-2 md:w-3 md:h-3 rounded-full transition-all duration-300 ${
                   Math.floor(currentIndex / cardsPerView) === index
-                    ? "bg-[#A1D302] dark:bg-[#A1D302] scale-125"
-                    : "bg-[#006174]/30 hover:bg-[#006174]/50 dark:bg-[#006174]/50 dark:hover:bg-[#006174]/75"
+                    ? "bg-[#006174] scale-125"
+                    : "bg-[#A1D302]/30 hover:bg-[#006174]/50"
                 }`}
-                onClick={() => goToSlide(index * cardsPerView)}
+                onClick={() => setCurrentIndex(index * cardsPerView)}
               />
             ))}
           </div>
 
-          {/* Indicador de Auto-reproducción */}
-          <div className="text-center mt-3 sm:mt-4">
-            <p className="text-gray-500 dark:text-[#006174]/80 text-xs sm:text-sm">
-              {isAutoPlaying}
-            </p>
-          </div>
+          <Button
+            variant="outline"
+            size="icon"
+            className="rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:bg-white hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-100"
+            onClick={() => navigate("next")}
+          >
+            <ChevronRight className="w-3 h-3 md:w-4 md:h-4 text-gray-400" />
+          </Button>
         </div>
-      </div>
-    </section>
-  );
+      </motion.div>
+    </motion.section>
+  )
 }

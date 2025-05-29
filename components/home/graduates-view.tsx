@@ -193,7 +193,7 @@ export default function DiplomadosDestacados() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
+              className="rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:bg-white hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-100"
               onClick={goToPrevious}
               disabled={currentIndex === 0}
             >
@@ -202,7 +202,7 @@ export default function DiplomadosDestacados() {
             <Button
               variant="ghost"
               size="icon"
-              className="text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 disabled:opacity-50"
+              className="rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:bg-white hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-100"
               onClick={goToNext}
               disabled={currentIndex === maxIndex}
             >
@@ -223,15 +223,6 @@ export default function DiplomadosDestacados() {
             ))}
           </div>
 
-          {/* Control de auto-play */}
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-gray-700 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
-            onClick={() => setIsAutoPlaying(!isAutoPlaying)}
-          >
-            {isAutoPlaying ? "Pausar" : "Reproducir"}
-          </Button>
         </motion.div>
 
         {/* Contenedor del carrusel */}
