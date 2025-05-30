@@ -1,76 +1,52 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
-import Image from "next/image"
-import { ChevronLeft, ChevronRight, Star } from "lucide-react"
-import { motion, AnimatePresence } from "framer-motion"
-
-const testimonials = [
-  {
-    id: 1,
-    name: "María González",
-    role: "Asistente de Enfermería",
-    image:
-      "https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
-    quote:
-      "El programa de enfermería aquí es excepcional. Los profesores son muy dedicados y siempre están dispuestos a ayudar. He aprendido muchísimo y me siento preparada para mi carrera.",
-    rating: 5,
-  },
-  {
-    id: 2,
-    name: "Carlos Rodríguez",
-    role: "Estudiante de Medicina",
-    image:
-      "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
-    quote:
-      "Las instalaciones son de primera clase y el ambiente de aprendizaje es increíble. Los laboratorios están muy bien equipados y las clases son muy dinámicas e interactivas.",
-    rating: 5,
-  },
-  {
-    id: 3,
-    name: "Ana Martínez",
-    role: "Técnico en Radiología",
-    image:
-      "https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
-    quote:
-      "Lo que más me gusta es la atención personalizada. Los grupos son pequeños y cada estudiante recibe la atención que necesita para desarrollar sus habilidades al máximo.",
-    rating: 5,
-  },
-  {
-    id: 4,
-    name: "Roberto Silva",
-    role: "Paramédico",
-    image:
-      "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&h=100&fit=crop&crop=faces&auto=format&q=60",
-    quote:
-      "La experiencia práctica que ofrecen es invaluable. Desde el primer semestre estás trabajando con casos reales y eso te prepara muy bien para el mundo laboral.",
-    rating: 5,
-  },
-]
+import { useState, useEffect } from "react";
+import Image from "next/image";
+import { ChevronLeft, ChevronRight, Star } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { testimonials } from "./utils/testimonials";
+import Link from "next/link";
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.2 } },
-}
+};
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-}
+};
 
 const testimonialVariants = {
-  enter: (direction: number) => ({ x: direction > 0 ? 300 : -300, opacity: 0, scale: 0.9 }),
-  center: { x: 0, opacity: 1, scale: 1, transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] } },
+  enter: (direction: number) => ({
+    x: direction > 0 ? 300 : -300,
+    opacity: 0,
+    scale: 0.9,
+  }),
+  center: {
+    x: 0,
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] },
+  },
   exit: (direction: number) => ({
     x: direction < 0 ? 300 : -300,
     opacity: 0,
     scale: 0.9,
     transition: { duration: 0.4 },
   }),
-}
+};
 
 // Componente reutilizable para testimonios
-function TestimonialCard({ testimonial, index, isDesktop }: { testimonial: any; index: number; isDesktop: boolean }) {
+function TestimonialCard({
+  testimonial,
+  index,
+  isDesktop,
+}: {
+  testimonial: any;
+  index: number;
+  isDesktop: boolean;
+}) {
   const sizes = isDesktop
     ? {
         card: "rounded-2xl p-6 xl:p-8",
@@ -89,7 +65,7 @@ function TestimonialCard({ testimonial, index, isDesktop }: { testimonial: any; 
         star: "w-3 sm:w-4 h-3 sm:h-4",
         text: "text-sm sm:text-base",
         quote: "text-xs sm:text-sm",
-      }
+      };
 
   return (
     <motion.div
@@ -108,35 +84,54 @@ function TestimonialCard({ testimonial, index, isDesktop }: { testimonial: any; 
         <div
           className={`${sizes.icon} bg-[#006174] dark:bg-[#A1D302] rounded-lg flex items-center justify-center transition-colors duration-300`}
         >
-          <svg className={`${sizes.iconSvg} text-white dark:text-[#20252b]`} fill="currentColor" viewBox="0 0 24 24">
+          <svg
+            className={`${sizes.iconSvg} text-white dark:text-[#20252b]`}
+            fill="currentColor"
+            viewBox="0 0 24 24"
+          >
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
           </svg>
         </div>
       </motion.div>
 
-      <motion.div
-        className={`flex items-center ${isDesktop ? "mb-6" : "mb-4 sm:mb-6"}`}
-        initial={{ x: -20, opacity: 0 }}
-        animate={{ x: 0, opacity: 1 }}
-        transition={{ delay: 0.2, duration: 0.4 }}
-      >
-        <div
-          className={`relative ${sizes.avatar} rounded-full overflow-hidden ${isDesktop ? "mr-4" : "mr-3 sm:mr-4"} flex-shrink-0 ring-2 ring-[#A1D302] dark:ring-[#006174] transition-all duration-300`}
+      <Link className="cursor-pointer" href={"https://www.facebook.com/profile.php?id=61565984064270&sk=reviews"} target="_blank">
+        <motion.div
+          className={`flex items-center ${isDesktop ? "mb-6" : "mb-4 sm:mb-6"}`}
+          initial={{ x: -20, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ delay: 0.2, duration: 0.4 }}
         >
-          <Image src={testimonial.image || "/placeholder.svg"} alt={testimonial.name} fill className="object-cover" />
-        </div>
-        <div>
-          <h3 className={`font-bold ${sizes.text} text-gray-900 dark:text-white transition-colors duration-300`}>
-            {testimonial.name}
-          </h3>
-          <p className={`text-[#006174] dark:text-[#A1D302] ${sizes.quote} font-medium transition-colors duration-300`}>
-            {testimonial.role}
-          </p>
-        </div>
-      </motion.div>
+          <div
+            className={`relative ${sizes.avatar} rounded-full overflow-hidden ${
+              isDesktop ? "mr-4" : "mr-3 sm:mr-4"
+            } flex-shrink-0 ring-2 ring-[#A1D302] dark:ring-[#006174] transition-all duration-300`}
+          >
+            <Image
+              src={testimonial.image || "/placeholder.svg"}
+              alt={testimonial.name}
+              fill
+              className="object-cover"
+            />
+          </div>
+          <div>
+            <h3
+              className={`font-bold ${sizes.text} text-gray-900 dark:text-white transition-colors duration-300`}
+            >
+              {testimonial.name}
+            </h3>
+            <p
+              className={`text-[#006174] dark:text-[#A1D302] ${sizes.quote} font-medium transition-colors duration-300`}
+            >
+              {testimonial.role}
+            </p>
+          </div>
+        </motion.div>
+      </Link>
 
       <motion.blockquote
-        className={`text-gray-600 dark:text-gray-300 leading-relaxed ${isDesktop ? "mb-6" : "mb-4 sm:mb-6"} ${sizes.quote} transition-colors duration-300`}
+        className={`text-gray-600 dark:text-gray-300 leading-relaxed ${
+          isDesktop ? "mb-6" : "mb-4 sm:mb-6"
+        } ${sizes.quote} transition-colors duration-300`}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 0.4, duration: 0.5 }}
@@ -165,7 +160,7 @@ function TestimonialCard({ testimonial, index, isDesktop }: { testimonial: any; 
         ))}
       </motion.div>
     </motion.div>
-  )
+  );
 }
 
 // Componente para botones de navegación
@@ -173,9 +168,13 @@ function NavButton({
   onClick,
   direction,
   isDesktop,
-}: { onClick: () => void; direction: "prev" | "next"; isDesktop: boolean }) {
-  const size = isDesktop ? "w-12 h-12" : "w-10 sm:w-12 h-10 sm:h-12"
-  const iconSize = isDesktop ? "w-5 h-5" : "w-4 sm:w-5 h-4 sm:h-5"
+}: {
+  onClick: () => void;
+  direction: "prev" | "next";
+  isDesktop: boolean;
+}) {
+  const size = isDesktop ? "w-12 h-12" : "w-10 sm:w-12 h-10 sm:h-12";
+  const iconSize = isDesktop ? "w-5 h-5" : "w-4 sm:w-5 h-4 sm:h-5";
 
   return (
     <motion.button
@@ -183,48 +182,54 @@ function NavButton({
       className={`${size} rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      aria-label={`${direction === "prev" ? "Testimonio anterior" : "Siguiente testimonio"}`}
+      aria-label={`${
+        direction === "prev" ? "Testimonio anterior" : "Siguiente testimonio"
+      }`}
     >
-      {direction === "prev" ? <ChevronLeft className={iconSize} /> : <ChevronRight className={iconSize} />}
+      {direction === "prev" ? (
+        <ChevronLeft className={iconSize} />
+      ) : (
+        <ChevronRight className={iconSize} />
+      )}
     </motion.button>
-  )
+  );
 }
 
 export default function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0)
-  const [autoplay, setAutoplay] = useState(true)
-  const [direction, setDirection] = useState(0)
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [autoplay, setAutoplay] = useState(true);
+  const [direction, setDirection] = useState(0);
 
   const changeTestimonial = (newIndex: number) => {
-    setDirection(newIndex > currentIndex ? 1 : -1)
-    setCurrentIndex(newIndex)
-  }
+    setDirection(newIndex > currentIndex ? 1 : -1);
+    setCurrentIndex(newIndex);
+  };
 
   useEffect(() => {
-    if (!autoplay) return
+    if (!autoplay) return;
     const interval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % testimonials.length
-      changeTestimonial(nextIndex)
-    }, 4000)
-    return () => clearInterval(interval)
-  }, [autoplay, currentIndex])
+      const nextIndex = (currentIndex + 1) % testimonials.length;
+      changeTestimonial(nextIndex);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [autoplay, currentIndex]);
 
   const handleNavigation = (direction: "prev" | "next") => {
-    setAutoplay(false)
+    setAutoplay(false);
     const newIndex =
       direction === "prev"
         ? (currentIndex - 1 + testimonials.length) % testimonials.length
-        : (currentIndex + 1) % testimonials.length
-    changeTestimonial(newIndex)
-    setTimeout(() => setAutoplay(true), 5000)
-  }
+        : (currentIndex + 1) % testimonials.length;
+    changeTestimonial(newIndex);
+    setTimeout(() => setAutoplay(true), 5000);
+  };
 
   const getVisibleTestimonials = () => {
-    const extended = [...testimonials, ...testimonials]
+    const extended = [...testimonials, ...testimonials];
     return typeof window !== "undefined" && window.innerWidth < 768
       ? [extended[currentIndex]]
-      : [extended[currentIndex], extended[currentIndex + 1]]
-  }
+      : [extended[currentIndex], extended[currentIndex + 1]];
+  };
 
   return (
     <motion.section
@@ -240,7 +245,10 @@ export default function TestimonialsSection() {
             {/* Mobile Layout */}
             <div className="lg:hidden">
               {/* Header */}
-              <motion.div className="text-center mb-8 sm:mb-12" variants={itemVariants}>
+              <motion.div
+                className="text-center mb-8 sm:mb-12"
+                variants={itemVariants}
+              >
                 <div className="flex items-center justify-center mb-4">
                   <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs sm:text-sm tracking-wider uppercase transition-colors duration-300">
                     TESTIMONIOS
@@ -258,7 +266,10 @@ export default function TestimonialsSection() {
                       autoplay ? "bg-[#A1D302]" : "bg-gray-400 dark:bg-gray-500"
                     }`}
                     animate={{ scale: autoplay ? [1, 1.2, 1] : 1 }}
-                    transition={{ duration: 2, repeat: autoplay ? Number.POSITIVE_INFINITY : 0 }}
+                    transition={{
+                      duration: 2,
+                      repeat: autoplay ? Number.POSITIVE_INFINITY : 0,
+                    }}
                   />
                   <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
                     {autoplay ? "Reproducción automática" : "Manual"}
@@ -267,7 +278,10 @@ export default function TestimonialsSection() {
               </motion.div>
 
               {/* Contenedor de testimonios mobile */}
-              <motion.div className="relative overflow-hidden" variants={itemVariants}>
+              <motion.div
+                className="relative overflow-hidden"
+                variants={itemVariants}
+              >
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={currentIndex}
@@ -291,19 +305,35 @@ export default function TestimonialsSection() {
               </motion.div>
 
               {/* Navegación mobile */}
-              <motion.div className="flex justify-center space-x-4 mt-6" variants={itemVariants}>
-                <NavButton onClick={() => handleNavigation("prev")} direction="prev" isDesktop={false} />
-                <NavButton onClick={() => handleNavigation("next")} direction="next" isDesktop={false} />
+              <motion.div
+                className="flex justify-center space-x-4 mt-6"
+                variants={itemVariants}
+              >
+                <NavButton
+                  onClick={() => handleNavigation("prev")}
+                  direction="prev"
+                  isDesktop={false}
+                />
+                <NavButton
+                  onClick={() => handleNavigation("next")}
+                  direction="next"
+                  isDesktop={false}
+                />
               </motion.div>
 
               {/* Dots indicator */}
-              <motion.div className="flex justify-center space-x-2 mt-6" variants={itemVariants}>
+              <motion.div
+                className="flex justify-center space-x-2 mt-6"
+                variants={itemVariants}
+              >
                 {testimonials.map((_, index) => (
                   <motion.button
                     key={index}
                     onClick={() => changeTestimonial(index)}
                     className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                      index === currentIndex ? "bg-[#006174] dark:bg-[#A1D302]" : "bg-gray-300 dark:bg-gray-600"
+                      index === currentIndex
+                        ? "bg-[#006174] dark:bg-[#A1D302]"
+                        : "bg-gray-300 dark:bg-gray-600"
                     }`}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
@@ -317,7 +347,11 @@ export default function TestimonialsSection() {
             {/* Desktop Layout */}
             <div className="hidden lg:flex items-start justify-between">
               {/* Left side - Title and Navigation */}
-              <motion.div className="w-1/3 pr-8 xl:pr-12" variants={itemVariants}>
+
+              <motion.div
+                className="w-1/3 pr-8 xl:pr-12"
+                variants={itemVariants}
+              >
                 <div className="mb-6">
                   <div className="flex items-center mb-4">
                     <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
@@ -333,10 +367,15 @@ export default function TestimonialsSection() {
                   <div className="flex items-center mt-2">
                     <motion.div
                       className={`w-2 h-2 rounded-full mr-2 transition-colors duration-300 ${
-                        autoplay ? "bg-[#A1D302]" : "bg-gray-400 dark:bg-gray-500"
+                        autoplay
+                          ? "bg-[#A1D302]"
+                          : "bg-gray-400 dark:bg-gray-500"
                       }`}
                       animate={{ scale: autoplay ? [1, 1.2, 1] : 1 }}
-                      transition={{ duration: 2, repeat: autoplay ? Number.POSITIVE_INFINITY : 0 }}
+                      transition={{
+                        duration: 2,
+                        repeat: autoplay ? Number.POSITIVE_INFINITY : 0,
+                      }}
                     />
                     <span className="text-xs text-gray-500 dark:text-gray-400 transition-colors duration-300">
                       {autoplay ? "Reproducción automática" : "Manual"}
@@ -346,13 +385,24 @@ export default function TestimonialsSection() {
 
                 {/* Navigation arrows */}
                 <div className="flex space-x-4 mt-8">
-                  <NavButton onClick={() => handleNavigation("prev")} direction="prev" isDesktop={true} />
-                  <NavButton onClick={() => handleNavigation("next")} direction="next" isDesktop={true} />
+                  <NavButton
+                    onClick={() => handleNavigation("prev")}
+                    direction="prev"
+                    isDesktop={true}
+                  />
+                  <NavButton
+                    onClick={() => handleNavigation("next")}
+                    direction="next"
+                    isDesktop={true}
+                  />
                 </div>
               </motion.div>
 
               {/* Right side - Testimonials */}
-              <motion.div className="w-2/3 relative overflow-hidden" variants={itemVariants}>
+              <motion.div
+                className="w-2/3 relative overflow-hidden"
+                variants={itemVariants}
+              >
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
                     key={currentIndex}
@@ -379,5 +429,5 @@ export default function TestimonialsSection() {
         </div>
       </div>
     </motion.section>
-  )
+  );
 }

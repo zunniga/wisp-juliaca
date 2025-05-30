@@ -56,7 +56,8 @@ const ContactView = () => {
     "w-12 h-12 bg-white/20 dark:bg-[#A1D302]/70 backdrop-blur-sm rounded-full flex items-center justify-center hover:bg-white/30 dark:hover:from-[#A1D302]/60 dark:hover:to-[#8eb902]/80 transition-all duration-300 hover:scale-110 dark:shadow-lg dark:shadow-[#A1D302]/20";
 
   return (
-    <div className="bg-gray-100 dark:bg-gradient-to-br dark:bg-[#0F172A] transition-colors duration-300">
+
+    <div id="contacts" className="bg-gray-100 dark:bg-gradient-to-br dark:bg-[#0F172A] transition-colors duration-300">
       <div className="container mx-auto px-4 py-8 lg:py-16">
         <div
           ref={sectionRef}

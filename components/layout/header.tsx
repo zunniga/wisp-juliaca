@@ -13,7 +13,7 @@ import { ThemeSwitch } from "@/components/utils/ThemeSwitch";
 
 const navItems = [
   { name: "INICIO", href: "/" },
-  { name: "NOSOTROS", href: "/about" },
+  { name: "NOSOTROS", href: "/#about" },
   {
     name: "CERTIFICADOS",
     href: "https://www.verycerts.com/certs",
@@ -21,7 +21,7 @@ const navItems = [
   },
   { name: "DIPLOMADOS", href: "/services" },
   { name: "CURSOS", href: "/gallery" },
-  { name: "CONTÁCTANOS", href: "/contact" },
+  { name: "CONTÁCTANOS", href: "/#contacts" },
 ];
 
 export default function Header() {

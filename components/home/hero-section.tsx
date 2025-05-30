@@ -9,6 +9,7 @@ export default function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-gradient-to-br from-[#006174] via-[#00A9BB] to-blue-[#006174] dark:from-[#0F172A] dark:via-[#06202B] dark:to-[#0F172A] ">
       {/* Elementos flotantes decorativos */}
+    
       <motion.div
         className="absolute top-20 right-20 w-20 h-20 bg-white/10 rounded-full blur-xl"
         animate={{
@@ -113,7 +114,6 @@ export default function HeroSection() {
               >
                 <Link href="/contact">Contáctanos</Link>
               </Button>
-
             </motion.div>
 
             <motion.div
@@ -196,7 +196,7 @@ export default function HeroSection() {
                       className="w-16 h-16"
                       fill="currentColor"
                       viewBox="0 0 20 20"
-                    >
+                    > 
                       <path
                         fillRule="evenodd"
                         d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
