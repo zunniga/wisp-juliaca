@@ -159,7 +159,7 @@ export default function HeroSection() {
                 transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
               >
                 <div className="text-yellow-400 flex text-2xl">{"★★★★★"}</div>
-                <p className="text-sm text-gray-300">
+                <p className="text-sm  text-gray-300 dark:text-gray-300">
                   Más de 2,000 estudiantes graduados en cursos y diplomados
                 </p>
               </motion.div>
@@ -207,7 +207,7 @@ export default function HeroSection() {
                 </div>
 
                 <Image
-                  src="image/background/bg.png"
+                  src="image/background/bgg.png"
                   alt="background_of_laptop"
                   fill
                   className="object-contain"

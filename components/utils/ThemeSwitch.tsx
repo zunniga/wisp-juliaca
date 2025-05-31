@@ -24,15 +24,15 @@ export const ThemeSwitch = () => {
       className={`
     rounded-xl p-2 border transition-colors duration-300
     shadow-sm hover:shadow-md
-    border-zinc-300 bg-white hover:bg-zinc-100 text-zinc-800
-    dark:border-zinc-700 dark:bg-zinc-900 dark:hover:bg-zinc-800 dark:text-zinc-100
+    border-zinc-300/70 bg-transparent hover:bg-transparent text-zinc-800
+    dark:border-zinc-700 dark:bg-transparent dark:hover:bg-transparent dark:text-zinc-100
   `}
       aria-label="Cambiar tema"
     >
       {isDark ? (
-        <Sun className="w-5 h-5 text-yellow-400" />
+        <Sun className="w-5 h-5  text-[#A1D302]" />
       ) : (
-        <Moon className="w-5 h-5 text-zinc-800" />
+        <Moon className="w-5 h-5  text-white" />
       )}
     </button>
   );

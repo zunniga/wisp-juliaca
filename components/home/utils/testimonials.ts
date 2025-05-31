@@ -56,7 +56,7 @@ export const testimonials = [
     image:
        "image/testimonials/picture.png",
     quote:
-      "INALTA, Ofrece las mejores capacitaciones con los. Mejores potentes, recomendado",
+      "INALTA, Ofrece las mejores capacitaciones con los. Mejores ponentes, recomendado",
     rating: 5,
   },
   {

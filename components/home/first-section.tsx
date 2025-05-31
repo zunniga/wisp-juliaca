@@ -281,9 +281,9 @@ const FirstSection = () => {
                 variants={itemVariants}
                 className="text-4xl lg:text-5xl font-bold leading-tight"
               >
-                Bienvenido a{" "}
+                Bienvenid@ a{" "}
                 <span className="relative">
-                  Campus <span className="text-[#A1D302]">Virtual</span> Pro
+                  Corporación <span className="text-[#A1D302]">INALTA</span>
                   <motion.div
                     className="absolute bottom-0 left-0 w-full h-1 bg-[#A1D302] rounded-full"
                     initial={{ scaleX: 0 }}
@@ -313,7 +313,7 @@ const FirstSection = () => {
                     className="flex items-center space-x-3 group"
                   >
                     <motion.div
-                      className="w-6 h-6 bg-[#00a9bb] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
+                      className="w-6 h-6 bg-[#00a9bb] dark:bg-[#A1D302] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
                       whileHover={{ rotate: 360 }}
                       transition={{ duration: 0.5 }}
                     >

@@ -1,16 +1,35 @@
-"use client"
-import Link from "next/link"
-import { MapPin, Phone, Mail, Clock, BookOpen, Award, Users } from "lucide-react"
-import { FaFacebookF, FaWhatsapp, FaTiktok, FaInstagram } from "react-icons/fa"
-import Image from "next/image"
-import { useTheme } from "next-themes"
+"use client";
+import Link from "next/link";
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
+  BookOpen,
+  Award,
+  Users,
+} from "lucide-react";
+import { FaFacebookF, FaWhatsapp, FaTiktok, FaInstagram } from "react-icons/fa";
+import Image from "next/image";
+import { useTheme } from "next-themes";
+import { useEffect, useState } from "react";
 
 export default function Footer() {
-  const { theme } = useTheme()
-  const logoSrc = theme === "dark" ? "image/logo/inalta_logo_dark.png" : "image/logo/inalta_logo_main.png";
+  const { theme, systemTheme } = useTheme();
+  const [logoSrc, setLogoSrc] = useState("/image/logo/inalta_logo_main.png");
+
+
+   useEffect(() => {
+    const currentTheme = theme === 'system' ? systemTheme : theme;
+    if (currentTheme === 'dark') {
+      setLogoSrc('/image/logo/inalta_logo_dark.png');
+    } else {
+      setLogoSrc('/image/logo/inalta_logo_main.png');
+    }
+  }, [theme, systemTheme]);
 
   return (
-    <footer className="bg-gradient-to-br from-[#006174] to-[#004d5c] dark:from-[#0F172A] dark:to-[#0F172A] text-white pt-20 relative overflow-hidden">
+    <footer className="bg-gradient-to-br from-[#006174] to-[#004d5c] dark:from-[#0F172A] dark:to-[#0F172A] text-white pt-20 relative overflow-hidden ">
       {/* Decorative background elements */}
       <div className="absolute inset-0 opacity-10">
         <div className="absolute top-10 left-10 w-32 h-32 bg-white/20 rounded-full blur-xl"></div>
@@ -33,8 +52,8 @@ export default function Footer() {
             </div>
 
             <p className="text-gray-300 dark:text-gray-400 mb-6 text-sm leading-relaxed">
-              "Gracias por visitarnos. En INALTA, estamos comprometidos con tu desarrollo profesional. ¡Esperamos verte
-              pronto!"
+              "Gracias por visitarnos. En INALTA, estamos comprometidos con tu
+              desarrollo profesional. ¡Esperamos verte pronto!"
             </p>
 
             <div className="flex space-x-4 items-center">
@@ -138,29 +157,45 @@ export default function Footer() {
               <li className="flex items-start">
                 <BookOpen className="h-4 w-4 text-emerald-400 shrink-0 mt-1 mr-2" />
                 <div>
-                  <p className="text-white text-sm font-medium">"El Poder del Ahora"</p>
-                  <p className="text-gray-300 dark:text-gray-400 text-xs">Eckhart Tolle</p>
+                  <p className="text-white text-sm font-medium">
+                    "El Poder del Ahora"
+                  </p>
+                  <p className="text-gray-300 dark:text-gray-400 text-xs">
+                    Eckhart Tolle
+                  </p>
                 </div>
               </li>
               <li className="flex items-start">
                 <BookOpen className="h-4 w-4 text-emerald-400 shrink-0 mt-1 mr-2" />
                 <div>
-                  <p className="text-white text-sm font-medium">"Mindfulness"</p>
-                  <p className="text-gray-300 dark:text-gray-400 text-xs">Jon Kabat-Zinn</p>
+                  <p className="text-white text-sm font-medium">
+                    "Mindfulness"
+                  </p>
+                  <p className="text-gray-300 dark:text-gray-400 text-xs">
+                    Jon Kabat-Zinn
+                  </p>
                 </div>
               </li>
               <li className="flex items-start">
                 <BookOpen className="h-4 w-4 text-emerald-400 shrink-0 mt-1 mr-2" />
                 <div>
-                  <p className="text-white text-sm font-medium">"Respiración Consciente"</p>
-                  <p className="text-gray-300 dark:text-gray-400 text-xs">Guía de relajación</p>
+                  <p className="text-white text-sm font-medium">
+                    "Respiración Consciente"
+                  </p>
+                  <p className="text-gray-300 dark:text-gray-400 text-xs">
+                    Guía de relajación
+                  </p>
                 </div>
               </li>
               <li className="flex items-start">
                 <Award className="h-4 w-4 text-emerald-400 shrink-0 mt-1 mr-2" />
                 <div>
-                  <p className="text-white text-sm font-medium">Certificaciones</p>
-                  <p className="text-gray-300 dark:text-gray-400 text-xs">Programas acreditados</p>
+                  <p className="text-white text-sm font-medium">
+                    Certificaciones
+                  </p>
+                  <p className="text-gray-300 dark:text-gray-400 text-xs">
+                    Programas acreditados
+                  </p>
                 </div>
               </li>
             </ul>
@@ -175,19 +210,27 @@ export default function Footer() {
             <ul className="space-y-4">
               <li className="flex items-start">
                 <MapPin className="h-5 w-5 text-orange-400 shrink-0 mt-0.5 mr-3" />
-                <span className="text-gray-300 dark:text-gray-400 text-sm">Lima, Perú</span>
+                <span className="text-gray-300 dark:text-gray-400 text-sm">
+                  Lima, Perú
+                </span>
               </li>
               <li className="flex items-center">
                 <Phone className="h-5 w-5 text-orange-400 mr-3" />
-                <span className="text-gray-300 dark:text-gray-400 text-sm">+51 99495 65 73</span>
+                <span className="text-gray-300 dark:text-gray-400 text-sm">
+                  +51 99495 65 73
+                </span>
               </li>
               <li className="flex items-center">
                 <Mail className="h-5 w-5 text-orange-400 mr-3" />
-                <span className="text-gray-300 dark:text-gray-400 text-sm">info@inalta.com</span>
+                <span className="text-gray-300 dark:text-gray-400 text-sm">
+                  info@inalta.com
+                </span>
               </li>
               <li className="flex items-center">
                 <Users className="h-5 w-5 text-orange-400 mr-3" />
-                <span className="text-gray-300 dark:text-gray-400 text-sm">+500 estudiantes</span>
+                <span className="text-gray-300 dark:text-gray-400 text-sm">
+                  +500 estudiantes
+                </span>
               </li>
             </ul>
           </div>
@@ -202,21 +245,32 @@ export default function Footer() {
               <li className="flex items-start">
                 <Clock className="h-5 w-5 text-purple-400 shrink-0 mt-0.5 mr-3" />
                 <div>
-                  <p className="text-gray-300 dark:text-gray-400 text-sm">Lunes - Sábado:</p>
-                  <p className="font-semibold text-white text-sm">10:00 AM - 8:00 PM</p>
+                  <p className="text-gray-300 dark:text-gray-400 text-sm">
+                    Lunes - Sábado:
+                  </p>
+                  <p className="font-semibold text-white text-sm">
+                    10:00 AM - 8:00 PM
+                  </p>
                 </div>
               </li>
               <li className="flex items-start">
                 <Clock className="h-5 w-5 text-purple-400 shrink-0 mt-0.5 mr-3" />
                 <div>
-                  <p className="text-gray-300 dark:text-gray-400 text-sm">Domingo:</p>
-                  <p className="font-semibold text-white text-sm">11:00 AM - 6:00 PM</p>
+                  <p className="text-gray-300 dark:text-gray-400 text-sm">
+                    Domingo:
+                  </p>
+                  <p className="font-semibold text-white text-sm">
+                    11:00 AM - 6:00 PM
+                  </p>
                 </div>
               </li>
               <li className="mt-4 p-3 bg-white/10 dark:bg-white/5 rounded-lg border border-white/20">
-                <p className="text-white text-sm font-medium mb-1">💡 Tip de Relajación</p>
+                <p className="text-white text-sm font-medium mb-1">
+                  💡 Tip de Relajación
+                </p>
                 <p className="text-gray-300 dark:text-gray-400 text-xs">
-                  Dedica 5 minutos diarios a la respiración consciente para reducir el estrés.
+                  Dedica 5 minutos diarios a la respiración consciente para
+                  reducir el estrés.
                 </p>
               </li>
             </ul>
@@ -226,9 +280,12 @@ export default function Footer() {
         {/* Newsletter Section */}
         <div className="border-t border-white/20 pt-8 mb-8">
           <div className="text-center max-w-2xl mx-auto">
-            <h4 className="text-xl font-semibold text-white mb-3">Mantente Conectado con INALTA</h4>
+            <h4 className="text-xl font-semibold text-white mb-3">
+              Mantente Conectado con INALTA
+            </h4>
             <p className="text-gray-300 dark:text-gray-400 text-sm mb-6">
-              Recibe tips de bienestar, recursos de desarrollo profesional y noticias sobre nuestros programas.
+              Recibe tips de bienestar, recursos de desarrollo profesional y
+              noticias sobre nuestros programas.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 max-w-md mx-auto">
               <input
@@ -246,13 +303,17 @@ export default function Footer() {
         {/* Copyright */}
         <div className="border-t border-white/20 pt-8 text-center">
           <div className="text-gray-300 dark:text-gray-200 text-sm">
-            <p className="mb-2">&copy; {new Date().getFullYear()} Corporación Inalta. Todos los derechos reservados.</p>
+            <p className="mb-2">
+              &copy; {new Date().getFullYear()} Corporación Inalta. Todos los
+              derechos reservados.
+            </p>
             <p className="text-xs text-gray-400 mb-4">
-              Transformando vidas a través de la educación y el bienestar integral.
+              Transformando vidas a través de la educación y el bienestar
+              integral.
             </p>
           </div>
         </div>
       </div>
     </footer>
-  )
+  );
 }

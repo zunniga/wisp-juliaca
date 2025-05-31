@@ -1,21 +1,21 @@
-"use client";
+"use client"
 
-import { useState, useEffect } from "react";
-import Image from "next/image";
-import { ChevronLeft, ChevronRight, Star } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
-import { testimonials } from "./utils/testimonials";
-import Link from "next/link";
+import { useState, useEffect } from "react"
+import Image from "next/image"
+import { ChevronLeft, ChevronRight, Star } from "lucide-react"
+import { motion, AnimatePresence } from "framer-motion"
+import { testimonials } from "./utils/testimonials"
+import Link from "next/link"
 
 const containerVariants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: 0.6, staggerChildren: 0.2 } },
-};
+}
 
 const itemVariants = {
   hidden: { opacity: 0, y: 30 },
   visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
-};
+}
 
 const testimonialVariants = {
   enter: (direction: number) => ({
@@ -35,7 +35,7 @@ const testimonialVariants = {
     scale: 0.9,
     transition: { duration: 0.4 },
   }),
-};
+}
 
 // Componente reutilizable para testimonios
 function TestimonialCard({
@@ -43,9 +43,9 @@ function TestimonialCard({
   index,
   isDesktop,
 }: {
-  testimonial: any;
-  index: number;
-  isDesktop: boolean;
+  testimonial: any
+  index: number
+  isDesktop: boolean
 }) {
   const sizes = isDesktop
     ? {
@@ -65,15 +65,15 @@ function TestimonialCard({
         star: "w-3 sm:w-4 h-3 sm:h-4",
         text: "text-sm sm:text-base",
         quote: "text-xs sm:text-sm",
-      };
+      }
 
   return (
     <motion.div
       className={`bg-white dark:bg-gray-800 ${sizes.card} shadow-sm dark:shadow-lg relative`}
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: index * 0.1, duration: 0.4 }}
-      whileHover={{ y: -5, transition: { duration: 0.2 } }}
+      transition={{ delay: index * 0.1, duration: 0.8 }}
+      whileHover={{ y: -5, transition: { duration: 0.8 } }}
     >
       <motion.div
         className={`absolute ${isDesktop ? "top-6 right-6" : "top-4 right-4"}`}
@@ -84,17 +84,17 @@ function TestimonialCard({
         <div
           className={`${sizes.icon} bg-[#006174] dark:bg-[#A1D302] rounded-lg flex items-center justify-center transition-colors duration-300`}
         >
-          <svg
-            className={`${sizes.iconSvg} text-white dark:text-[#20252b]`}
-            fill="currentColor"
-            viewBox="0 0 24 24"
-          >
+          <svg className={`${sizes.iconSvg} text-white dark:text-[#20252b]`} fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
           </svg>
         </div>
       </motion.div>
 
-      <Link className="cursor-pointer" href={"https://www.facebook.com/profile.php?id=61565984064270&sk=reviews"} target="_blank">
+      <Link
+        className="cursor-pointer"
+        href={"https://www.facebook.com/profile.php?id=61565984064270&sk=reviews"}
+        target="_blank"
+      >
         <motion.div
           className={`flex items-center ${isDesktop ? "mb-6" : "mb-4 sm:mb-6"}`}
           initial={{ x: -20, opacity: 0 }}
@@ -106,17 +106,10 @@ function TestimonialCard({
               isDesktop ? "mr-4" : "mr-3 sm:mr-4"
             } flex-shrink-0 ring-2 ring-[#A1D302] dark:ring-[#006174] transition-all duration-300`}
           >
-            <Image
-              src={testimonial.image || "/placeholder.svg"}
-              alt={testimonial.name}
-              fill
-              className="object-cover"
-            />
+            <Image src={testimonial.image || "/placeholder.svg"} alt={testimonial.name} fill className="object-cover" />
           </div>
           <div>
-            <h3
-              className={`font-bold ${sizes.text} text-gray-900 dark:text-white transition-colors duration-300`}
-            >
+            <h3 className={`font-bold ${sizes.text} text-gray-900 dark:text-white transition-colors duration-300`}>
               {testimonial.name}
             </h3>
             <p
@@ -160,7 +153,7 @@ function TestimonialCard({
         ))}
       </motion.div>
     </motion.div>
-  );
+  )
 }
 
 // Componente para botones de navegación
@@ -169,12 +162,12 @@ function NavButton({
   direction,
   isDesktop,
 }: {
-  onClick: () => void;
-  direction: "prev" | "next";
-  isDesktop: boolean;
+  onClick: () => void
+  direction: "prev" | "next"
+  isDesktop: boolean
 }) {
-  const size = isDesktop ? "w-12 h-12" : "w-10 sm:w-12 h-10 sm:h-12";
-  const iconSize = isDesktop ? "w-5 h-5" : "w-4 sm:w-5 h-4 sm:h-5";
+  const size = isDesktop ? "w-12 h-12" : "w-10 sm:w-12 h-10 sm:h-12"
+  const iconSize = isDesktop ? "w-5 h-5" : "w-4 sm:w-5 h-4 sm:h-5"
 
   return (
     <motion.button
@@ -182,58 +175,52 @@ function NavButton({
       className={`${size} rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      aria-label={`${
-        direction === "prev" ? "Testimonio anterior" : "Siguiente testimonio"
-      }`}
+      aria-label={`${direction === "prev" ? "Testimonio anterior" : "Siguiente testimonio"}`}
     >
-      {direction === "prev" ? (
-        <ChevronLeft className={iconSize} />
-      ) : (
-        <ChevronRight className={iconSize} />
-      )}
+      {direction === "prev" ? <ChevronLeft className={iconSize} /> : <ChevronRight className={iconSize} />}
     </motion.button>
-  );
+  )
 }
 
 export default function TestimonialsSection() {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [autoplay, setAutoplay] = useState(true);
-  const [direction, setDirection] = useState(0);
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const [autoplay, setAutoplay] = useState(true)
+  const [direction, setDirection] = useState(0)
 
   const changeTestimonial = (newIndex: number) => {
-    setDirection(newIndex > currentIndex ? 1 : -1);
-    setCurrentIndex(newIndex);
-  };
+    setDirection(newIndex > currentIndex ? 1 : -1)
+    setCurrentIndex(newIndex)
+  }
 
   useEffect(() => {
-    if (!autoplay) return;
+    if (!autoplay) return
     const interval = setInterval(() => {
-      const nextIndex = (currentIndex + 1) % testimonials.length;
-      changeTestimonial(nextIndex);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [autoplay, currentIndex]);
+      const nextIndex = (currentIndex + 1) % testimonials.length
+      changeTestimonial(nextIndex)
+    }, 4000)
+    return () => clearInterval(interval)
+  }, [autoplay, currentIndex])
 
   const handleNavigation = (direction: "prev" | "next") => {
-    setAutoplay(false);
+    setAutoplay(false)
     const newIndex =
       direction === "prev"
         ? (currentIndex - 1 + testimonials.length) % testimonials.length
-        : (currentIndex + 1) % testimonials.length;
-    changeTestimonial(newIndex);
-    setTimeout(() => setAutoplay(true), 5000);
-  };
+        : (currentIndex + 1) % testimonials.length
+    changeTestimonial(newIndex)
+    setTimeout(() => setAutoplay(true), 5000)
+  }
 
   const getVisibleTestimonials = () => {
-    const extended = [...testimonials, ...testimonials];
+    const extended = [...testimonials, ...testimonials]
     return typeof window !== "undefined" && window.innerWidth < 768
       ? [extended[currentIndex]]
-      : [extended[currentIndex], extended[currentIndex + 1]];
-  };
+      : [extended[currentIndex], extended[currentIndex + 1]]
+  }
 
   return (
     <motion.section
-      className="relative"
+      className="relative z-0"
       variants={containerVariants}
       initial="hidden"
       whileInView="visible"
@@ -245,10 +232,7 @@ export default function TestimonialsSection() {
             {/* Mobile Layout */}
             <div className="lg:hidden">
               {/* Header */}
-              <motion.div
-                className="text-center mb-8 sm:mb-12"
-                variants={itemVariants}
-              >
+              <motion.div className="text-center mb-8 sm:mb-12" variants={itemVariants}>
                 <div className="flex items-center justify-center mb-4">
                   <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs sm:text-sm tracking-wider uppercase transition-colors duration-300">
                     TESTIMONIOS
@@ -279,8 +263,9 @@ export default function TestimonialsSection() {
 
               {/* Contenedor de testimonios mobile */}
               <motion.div
-                className="relative overflow-hidden"
+                className="relative overflow-hidden h-full"
                 variants={itemVariants}
+                style={{ minHeight: "280px" }}
               >
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
@@ -305,35 +290,19 @@ export default function TestimonialsSection() {
               </motion.div>
 
               {/* Navegación mobile */}
-              <motion.div
-                className="flex justify-center space-x-4 mt-6"
-                variants={itemVariants}
-              >
-                <NavButton
-                  onClick={() => handleNavigation("prev")}
-                  direction="prev"
-                  isDesktop={false}
-                />
-                <NavButton
-                  onClick={() => handleNavigation("next")}
-                  direction="next"
-                  isDesktop={false}
-                />
+              <motion.div className="flex justify-center space-x-4 mt-6" variants={itemVariants}>
+                <NavButton onClick={() => handleNavigation("prev")} direction="prev" isDesktop={false} />
+                <NavButton onClick={() => handleNavigation("next")} direction="next" isDesktop={false} />
               </motion.div>
 
               {/* Dots indicator */}
-              <motion.div
-                className="flex justify-center space-x-2 mt-6"
-                variants={itemVariants}
-              >
+              <motion.div className="flex justify-center space-x-2 mt-6" variants={itemVariants}>
                 {testimonials.map((_, index) => (
                   <motion.button
                     key={index}
                     onClick={() => changeTestimonial(index)}
                     className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                      index === currentIndex
-                        ? "bg-[#006174] dark:bg-[#A1D302]"
-                        : "bg-gray-300 dark:bg-gray-600"
+                      index === currentIndex ? "bg-[#006174] dark:bg-[#A1D302]" : "bg-gray-300 dark:bg-gray-600"
                     }`}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
@@ -348,10 +317,7 @@ export default function TestimonialsSection() {
             <div className="hidden lg:flex items-start justify-between">
               {/* Left side - Title and Navigation */}
 
-              <motion.div
-                className="w-1/3 pr-8 xl:pr-12"
-                variants={itemVariants}
-              >
+              <motion.div className="w-1/3 pr-8 xl:pr-12" variants={itemVariants}>
                 <div className="mb-6">
                   <div className="flex items-center mb-4">
                     <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
@@ -367,9 +333,7 @@ export default function TestimonialsSection() {
                   <div className="flex items-center mt-2">
                     <motion.div
                       className={`w-2 h-2 rounded-full mr-2 transition-colors duration-300 ${
-                        autoplay
-                          ? "bg-[#A1D302]"
-                          : "bg-gray-400 dark:bg-gray-500"
+                        autoplay ? "bg-[#A1D302]" : "bg-gray-400 dark:bg-gray-500"
                       }`}
                       animate={{ scale: autoplay ? [1, 1.2, 1] : 1 }}
                       transition={{
@@ -385,16 +349,8 @@ export default function TestimonialsSection() {
 
                 {/* Navigation arrows */}
                 <div className="flex space-x-4 mt-8">
-                  <NavButton
-                    onClick={() => handleNavigation("prev")}
-                    direction="prev"
-                    isDesktop={true}
-                  />
-                  <NavButton
-                    onClick={() => handleNavigation("next")}
-                    direction="next"
-                    isDesktop={true}
-                  />
+                  <NavButton onClick={() => handleNavigation("prev")} direction="prev" isDesktop={true} />
+                  <NavButton onClick={() => handleNavigation("next")} direction="next" isDesktop={true} />
                 </div>
               </motion.div>
 
@@ -402,6 +358,7 @@ export default function TestimonialsSection() {
               <motion.div
                 className="w-2/3 relative overflow-hidden"
                 variants={itemVariants}
+                style={{ minHeight: "320px" }}
               >
                 <AnimatePresence mode="wait" custom={direction}>
                   <motion.div
@@ -429,5 +386,5 @@ export default function TestimonialsSection() {
         </div>
       </div>
     </motion.section>
-  );
+  )
 }
