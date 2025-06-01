@@ -6,8 +6,7 @@ import { Search, Filter, Grid3X3, List, Bookmark, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Badge } from "@/components/ui/badge"
-import { graduates } from "@/components/graduates/utils/graduate-data"
-
+import { courses } from "@/components/courses/utils/course-data"
 
 export default function CoursesPage() {
   const [viewMode, setViewMode] = useState("grid")
@@ -18,12 +17,12 @@ export default function CoursesPage() {
         {/* Header */}
         <div className="mb-8 mt-20">
           <div className="flex items-center gap-4 mb-4">
-            <h1 className="text-4xl md:text-5xl font-bold text-white dark:text-gray-50">Todos los Diplomados</h1>
+            <h1 className="text-4xl md:text-5xl font-bold text-white dark:text-gray-50">Estos son nuestros cursos</h1>
             <Badge
               variant="secondary"
               className="bg-white/20 dark:bg-gray-800/80 text-white dark:text-gray-200 px-4 py-2 rounded-full backdrop-blur-sm border border-white/30 dark:border-gray-700"
             >
-              🎯 30 Diplomados
+              🎯 50 cursos
             </Badge>
           </div>
           <p className="text-white/90 dark:text-gray-300 text-lg max-w-2xl">
@@ -91,7 +90,7 @@ export default function CoursesPage() {
         {/* Course Grid/List */}
         {viewMode === "grid" ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {graduates.map((course) => (
+            {courses.map((course) => (
               <div
                 key={course.id}
                 className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 overflow-hidden hover:shadow-xl dark:hover:shadow-gray-900/30 transition-all duration-300 border border-white/20 dark:border-gray-700"
@@ -178,7 +177,7 @@ export default function CoursesPage() {
         ) : (
           /* List View */
           <div className="space-y-4">
-            {graduates.map((course) => (
+            {courses.map((course) => (
               <div
                 key={course.id}
                 className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg dark:shadow-gray-900/20 overflow-hidden hover:shadow-xl dark:hover:shadow-gray-900/30 transition-all duration-300 border border-white/20 dark:border-gray-700"

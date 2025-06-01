@@ -1,4 +1,4 @@
- export const graduates = [
+ export const courses = [
     {
       id: 1,
       title: "Reaccionar Frente Para Volver",

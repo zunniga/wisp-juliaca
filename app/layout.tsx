@@ -38,7 +38,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="es" suppressHydrationWarning>
-      <body className={`font-sans ${poppins.variable}` }>
+      <body className={`font-sans ${poppins.variable}`} suppressHydrationWarning>
         <ThemeProvider attribute="class" enableSystem={true} defaultTheme="system">
           <GoogleAnalytics />
           <Header />

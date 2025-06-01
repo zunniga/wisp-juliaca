@@ -4,11 +4,10 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X } from "lucide-react"
+import { Menu, X, GraduationCap } from "lucide-react"
 import Image from "next/image"
 import { useTheme } from "next-themes"
 import { ThemeSwitch } from "@/components/utils/ThemeSwitch"
-
 
 const navItems = [
   { name: "INICIO", href: "/" },
@@ -19,15 +18,16 @@ const navItems = [
     target: "_blank",
   },
   { name: "DIPLOMADOS", href: "/graduates" },
-  { name: "CURSOS", href: "/gallery" },
+  { name: "CURSOS", href: "/courses" },
   { name: "CONTÁCTANOS", href: "/#contacts" },
+  { name: "AULA VIRTUAL", href: "/aula-virtual", special: true },
 ]
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { theme } = useTheme()
-  const [logoSrc, setLogoSrc] = useState('/image/logo/inalta_logo_main.png');
+  const [logoSrc, setLogoSrc] = useState("/image/logo/inalta_logo_main.png")
   const pathname = usePathname()
 
   const { resolvedTheme, setTheme } = useTheme()
@@ -39,13 +39,12 @@ export default function Header() {
   }, [])
 
   useEffect(() => {
-    if (resolvedTheme === 'dark') {
-      setLogoSrc('/image/logo/inalta_logo_dark.png');
+    if (resolvedTheme === "dark") {
+      setLogoSrc("/image/logo/inalta_logo_dark.png")
     } else {
-      setLogoSrc('/image/logo/inalta_logo_main.png');
+      setLogoSrc("/image/logo/inalta_logo_main.png")
     }
-  }, [resolvedTheme]);
-
+  }, [resolvedTheme])
 
   // Control del scroll del body
   useEffect(() => {
@@ -72,20 +71,14 @@ export default function Header() {
     <>
       <header
         className={` fixed w-full z-50 transition-all duration-300 animate-fadeIn ${
-          isScrolled ? "bg-black/30 dark:bg-[#0F172A] backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
+          isScrolled ? "bg-black/40 dark:bg-[#0F172A] backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
         }`}
       >
         <div className="container-custom">
-          <div className="flex items-center justify-between">
+          <div className="flex items-center justify-between">       
             <Link href="/" className="flex items-center space-x-2 transition-transform hover:scale-105">
               <div className="relative rounded-full overflow-hidden xl:w-44 xl:h-20 w-40 h-20 sm:w-20 sm:h-20 md:w-36 md:h-36">
-                <Image
-                  src={logoSrc}
-                  alt="Inalta-Logo"
-                  fill
-                  className="object-contain"
-                  priority
-                />
+                <Image src={logoSrc || "/placeholder.svg"} alt="Inalta-Logo" fill className="object-contain" priority />
               </div>
             </Link>
 
@@ -95,13 +88,24 @@ export default function Header() {
                   key={item.name}
                   href={item.href}
                   {...(item.target ? { target: item.target, rel: "noopener noreferrer" } : {})}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors hover:scale-105 transform ${
-                    pathname === item.href
-                      ? "text-white bg-primary shadow-md"
-                      : "text-gray-100 hover:text-white hover:bg-primary/80"
-                  }`}
+                  className={`${
+                    item.special
+                      ? "px-6 py-2 rounded-sm text-sm font-bold transition-all hover:scale-105 transform bg-transparent border border-zinc-300/70 dark:border-zinc-700  text-white shadow-lg hover:shadow-xl border-1 hover:border-white/30 flex items-center gap-2"
+                      : `px-4 py-2 rounded-full text-sm font-medium transition-colors hover:scale-105 transform ${
+                          pathname === item.href
+                            ? "text-white  bg-primary shadow-md"
+                            : "text-gray-100 hover:text-white hover:bg-primary/80"
+                        }`
+                  } `}
                 >
-                  {item.name}
+                  {item.special ? (
+                    <>
+                      <GraduationCap size={16} />
+                      {item.name}
+                    </>
+                  ) : (
+                    item.name
+                  )}
                 </Link>
               ))}
               <ThemeSwitch />
@@ -124,10 +128,9 @@ export default function Header() {
         <div className="fixed inset-0 bg-black bg-opacity-50 z-[60] lg:hidden" onClick={closeMobileMenu} />
       )}
 
-   
       <div
         className={`
-          fixed top-0 right-0 h-[550px] w-80 max-w-[65vw] bg-[#007389] dark:bg-[#1F2937] rounded-xl z-[70] lg:hidden
+          fixed top-0 right-0 h-[600px] w-80 max-w-[65vw] bg-[#007389] dark:bg-[#1F2937] rounded-xl z-[70] lg:hidden
           transform transition-transform duration-300 ease-in-out
           ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}
         `}
@@ -139,7 +142,7 @@ export default function Header() {
               src={logoSrc || "/placeholder.svg?height=64&width=128"}
               alt="Inalta-Logo"
               fill
-              className="object-contain"
+              className="object-contain" 
             />
           </div>
           <Button
@@ -160,14 +163,25 @@ export default function Header() {
               key={item.name}
               href={item.href}
               {...(item.target ? { target: item.target, rel: "noopener noreferrer" } : {})}
-              className={`text-center block px-4 py-3 rounded-2xl text-base font-medium mb-2 transition-colors ${
-                pathname === item.href
-                  ? "text-gray-800 dark:text-white bg-white dark:bg-[#A1D302] shadow-md"
-                  : "text-gray-100 dark:text-gray-100 hover:text-white hover:bg-white/20"
+              className={`${
+                item.special
+                  ? "text-center  px-4 py-3 rounded-2xl text-base font-bold mb-2 transition-all bg-transparent border border-zinc-300/70 dark:border-zinc-700 text-white shadow-lg flex items-center justify-center gap-2"
+                  : `text-center block px-4 py-3 rounded-2xl text-base font-medium mb-2 transition-colors ${
+                      pathname === item.href
+                        ? "text-gray-800 dark:text-white bg-white dark:bg-[#A1D302] shadow-md"
+                        : "text-gray-100 dark:text-gray-100 hover:text-white hover:bg-white/20"
+                    }`
               }`}
               onClick={closeMobileMenu}
             >
-              {item.name}
+              {item.special ? (
+                <>
+                  <GraduationCap size={18} />
+                  {item.name}
+                </>
+              ) : (
+                item.name
+              )}
             </Link>
           ))}
 

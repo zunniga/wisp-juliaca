@@ -69,18 +69,15 @@ export default function HeroSection() {
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           {/* Contenido de texto - Lado izquierdo */}
           <div className="text-white order-2 lg:order-1">
-            <motion.h1
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-tight"
-              initial={{ opacity: 0, y: 50 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: "easeOut" }}
+            <div
+              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-tight"        
             >
               Eleva tu{" "}
               <span className="text-transparent bg-clip-text bg-[#A1D302]">
                 Conocimiento <br />
               </span>
               <span className="text-white">y Carrera</span>
-            </motion.h1>
+            </div>
 
             <motion.p
               className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-200 leading-relaxed"
