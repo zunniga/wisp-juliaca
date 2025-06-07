@@ -1,250 +1,235 @@
-"use client";
+"use client"
 
-import Link from "next/link";
-import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { Button } from "@/components/ui/button"
+import { motion } from "framer-motion"
+import Image from "next/image"
+import { Network, Shield, Zap, Users, Wifi, Server, Globe } from "lucide-react"
+import { useEffect, useState } from "react"
+
+// Valores fijos para evitar problemas de hidratación
+const FLOATING_ELEMENTS = [
+  { icon: Wifi, size: 45, top: 20, left: 15, delay: 0 },
+  { icon: Server, size: 38, top: 60, left: 80, delay: 0.5 },
+  { icon: Globe, size: 42, top: 80, left: 25, delay: 1 },
+  { icon: Network, size: 35, top: 30, left: 70, delay: 1.5 },
+  { icon: Wifi, size: 40, top: 70, left: 60, delay: 2 },
+]
+
+const NETWORK_LINES = [
+  { top: 25, height: 1, delay: 0 },
+  { top: 45, height: 1.5, delay: 0.3 },
+  { top: 65, height: 1, delay: 0.6 },
+  { top: 85, height: 1.2, delay: 0.9 },
+]
 
 export default function HeroSection() {
+  const [mounted, setMounted] = useState(false)
+
+  useEffect(() => {
+    setMounted(true)
+  }, [])
+
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden bg-gradient-to-br from-[#006174] via-[#00A9BB] to-blue-[#006174] dark:from-[#0F172A] dark:via-[#06202B] dark:to-[#0F172A] ">
-      {/* Elementos flotantes decorativos */}
-    
-      <motion.div
-        className="absolute top-20 right-20 w-20 h-20 bg-white/10 rounded-full blur-xl"
-        animate={{
-          y: [0, -20, 0],
-          x: [0, 10, 0],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-        }}
-      />
+    <section className="relative min-h-screen flex items-center overflow-hidden">
+      {/* Fondo optimizado con imagen completa */}
+      <div className="absolute inset-0">
+        {/* Imagen de fondo principal */}
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{
+            backgroundImage: `url("bg2.jpg")`,
+            backgroundSize: "cover",
+            backgroundPosition: "center center",
+            backgroundAttachment: "fixed",
+          }}
+        />
 
-      <motion.div
-        className="absolute top-1/3 right-1/4 w-12 h-12 bg-cyan-400/20 rounded-full blur-lg"
-        animate={{
-          y: [0, 15, 0],
-          x: [0, -8, 0],
-        }}
-        transition={{
-          duration: 4,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-          delay: 1,
-        }}
-      />
+        {/* Overlay de gradiente para mejor legibilidad */}
+        <div className="absolute inset-0 bg-gradient-to-br from-slate-900/40 via-slate-800/30 to-slate-900/50 dark:from-slate-900/60 dark:via-slate-800/50 dark:to-slate-900/70" />
 
-      <motion.div
-        className="absolute bottom-1/3 left-10 w-16 h-16 bg-white/10 rounded-full blur-lg"
-        animate={{
-          y: [0, -25, 0],
-          x: [0, 12, 0],
-        }}
-        transition={{
-          duration: 5,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-          delay: 2,
-        }}
-      />
+        {/* Overlay adicional para contraste */}
+        <div className="absolute inset-0 bg-gradient-to-r from-black/20 via-transparent to-black/10" />
+      </div>
 
-      <motion.div
-        className="absolute top-1/2 left-1/4 w-8 h-8 bg-cyan-400/30 rounded-full blur-md"
-        animate={{
-          y: [0, 20, 0],
-          x: [0, -15, 0],
-        }}
-        transition={{
-          duration: 7,
-          repeat: Number.POSITIVE_INFINITY,
-          ease: "easeInOut",
-          delay: 0.5,
-        }}
-      />
-
-      <div className="container mx-auto px-4 relative z-10">
+      <div className="container mx-auto px-4 relative z-20">
         <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-          {/* Contenido de texto - Lado izquierdo */}
-          <div className="text-white order-2 lg:order-1">
-            <div
-              className="text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-extrabold mb-6 leading-tight"        
-            >
-              Eleva tu{" "}
-              <span className="text-transparent bg-clip-text bg-[#A1D302]">
-                Conocimiento <br />
-              </span>
-              <span className="text-white">y Carrera</span>
+          {/* Contenido de texto */}
+          <motion.div
+            className="text-white drop-shadow-lg order-2 lg:order-1"
+            initial={{ opacity: 0, x: -100 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{
+              duration: 1.2,
+              ease: [0.25, 0.46, 0.45, 0.94], // Curva de animación suave
+            }}
+          >
+            {/* Título con animación escalonada */}
+            <div className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+              {["CONECTAMOS", "TECNOLOGÍA", "Y PERSONAS"].map((word, i) => (
+                <motion.div
+                  key={word}
+                  initial={{ opacity: 0, y: 50 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{
+                    duration: 0.8,
+                    delay: 0.3 + i * 0.2,
+                    ease: "easeOut",
+                  }}
+                >
+                  {i === 1 ? (
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D29D69] to-[#F8BB7C]">
+                      {word}
+                    </span>
+                  ) : (
+                    <span>{word}</span>
+                  )}
+                  {i < 2 && <br />}
+                </motion.div>
+              ))}
             </div>
 
             <motion.p
-              className="text-lg md:text-xl lg:text-2xl mb-8 text-gray-200 leading-relaxed"
+              className="text-lg md:text-xl mb-8 text-white/90 drop-shadow-md leading-relaxed max-w-lg"
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+              transition={{ duration: 0.8, delay: 1, ease: "easeOut" }}
             >
-              Descubre nuestros diplomados y cursos diseñados para potenciar tus
-              habilidades, abrir nuevas oportunidades y transformar tu futuro
-              profesional.
+              Ofrecemos soluciones integrales en redes y telecomunicaciones que garantizan conectividad eficiente y
+              seguridad confiable.
             </motion.p>
 
             <motion.div
-              className="flex flex-wrap gap-4 mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: 0.4, ease: "easeOut" }}
+              className="mb-12"
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ duration: 0.6, delay: 1.3, ease: "easeOut" }}
             >
               <Button
-                asChild
                 size="lg"
-                className="text-lg px-8 py-4 bg-[#00A9BB] dark:bg-[#06202B] dark:border dark:border-gray-100/60 text-white hover:bg-cyan-600 dark:hover:bg-[#0F172A]"
+                className="text-lg px-8 py-4 bg-gradient-to-r from-[#D29D69] to-[#F8BB7C] text-white hover:from-[#B8845A] hover:to-[#E6A66D] shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105"
               >
-                <Link href="/courses">Explorar Cursos</Link>
-              </Button>
-
-              <Button
-                asChild
-                size="lg"
-                className="text-lg px-8 py-4 bg-[#A1D302]/80 text-white hover:bg-[#A1D302]/40"
-              >
-                <Link href="/contact">Contáctanos</Link>
+                Conoce nuestros servicios
               </Button>
             </motion.div>
 
+            {/* Características */}
             <motion.div
-              className="flex items-center space-x-4"
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.6, ease: "easeOut" }}
+              className="grid grid-cols-2 gap-6"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 1.5, ease: "easeOut" }}
             >
-              <motion.div
-                className="flex -space-x-2"
-                initial={{ opacity: 0, scale: 0.8 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
-              >
-                {["one.jpg", "five.jpg", "four.jpg", "three.jpg"].map(
-                  (nombre, index) => (
-                    <motion.div
-                      key={index}
-                      className="w-12 h-12 rounded-full border-2 border-white overflow-hidden"
-                      initial={{ opacity: 0, scale: 0 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{
-                        duration: 0.4,
-                        delay: 0.9 + index * 0.1,
-                        ease: "easeOut",
-                      }}
-                    >
-                      <Image
-                        src={`/image/usuarios/${nombre}`}
-                        alt={`Estudiante satisfecho ${index}`}
-                        width={48}
-                        height={48}
-                        className="w-full h-full object-cover"
-                      />
-                    </motion.div>
-                  )
-                )}
-              </motion.div>
-
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: 1.0, ease: "easeOut" }}
-              >
-                <div className="text-yellow-400 flex text-2xl">{"★★★★★"}</div>
-                <p className="text-sm  text-gray-300 dark:text-gray-300">
-                  Más de 2,000 estudiantes graduados en cursos y diplomados
-                </p>
-              </motion.div>
+              {[
+                { icon: Zap, title: "Experiencia", subtitle: "Comprobada" },
+                { icon: Shield, title: "Seguridad", subtitle: "Confiable" },
+                { icon: Network, title: "Innovación", subtitle: "Tecnológica" },
+                { icon: Users, title: "Servicio", subtitle: "Excepcional" },
+              ].map((item, i) => {
+                const IconComponent = item.icon
+                return (
+                  <motion.div
+                    key={item.title}
+                    className="flex items-center space-x-3"
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{
+                      duration: 0.6,
+                      delay: 1.7 + i * 0.1,
+                      ease: "easeOut",
+                    }}
+                    whileHover={{ scale: 1.05 }}
+                  >
+                    <div className="w-10 h-10 bg-gradient-to-r from-[#D29D69] to-[#F8BB7C] rounded-full flex items-center justify-center shadow-lg">
+                      <IconComponent className="w-5 h-5 text-white" />
+                    </div>
+                    <div>
+                      <p className="font-semibold text-white drop-shadow-md">{item.title}</p>
+                      <p className="text-sm text-white/80 drop-shadow-sm">{item.subtitle}</p>
+                    </div>
+                  </motion.div>
+                )
+              })}
             </motion.div>
-          </div>
+          </motion.div>
 
-          {/* Área para imagen - Lado derecho */}
+          {/* Imagen */}
           <motion.div
             className="order-1 lg:order-2 flex justify-center lg:justify-end"
-            initial={{ opacity: 0, x: 50 }}
-            animate={{
-              opacity: 1,
-              x: 0,
-              y: [0, -15, 0],
-            }}
+            initial={{ opacity: 0, x: 100, scale: 0.8 }}
+            animate={{ opacity: 1, x: 0, scale: 1 }}
             transition={{
-              opacity: { duration: 0.8, delay: 0.3, ease: "easeOut" },
-              x: { duration: 0.8, delay: 0.3, ease: "easeOut" },
-              y: {
-                duration: 3,
-                repeat: Number.POSITIVE_INFINITY,
-                ease: "easeInOut",
-                delay: 1,
-              },
+              duration: 1.2,
+              delay: 0.5,
+              ease: [0.25, 0.46, 0.45, 0.94],
             }}
           >
             <div className="relative w-full max-w-2xl">
-              {/* Aquí puedes agregar tu imagen */}
-              <div className="relative aspect-[4/3] bg-transparent rounded-3xl backdrop-blur-sm  flex items-center justify-center">
-                {/* Placeholder para la imagen - reemplaza esto con tu imagen real */}
-                <div className="text-center text-white/60">
-                  <div className="w-32 h-32 mx-auto mb-4 bg-white/10 rounded-2xl flex items-center justify-center">
-                    <svg
-                      className="w-16 h-16"
-                      fill="currentColor"
-                      viewBox="0 0 20 20"
-                    > 
-                      <path
-                        fillRule="evenodd"
-                        d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z"
-                        clipRule="evenodd"
-                      />
-                    </svg>
-                  </div>
-                </div>
-
-                <Image
-                  src="image/background/bgg.png"
-                  alt="background_of_laptop"
-                  fill
-                  className="object-contain"
-                  priority
-                />
-              </div>
-
-              {/* Elementos decorativos alrededor de la imagen */}
+              {/* Efectos de fondo */}
               <motion.div
-                className="absolute -top-4 -right-4 w-8 h-8 bg-white/20 dark:bg-[#A1D302]/30   rounded-full blur-sm"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.7, 1, 0.7],
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
+                className="absolute inset-0 bg-gradient-to-r from-[#D29D69]/20 to-[#F8BB7C]/20 rounded-3xl blur-3xl"
+                initial={{ scale: 0, opacity: 0 }}
+                animate={{ scale: 1, opacity: 0.4 }}
+                transition={{ duration: 1, delay: 1 }}
               />
 
               <motion.div
-                className="absolute -bottom-6 -left-6 w-12 h-12 bg-white/20 dark:bg-[#A1D302]/30  rounded-full blur-sm"
+                className="relative aspect-[4/4] rounded-3xl overflow-hidden shadow-2xl"
+                initial={{ rotateY: -15, rotateX: 5 }}
+                animate={{ rotateY: 0, rotateX: 0 }}
+                transition={{ duration: 1, delay: 0.8 }}
+                whileHover={{
+                  y: -10,
+                  transition: { duration: 0.3 },
+                }}
+              >
+                <Image
+                  src="tecnico.png"
+                  alt="Profesional en telecomunicaciones"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+              </motion.div>
+
+              {/* Elementos decorativos */}
+              <motion.div
+                className="absolute -top-4 -right-4 w-8 h-8 bg-gradient-to-r from-[#D29D69] to-[#F8BB7C] rounded-full shadow-lg"
+                initial={{ scale: 0, rotate: -180 }}
                 animate={{
-                  y: [0, -10, 0],
+                  scale: 1,
+                  rotate: 0,
                 }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                  delay: 1,
+                transition={{ duration: 0.6, delay: 1.5 }}
+              />
+
+              <motion.div
+                className="absolute -bottom-6 -left-6 w-12 h-12 bg-gradient-to-r from-[#F8BB7C] to-[#D29D69] rounded-full shadow-lg"
+                initial={{ scale: 0, rotate: 180 }}
+                animate={{
+                  scale: 1,
+                  rotate: 0,
                 }}
+                transition={{ duration: 0.6, delay: 1.7 }}
               />
             </div>
           </motion.div>
         </div>
       </div>
 
-      {/* Gradiente inferior */}
-      <div className="absolute bottom-0 left-0 right-0 h-24 bg-gradient-to-t from-[#A1D302]/10 to-transparent"></div>
+      {/* Ondas decorativas */}
+      <div className="absolute bottom-0 left-0 right-0 z-10">
+        <motion.svg
+          className="w-full h-24 text-white/10 dark:text-slate-800/20"
+          viewBox="0 0 1200 120"
+          preserveAspectRatio="none"
+          initial={{ pathLength: 0, opacity: 0 }}
+          animate={{ pathLength: 1, opacity: 1 }}
+          transition={{ duration: 2, delay: 2 }}
+        >
+          <path d="M0,60 C300,120 900,0 1200,60 L1200,120 L0,120 Z" fill="currentColor" />
+        </motion.svg>
+      </div>
     </section>
-  );
+  )
 }

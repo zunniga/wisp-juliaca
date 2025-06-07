@@ -4,47 +4,73 @@ import { useState, useEffect } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
-import { Menu, X, GraduationCap } from "lucide-react"
-import Image from "next/image"
+import { Menu, X, MessageCircle, Sun, Moon, Globe } from "lucide-react"
 import { useTheme } from "next-themes"
-import { ThemeSwitch } from "@/components/utils/ThemeSwitch"
+import { motion } from "framer-motion"
 
 const navItems = [
   { name: "INICIO", href: "/" },
-  { name: "NOSOTROS", href: "/#about" },
-  {
-    name: "CERTIFICADOS",
-    href: "https://www.verycerts.com/certs",
-    target: "_blank",
-  },
-  { name: "DIPLOMADOS", href: "/graduates" },
-  { name: "CURSOS", href: "/courses" },
-  { name: "CONTÁCTANOS", href: "/#contacts" },
-  { name: "AULA VIRTUAL", href: "/aula-virtual", special: true },
+  { name: "NOSOTROS", href: "/nosotros" },
+  { name: "SERVICIOS", href: "/servicios" },
+  { name: "PROYECTOS", href: "/proyectos" },
+  { name: "CONTACTO", href: "/contacto" },
+  { name: "DISEÑA TU RED", href: "/disena-tu-red", special: true },
+  { name: "COBERTURA", href: "/axion-market", special: true },
 ]
 
 export default function Header() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
-  const { theme } = useTheme()
-  const [logoSrc, setLogoSrc] = useState("/image/logo/inalta_logo_main.png")
+  const [language, setLanguage] = useState("ES")
+  const { theme, setTheme, resolvedTheme } = useTheme()
   const pathname = usePathname()
+  const [mounted, setMounted] = useState(false)
 
-  const { resolvedTheme, setTheme } = useTheme()
+  // Animation variants
+  const navItemVariants = {
+    hidden: { opacity: 0, y: -10 },
+    visible: (i: number) => ({
+      opacity: 1,
+      y: 0,
+      transition: {
+        delay: 0.1 + i * 0.1,
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    }),
+  }
+
+  const logoVariants = {
+    hidden: { opacity: 0, x: -20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+      },
+    },
+  }
+
+  const controlsVariants = {
+    hidden: { opacity: 0, x: 20 },
+    visible: {
+      opacity: 1,
+      x: 0,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut",
+        delay: 0.3,
+      },
+    },
+  }
 
   useEffect(() => {
+    setMounted(true)
     const handleScroll = () => setIsScrolled(window.scrollY > 10)
     window.addEventListener("scroll", handleScroll)
     return () => window.removeEventListener("scroll", handleScroll)
   }, [])
-
-  useEffect(() => {
-    if (resolvedTheme === "dark") {
-      setLogoSrc("/image/logo/inalta_logo_dark.png")
-    } else {
-      setLogoSrc("/image/logo/inalta_logo_main.png")
-    }
-  }, [resolvedTheme])
 
   // Control del scroll del body
   useEffect(() => {
@@ -63,57 +89,104 @@ export default function Header() {
     setTheme(resolvedTheme === "dark" ? "light" : "dark")
   }
 
+  const toggleLanguage = () => {
+    setLanguage(language === "ES" ? "EN" : "ES")
+  }
+
   const closeMobileMenu = () => {
     setIsMobileMenuOpen(false)
   }
 
+  if (!mounted) return null
+
   return (
     <>
       <header
-        className={` fixed w-full z-50 transition-all duration-300 animate-fadeIn ${
-          isScrolled ? "bg-black/40 dark:bg-[#0F172A] backdrop-blur-md shadow-md py-2" : "bg-transparent py-4"
+        className={`fixed w-full z-50 transition-all duration-300 ${
+          isScrolled
+            ? "bg-[#D29D69]/95 dark:bg-[#F8BB7C]/95 backdrop-blur-md shadow-lg py-2"
+            : "bg-[#D29D69] dark:bg-[#F8BB7C] py-3"
         }`}
       >
-        <div className="container-custom">
-          <div className="flex items-center justify-between">       
-            <Link href="/" className="flex items-center space-x-2 transition-transform hover:scale-105">
-              <div className="relative rounded-full overflow-hidden xl:w-44 xl:h-20 w-40 h-20 sm:w-20 sm:h-20 md:w-36 md:h-36">
-                <Image src={logoSrc || "/placeholder.svg"} alt="Inalta-Logo" fill className="object-contain" priority />
-              </div>
-            </Link>
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between">
+            {/* Logo */}
+            <motion.div initial="hidden" animate="visible" variants={logoVariants}>
+              <Link href="/" className="flex items-center space-x-2 transition-transform hover:scale-105">
+                <div className="text-white dark:text-[#333] font-bold text-2xl tracking-wider">WISP</div>
+              </Link>
+            </motion.div>
 
-            <nav className=" hidden lg:flex items-center space-x-1">
-              {navItems.map((item) => (
-                <Link
-                  key={item.name}
-                  href={item.href}
-                  {...(item.target ? { target: item.target, rel: "noopener noreferrer" } : {})}
-                  className={`${
-                    item.special
-                      ? "px-6 py-2 rounded-sm text-sm font-bold transition-all hover:scale-105 transform bg-transparent border border-zinc-300/70 dark:border-zinc-700  text-white shadow-lg hover:shadow-xl border-1 hover:border-white/30 flex items-center gap-2"
-                      : `px-4 py-2 rounded-full text-sm font-medium transition-colors hover:scale-105 transform ${
-                          pathname === item.href
-                            ? "text-white  bg-primary shadow-md"
-                            : "text-gray-100 hover:text-white hover:bg-primary/80"
-                        }`
-                  } `}
-                >
-                  {item.special ? (
-                    <>
-                      <GraduationCap size={16} />
-                      {item.name}
-                    </>
-                  ) : (
-                    item.name
-                  )}
-                </Link>
+            {/* Desktop Navigation */}
+            <nav className="hidden lg:flex items-center space-x-1">
+              {navItems.map((item, i) => (
+                <motion.div key={item.name} custom={i} initial="hidden" animate="visible" variants={navItemVariants}>
+                  <Link
+                    href={item.href}
+                    className={`px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
+                      item.special
+                        ? "text-white dark:text-[#333] hover:text-[#333] dark:hover:text-white"
+                        : pathname === item.href
+                          ? "text-[#333] dark:text-white border-b-2 border-[#333] dark:border-white"
+                          : "text-white/90 dark:text-[#333]/90 hover:text-white dark:hover:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10 rounded-md"
+                    }`}
+                  >
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
-              <ThemeSwitch />
             </nav>
 
+            {/* Desktop Controls */}
+            <motion.div
+              className="hidden lg:flex items-center space-x-3"
+              initial="hidden"
+              animate="visible"
+              variants={controlsVariants}
+            >
+              {/* Language Toggle */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleLanguage}
+                className="text-white dark:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10 hover:text-white dark:hover:text-[#333]"
+              >
+                <Globe className="w-4 h-4 mr-1" />
+                {language}
+              </Button>
+
+              {/* Theme Toggle */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={toggleTheme}
+                className="text-white dark:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10 hover:text-white dark:hover:text-[#333]"
+              >
+                {resolvedTheme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+              </Button>
+
+              {/* WhatsApp Button */}
+              <Button
+                asChild
+                className="bg-[#25D366] hover:bg-[#20b358] text-white font-medium px-4 py-2 rounded-full transition-all duration-200 hover:scale-105"
+              >
+                <Link
+                  href="https://wa.me/1234567890"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center space-x-2"
+                >
+                  <MessageCircle className="w-4 h-4" />
+                  <span>WhatsApp</span>
+                </Link>
+              </Button>
+            </motion.div>
+
+            {/* Mobile Menu Button */}
             <Button
               size="icon"
-              className="lg:hidden bg-primary text-white hover:bg-primary-dark"
+              variant="ghost"
+              className="lg:hidden text-white dark:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               aria-label="Toggle menu"
             >
@@ -123,32 +196,36 @@ export default function Header() {
         </div>
       </header>
 
-      {/* Overlay */}
+      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
-        <div className="fixed inset-0 bg-black bg-opacity-50 z-[60] lg:hidden" onClick={closeMobileMenu} />
+        <motion.div
+          className="fixed inset-0 bg-black/50 z-[60] lg:hidden"
+          onClick={closeMobileMenu}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.3 }}
+        />
       )}
 
-      <div
+      {/* Mobile Menu */}
+      <motion.div
         className={`
-          fixed top-0 right-0 h-[600px] w-80 max-w-[65vw] bg-[#007389] dark:bg-[#1F2937] rounded-xl z-[70] lg:hidden
+          fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-[#D29D69] dark:bg-[#F8BB7C] z-[70] lg:hidden
           transform transition-transform duration-300 ease-in-out
           ${isMobileMenuOpen ? "translate-x-0" : "translate-x-full"}
         `}
+        initial={{ x: "100%" }}
+        animate={{ x: isMobileMenuOpen ? 0 : "100%" }}
+        transition={{ type: "spring", stiffness: 300, damping: 30 }}
       >
-        {/* Header del menú móvil */}
-        <div className="flex items-center justify-between p-4 border-b border-white/20">
-          <div className="relative w-32 h-16">
-            <Image
-              src={logoSrc || "/placeholder.svg?height=64&width=128"}
-              alt="Inalta-Logo"
-              fill
-              className="object-contain" 
-            />
-          </div>
+        {/* Mobile Menu Header */}
+        <div className="flex items-center justify-between p-4 border-b border-white/20 dark:border-[#333]/20">
+          <div className="text-white dark:text-[#333] font-bold text-xl">AXION</div>
           <Button
             size="icon"
             variant="ghost"
-            className="text-white hover:bg-white/20"
+            className="text-white dark:text-[#333] hover:bg-white/20 dark:hover:bg-[#333]/20"
             onClick={closeMobileMenu}
             aria-label="Close menu"
           >
@@ -156,41 +233,80 @@ export default function Header() {
           </Button>
         </div>
 
-        {/* Contenido del menú */}
+        {/* Mobile Menu Content */}
         <div className="p-4 overflow-y-auto h-full pb-20">
-          {navItems.map((item) => (
-            <Link
+          {navItems.map((item, i) => (
+            <motion.div
               key={item.name}
-              href={item.href}
-              {...(item.target ? { target: item.target, rel: "noopener noreferrer" } : {})}
-              className={`${
-                item.special
-                  ? "text-center  px-4 py-3 rounded-2xl text-base font-bold mb-2 transition-all bg-transparent border border-zinc-300/70 dark:border-zinc-700 text-white shadow-lg flex items-center justify-center gap-2"
-                  : `text-center block px-4 py-3 rounded-2xl text-base font-medium mb-2 transition-colors ${
-                      pathname === item.href
-                        ? "text-gray-800 dark:text-white bg-white dark:bg-[#A1D302] shadow-md"
-                        : "text-gray-100 dark:text-gray-100 hover:text-white hover:bg-white/20"
-                    }`
-              }`}
-              onClick={closeMobileMenu}
+              initial={{ opacity: 0, x: 20 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ delay: 0.1 + i * 0.05, duration: 0.3 }}
             >
-              {item.special ? (
-                <>
-                  <GraduationCap size={18} />
-                  {item.name}
-                </>
-              ) : (
-                item.name
-              )}
-            </Link>
+              <Link
+                href={item.href}
+                className={`block px-4 py-3 rounded-lg text-base font-medium mb-2 transition-colors ${
+                  pathname === item.href
+                    ? "text-[#333] dark:text-white bg-white/10 dark:bg-[#333]/10"
+                    : "text-white/90 dark:text-[#333]/90 hover:text-white dark:hover:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10"
+                }`}
+                onClick={closeMobileMenu}
+              >
+                {item.name}
+              </Link>
+            </motion.div>
           ))}
 
-          {/* Theme switch en el menú móvil */}
-          <div className="flex justify-center mt-6 pt-4 border-t border-white/20">
-            <ThemeSwitch />
-          </div>
+          {/* Mobile Controls */}
+          <motion.div
+            className="flex flex-col space-y-3 mt-6 pt-4 border-t border-white/20 dark:border-[#333]/20"
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.4, duration: 0.5 }}
+          >
+            {/* Language Toggle */}
+            <Button
+              variant="ghost"
+              onClick={toggleLanguage}
+              className="text-white dark:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10 justify-start"
+            >
+              <Globe className="w-4 h-4 mr-2" />
+              Idioma: {language}
+            </Button>
+
+            {/* Theme Toggle */}
+            <Button
+              variant="ghost"
+              onClick={toggleTheme}
+              className="text-white dark:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10 justify-start"
+            >
+              {resolvedTheme === "dark" ? (
+                <>
+                  <Sun className="w-4 h-4 mr-2" />
+                  Modo Claro
+                </>
+              ) : (
+                <>
+                  <Moon className="w-4 h-4 mr-2" />
+                  Modo Oscuro
+                </>
+              )}
+            </Button>
+
+            {/* WhatsApp Button */}
+            <Button asChild className="bg-[#25D366] hover:bg-[#20b358] text-white font-medium justify-start">
+              <Link
+                href="https://wa.me/1234567890"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2"
+              >
+                <MessageCircle className="w-4 h-4" />
+                <span>WhatsApp</span>
+              </Link>
+            </Button>
+          </motion.div>
         </div>
-      </div>
+      </motion.div>
     </>
   )
 }

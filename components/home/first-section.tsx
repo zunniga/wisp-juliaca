@@ -1,25 +1,28 @@
-"use client";
+"use client"
 
-import { Play, User, BookOpen, Check } from "lucide-react";
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react"
+import { Button } from "@/components/ui/button"
+import { motion, useAnimation, useInView } from "framer-motion"
 
-const FirstSection = () => {
-  const featuresRef = useRef(null);
-  const mainContentRef = useRef(null);
-  const imageRef = useRef(null);
-  const contentRef = useRef(null);
+export function FirstSection() {
+  const ref = useRef(null)
+  const isInView = useInView(ref, { once: true })
+  const controls = useAnimation()
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
-  const featuresInView = useInView(featuresRef, {
-    once: true,
-    margin: "-100px",
-  });
-  const mainContentInView = useInView(mainContentRef, {
-    once: true,
-    margin: "-100px",
-  });
-  const imageInView = useInView(imageRef, { once: true, margin: "-100px" });
-  const contentInView = useInView(contentRef, { once: true, margin: "-100px" });
+  useEffect(() => {
+    if (isInView) {
+      controls.start("visible")
+    }
+  }, [isInView, controls])
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prev) => (prev + 1) % 3)
+    }, 6000) // Cambiar cada 5 segundos en lugar de 4
+
+    return () => clearInterval(interval)
+  }, [])
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -27,333 +30,171 @@ const FirstSection = () => {
       opacity: 1,
       transition: {
         staggerChildren: 0.2,
-        delayChildren: 0.1,
+        delayChildren: 0.3,
       },
     },
-  };
-
-  const cardVariants = {
-    hidden: {
-      opacity: 0,
-      y: 50,
-      scale: 0.9,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 100,
-        damping: 15,
-        duration: 0.6,
-      },
-    },
-  };
-
-  const imageVariants = {
-    hidden: {
-      opacity: 0,
-      x: -100,
-      scale: 0.8,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 80,
-        damping: 20,
-        duration: 0.8,
-      },
-    },
-  };
-
-  const contentVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2,
-      },
-    },
-  };
+  }
 
   const itemVariants = {
-    hidden: {
-      opacity: 0,
-      x: 50,
-      y: 20,
-    },
+    hidden: { y: 20, opacity: 0 },
     visible: {
-      opacity: 1,
-      x: 0,
       y: 0,
+      opacity: 1,
       transition: {
         type: "spring",
         stiffness: 100,
-        damping: 15,
+        damping: 10,
       },
     },
-  };
-
-  const checkItemVariants = {
-    hidden: {
-      opacity: 0,
-      x: 30,
-      scale: 0.8,
-    },
-    visible: {
-      opacity: 1,
-      x: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 120,
-        damping: 15,
-      },
-    },
-  };
+  }
 
   return (
-    <section id="about">
-      <div className="min-h-screen bg-gray-100 dark:bg-[#0F172A] text-gray-800 dark:text-gray-100">
-        {/* Features Section */}
-        <div className="container mx-auto px-6 pt-12">
-          <motion.div
-            ref={featuresRef}
-            variants={containerVariants}
-            initial="hidden"
-            animate={featuresInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-16"
-          >
-            {/* Video Training Card */}
-            <motion.div
-              variants={cardVariants}
-              className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#00a9bb] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
-            >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00a9bb]/10 to-transparent dark:from-[#A1D302]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-              <div className="relative z-10">
-                <motion.div
-                  className="w-12 h-12 bg-[#00a9bb] dark:bg-[#A1D302]/80 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <Play className="w-6 h-6 text-white" />
-                </motion.div>
-                <h3 className="text-xl font-semibold mb-2">
-                  Capacitación Virtual
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Con certificación incluida
-                </p>
+    <section
+      id="inicio"
+      className="relative p-24 flex items-center pt-16 bg-gradient-to-b from-white to-gray-100 dark:from-gray-950 dark:to-gray-900"
+    >
+      {/* Background Pattern */}
+      <div className="absolute inset-0 z-0 opacity-10 dark:opacity-20">
+        <div className="absolute right-0 top-1/4 w-64 h-64 bg-[#D29D69] rounded-full filter blur-3xl"></div>
+        <div className="absolute left-1/4 bottom-1/4 w-72 h-72 bg-[#F8BB7C] rounded-full filter blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-4 z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div ref={ref} variants={containerVariants} initial="hidden" animate={controls} className="space-y-6">
+            <motion.div variants={itemVariants} className="inline-block">
+              <div className="flex items-center mb-2">
+                <span className="text-[#D29D69] dark:text-[#F8BB7C] font-semibold text-sm tracking-wider uppercase">
+                  NOSOTROS
+                </span>
+                <div className="ml-3 w-12 h-0.5 bg-[#D29D69] dark:bg-[#F8BB7C]"></div>
               </div>
             </motion.div>
 
-            {/* Expert Teacher Card */}
-            <motion.div
-              variants={cardVariants}
-              className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#00a9bb] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
+            <motion.h1
+              variants={itemVariants}
+              className="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 dark:text-white leading-tight"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#00a9bb]/10 dark:from-[#A1D302]/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-              <div className="relative z-10">
-                <motion.div
-                  className="w-12 h-12 bg-[#00a9bb] dark:bg-[#A1D302]/80 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <User className="w-6 h-6 text-white" />
-                </motion.div>
-                <h3 className="text-xl font-semibold mb-2">
-                  Instructores Expertos
-                </h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Con certificación incluida
-                </p>
-              </div>
-            </motion.div>
+              <span className="block">SOMOS</span>
+              <span className="text-[#D29D69] dark:text-[#F8BB7C]">WISP</span>
+            </motion.h1>
 
-            {/* Versatile Course Card */}
-            <motion.div
-              variants={cardVariants}
-              className="group relative p-6 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-[#00a9bb] transition-all duration-500 bg-white/80 dark:bg-gray-800/30 backdrop-blur-sm"
+            <motion.h2
+              variants={itemVariants}
+              className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-300"
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-[#006174]/10 to-transparent dark:from-[#A1D302]/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg"></div>
-              <div className="relative z-10">
-                <motion.div
-                  className="w-12 h-12 bg-[#00a9bb] dark:bg-[#A1D302]/80 rounded-lg flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300"
-                  whileHover={{ rotate: 360 }}
-                  transition={{ duration: 0.5 }}
-                >
-                  <BookOpen className="w-6 h-6 text-white" />
-                </motion.div>
-                <h3 className="text-xl font-semibold mb-2">Cursos Flexibles</h3>
-                <p className="text-gray-600 dark:text-gray-400">
-                  Con certificación incluida
-                </p>
-              </div>
+              SERVICIO EN REDES Y TELECOMUNICACIONES
+            </motion.h2>
+
+            <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-400 text-lg max-w-lg">
+              Somos una empresa de redes y telecomunicaciones que garantizan una conectividad eficiente y una seguridad
+              confiable. Creemos firmemente en que cada servicio es una oportunidad para conectarnos con nuestros
+              clientes. Confiar en nosotros significa optar por experiencia, innovación y un servicio excepcional.
+            </motion.p>
+
+            <motion.div variants={itemVariants} className="pt-4 flex flex-wrap gap-4">
+              <Button
+                className="bg-[#D29D69] hover:bg-[#c08b5a] text-white dark:bg-[#F8BB7C] dark:hover:bg-[#e9ac6d] dark:text-gray-900"
+                size="lg"
+              >
+                Nuestros Servicios
+              </Button>
+              <Button
+                variant="outline"
+                className="border-[#D29D69] text-[#D29D69] hover:bg-[#D29D69] hover:text-white dark:border-[#F8BB7C] dark:text-[#F8BB7C] dark:hover:bg-[#F8BB7C] dark:hover:text-gray-900"
+                size="lg"
+              >
+                Contáctanos
+              </Button>
             </motion.div>
           </motion.div>
 
-          {/* Main Content Section */}
           <motion.div
-            ref={mainContentRef}
-            initial="hidden"
-            animate={mainContentInView ? "visible" : "hidden"}
-            className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
+            className="relative"
           >
-            {/* Left Side - Image */}
-            <motion.div
-              ref={imageRef}
-              variants={imageVariants}
-              className="relative"
-            >
-              <div className="relative z-10">
-                <motion.img
-                  src="image/background/student.png"
-                  alt="Online Learning"
-                  className="w-full max-w-2xl mx-auto rounded-2xl"
-                  whileHover={{ scale: 1.02 }}
-                  transition={{ duration: 0.3 }}
-                />
-              </div>
-              {/* Decorative shapes */}
-              <motion.div
-                className="absolute top-10 left-10 w-20 h-20 bg-[#A1D302] rounded-full opacity-20"
-                animate={{
-                  scale: [1, 1.2, 1],
-                  opacity: [0.2, 0.4, 0.2],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                }}
-              ></motion.div>
-              <motion.div
-                className="absolute bottom-10 right-10 w-16 h-16 bg-[#00a9bb] rounded-full opacity-30"
-                animate={{
-                  scale: [1, 1.3, 1],
-                  opacity: [0.3, 0.5, 0.3],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                  delay: 1,
-                }}
-              ></motion.div>
-              <motion.div
-                className="absolute top-1/2 left-0 w-12 h-12 bg-[#006174] rounded-full opacity-25"
-                animate={{
-                  scale: [1, 1.1, 1],
-                  opacity: [0.25, 0.45, 0.25],
-                }}
-                transition={{
-                  duration: 3,
-                  repeat: Number.POSITIVE_INFINITY,
-                  ease: "easeInOut",
-                  delay: 0.5,
-                }}
-              ></motion.div>
-            </motion.div>
-
-            {/* Right Side - Content */}
-            <motion.div
-              ref={contentRef}
-              variants={contentVariants}
-              initial="hidden"
-              animate={contentInView ? "visible" : "hidden"}
-              className="space-y-6"
-            >
-              <motion.div variants={itemVariants} className="inline-block">
-                <div className="flex items-center mb-0">
-                  <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
-                    NOSOTROS
-                  </span>
-                  <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
-                </div>
-              </motion.div>
-
-              <motion.h1
-                variants={itemVariants}
-                className="text-4xl lg:text-5xl font-bold leading-tight"
-              >
-                Bienvenid@ a{" "}
-                <span className="relative">
-                  Corporación <span className="text-[#A1D302]">INALTA</span>
-                  <motion.div
-                    className="absolute bottom-0 left-0 w-full h-1 bg-[#A1D302] rounded-full"
-                    initial={{ scaleX: 0 }}
-                    animate={contentInView ? { scaleX: 1 } : { scaleX: 0 }}
-                    transition={{ duration: 0.8, delay: 0.5 }}
-                    style={{ originX: 0 }}
-                  ></motion.div>
-                </span>
-              </motion.h1>
-
-              <motion.p
-                variants={itemVariants}
-                className="text-gray-600 dark:text-gray-300 text-lg leading-relaxed"
-              >
-                Tu plataforma líder en educación online
-              </motion.p>
-
-              <motion.div variants={itemVariants} className="space-y-4">
-                {[
-                  "Acceso 24/7 a todo nuestro contenido educativo",
-                  "Certificados avalados por instituciones reconocidas",
-                  "Metodología práctica con casos reales del mercado",
-                ].map((item, index) => (
-                  <motion.div
-                    key={index}
-                    variants={checkItemVariants}
-                    className="flex items-center space-x-3 group"
-                  >
-                    <motion.div
-                      className="w-6 h-6 bg-[#00a9bb] dark:bg-[#A1D302] rounded-full flex items-center justify-center group-hover:scale-110 transition-transform duration-300"
-                      whileHover={{ rotate: 360 }}
-                      transition={{ duration: 0.5 }}
-                    >
-                      <Check className="w-4 h-4 text-white" />
-                    </motion.div>
-                    <span className="text-gray-600 dark:text-gray-300">
-                      {item}
-                    </span>
-                  </motion.div>
-                ))}
-              </motion.div>
-
-              <motion.div variants={itemVariants} className="pt-4">
-                <motion.button
-                  className="group relative px-8 py-4 bg-gradient-to-r from-[#006174] to-[#00A9BB] hover:bg-transparent dark:from-[#739700]/70 dark:to-[#8eb902] dark:text-gray-100 text-white text-base font-medium rounded-lg overflow-hidden transition-all duration-300 hover:shadow-lg"
-                  whileHover={{ scale: 1.05 }}
-                  whileTap={{ scale: 0.95 }}
+            <div className="relative z-10 w-full max-w-md mx-auto">
+              <div className="relative overflow-hidden rounded-lg shadow-2xl">
+                <motion.div
+                  className="flex"
+                  animate={{ x: `${-currentImageIndex * 100}%` }}
+                  transition={{
+                    duration: 1.2,
+                    ease: [0.25, 0.1, 0.25, 1], // Curva de Bézier suave
+                    type: "tween",
+                  }}
                 >
-                  <span className="relative z-10 flex items-center space-x-2">
-                    <span>Conocer Más</span>
-                    <motion.span
-                      className="group-hover:translate-x-1 transition-transform duration-300"
-                      animate={{ x: [0, 5, 0] }}
-                      transition={{
-                        duration: 2,
-                        repeat: Number.POSITIVE_INFINITY,
-                      }}
-                    >
-                      →
-                    </motion.span>
-                  </span>
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#00a9bb] to-[#006174] dark:from-[#8eb902] dark:to-[#739700] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </motion.button>
+                  <div className="w-full flex-shrink-0">
+                    <img
+                      src="image/picture/image.png"
+                      alt="Técnicos de WISP trabajando"
+                      className="w-full h-80 object-cover"
+                    />
+                    {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <h3 className="text-white text-xl font-bold">Técnicos Especializados</h3>
+                      <p className="text-white/90">Profesionales capacitados en telecomunicaciones</p>
+                    </div> */}
+                  </div>
+                  <div className="w-full flex-shrink-0">
+                    <img
+                      src="image/picture/image2.png"
+                      alt="Instalación de torre de telecomunicaciones"
+                      className="w-full h-80 object-cover"
+                    />
+                    {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <h3 className="text-white text-xl font-bold">Infraestructura Avanzada</h3>
+                      <p className="text-white/90">Torres y equipos de última generación</p>
+                    </div> */}
+                  </div>
+                  <div className="w-full flex-shrink-0">
+                    <img
+                      src="image/picture/image3.png"
+                      alt="Técnico de WISP en campo"
+                      className="w-full h-80 object-cover"
+                    />
+                    {/* <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                      <h3 className="text-white text-xl font-bold">Servicio en Campo</h3>
+                      <p className="text-white/90">Atención personalizada y soporte técnico</p>
+                    </div> */}
+                  </div>
+                </motion.div>
+
+                {/* Navigation dots */}
+                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+                  {[0, 1, 2].map((index) => (
+                    <button
+                      key={index}
+                      onClick={() => setCurrentImageIndex(index)}
+                      className={`w-3 h-3 rounded-full transition-all duration-500 ease-out ${
+                        currentImageIndex === index
+                          ? "bg-[#D29D69] dark:bg-[#F8BB7C] scale-125"
+                          : "bg-white/50 hover:bg-white/70"
+                      }`}
+                    />
+                  ))}
+                </div>
+              </div>
+
+              {/* Info card overlay */}
+              <motion.div
+                className="absolute -bottom-6 -right-6 bg-[#D29D69] dark:bg-[#F8BB7C] p-6 rounded-lg shadow-lg text-white dark:text-gray-900 z-20"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.8 }}
+              >
+                <h3 className="text-xl font-bold mb-2">Desde 2019</h3>
+                <p>Brindando soluciones de calidad</p>
               </motion.div>
-            </motion.div>
+            </div>
+
+            {/* Decorative elements */}
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 border-4 border-[#D29D69] dark:border-[#F8BB7C] rounded-lg z-0"></div>
+            <div className="absolute -top-6 -right-6 w-32 h-32 border-4 border-[#D29D69] dark:border-[#F8BB7C] rounded-full z-0"></div>
           </motion.div>
         </div>
       </div>
     </section>
-  );
-};
-
-export default FirstSection;
+  )
+}

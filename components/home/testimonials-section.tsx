@@ -82,7 +82,7 @@ function TestimonialCard({
         transition={{ delay: 0.3, duration: 0.5, ease: "backOut" }}
       >
         <div
-          className={`${sizes.icon} bg-[#006174] dark:bg-[#A1D302] rounded-lg flex items-center justify-center transition-colors duration-300`}
+          className={`${sizes.icon} bg-[#D29D69] dark:bg-[#F8BB7C] rounded-lg flex items-center justify-center transition-colors duration-300`}
         >
           <svg className={`${sizes.iconSvg} text-white dark:text-[#20252b]`} fill="currentColor" viewBox="0 0 24 24">
             <path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h4v10h-10z" />
@@ -104,7 +104,7 @@ function TestimonialCard({
           <div
             className={`relative ${sizes.avatar} rounded-full overflow-hidden ${
               isDesktop ? "mr-4" : "mr-3 sm:mr-4"
-            } flex-shrink-0 ring-2 ring-[#A1D302] dark:ring-[#006174] transition-all duration-300`}
+            } flex-shrink-0 ring-2 ring-[#F8BB7C] dark:ring-[#D29D69] transition-all duration-300`}
           >
             <Image src={testimonial.image || "/placeholder.svg"} alt={testimonial.name} fill className="object-cover" />
           </div>
@@ -113,7 +113,7 @@ function TestimonialCard({
               {testimonial.name}
             </h3>
             <p
-              className={`text-[#006174] dark:text-[#A1D302] ${sizes.quote} font-medium transition-colors duration-300`}
+              className={`text-[#D29D69] dark:text-[#F8BB7C] ${sizes.quote} font-medium transition-colors duration-300`}
             >
               {testimonial.role}
             </p>
@@ -146,7 +146,7 @@ function TestimonialCard({
             transition={{ delay: 0.6 + i * 0.1, duration: 0.3 }}
           >
             <Star
-              className={`${sizes.star} text-[#A1D302] dark:text-yellow-400 transition-colors duration-300`}
+              className={`${sizes.star} text-[#F8BB7C] dark:text-yellow-400 transition-colors duration-300`}
               fill={i < testimonial.rating ? "currentColor" : "none"}
             />
           </motion.div>
@@ -172,7 +172,7 @@ function NavButton({
   return (
     <motion.button
       onClick={onClick}
-      className={`${size} rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#006174] dark:hover:border-[#A1D302] hover:text-[#006174] dark:hover:text-[#A1D302] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300`}
+      className={`${size} rounded-full border-2 border-gray-300 dark:border-gray-600 flex items-center justify-center hover:border-[#D29D69] dark:hover:border-[#F8BB7C] hover:text-[#D29D69] dark:hover:text-[#F8BB7C] transition-all duration-300 bg-white dark:bg-gray-800 text-gray-600 dark:text-gray-300`}
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
       aria-label={`${direction === "prev" ? "Testimonio anterior" : "Siguiente testimonio"}`}
@@ -234,20 +234,20 @@ export default function TestimonialsSection() {
               {/* Header */}
               <motion.div className="text-center mb-8 sm:mb-12" variants={itemVariants}>
                 <div className="flex items-center justify-center mb-4">
-                  <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs sm:text-sm tracking-wider uppercase transition-colors duration-300">
+                  <span className="text-[#D29D69] dark:text-[#F8BB7C] font-semibold text-xs sm:text-sm tracking-wider uppercase transition-colors duration-300">
                     TESTIMONIOS
                   </span>
-                  <div className="ml-3 w-8 sm:w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
+                  <div className="ml-3 w-8 sm:w-12 h-0.5 bg-[#D29D69] dark:bg-[#F8BB7C] transition-colors duration-300"></div>
                 </div>
                 <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 dark:text-white leading-tight mb-4 transition-colors duration-300">
-                  Lo Que Los Estudiantes
+                  Lo Que Los Clientes
                   <br />
                   Dicen Sobre Nosotros
                 </h2>
                 <div className="flex items-center justify-center">
                   <motion.div
                     className={`w-2 h-2 rounded-full mr-2 transition-colors duration-300 ${
-                      autoplay ? "bg-[#A1D302]" : "bg-gray-400 dark:bg-gray-500"
+                      autoplay ? "bg-[#F8BB7C]" : "bg-gray-400 dark:bg-gray-500"
                     }`}
                     animate={{ scale: autoplay ? [1, 1.2, 1] : 1 }}
                     transition={{
@@ -302,7 +302,7 @@ export default function TestimonialsSection() {
                     key={index}
                     onClick={() => changeTestimonial(index)}
                     className={`w-2 h-2 rounded-full transition-colors duration-300 ${
-                      index === currentIndex ? "bg-[#006174] dark:bg-[#A1D302]" : "bg-gray-300 dark:bg-gray-600"
+                      index === currentIndex ? "bg-[#D29D69] dark:bg-[#F8BB7C]" : "bg-gray-300 dark:bg-gray-600"
                     }`}
                     whileHover={{ scale: 1.2 }}
                     whileTap={{ scale: 0.9 }}
@@ -316,24 +316,23 @@ export default function TestimonialsSection() {
             {/* Desktop Layout */}
             <div className="hidden lg:flex items-start justify-between">
               {/* Left side - Title and Navigation */}
-
               <motion.div className="w-1/3 pr-8 xl:pr-12" variants={itemVariants}>
                 <div className="mb-6">
                   <div className="flex items-center mb-4">
-                    <span className="text-[#006174] dark:text-[#A1D302] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
+                    <span className="text-[#D29D69] dark:text-[#F8BB7C] font-semibold text-xs tracking-wider uppercase transition-colors duration-300">
                       TESTIMONIOS
                     </span>
-                    <div className="ml-3 w-12 h-0.5 bg-[#006174] dark:bg-[#A1D302] transition-colors duration-300"></div>
+                    <div className="ml-3 w-12 h-0.5 bg-[#D29D69] dark:bg-[#F8BB7C] transition-colors duration-300"></div>
                   </div>
                   <h2 className="text-3xl xl:text-4xl font-bold text-gray-900 dark:text-white leading-tight transition-colors duration-300">
-                    Lo Que Los Estudiantes
+                    Lo Que Los Clientes
                     <br />
                     Dicen Sobre Nosotros
                   </h2>
                   <div className="flex items-center mt-2">
                     <motion.div
                       className={`w-2 h-2 rounded-full mr-2 transition-colors duration-300 ${
-                        autoplay ? "bg-[#A1D302]" : "bg-gray-400 dark:bg-gray-500"
+                        autoplay ? "bg-[#F8BB7C]" : "bg-gray-400 dark:bg-gray-500"
                       }`}
                       animate={{ scale: autoplay ? [1, 1.2, 1] : 1 }}
                       transition={{

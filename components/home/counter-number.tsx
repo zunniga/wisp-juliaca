@@ -3,48 +3,54 @@
 import type React from "react"
 import { useState, useEffect } from "react"
 import { motion } from "framer-motion"
-import { Award, GraduationCap, Users, Globe } from "lucide-react"
+import { BarChart3, ThumbsUp, Users, Award } from "lucide-react"
 
 interface CounterItemProps {
   icon: React.ReactNode
   targetNumber: number
   suffix: string
-  label: string
+  title: string
+  description: string
   index: number
 }
 
-interface CounterNumberProps {
+interface CounterStatsProps {
   backgroundImage?: string
 }
 
-const CounterItem: React.FC<CounterItemProps> = ({ icon, targetNumber, suffix, label, index }) => {
+const CounterItem: React.FC<CounterItemProps> = ({ icon, targetNumber, suffix, title, description, index }) => {
   const [count, setCount] = useState(0)
+  const [hasAnimated, setHasAnimated] = useState(false)
 
   const containerVariants = {
-    hidden: { opacity: 0, y: 50, scale: 0.8 },
+    hidden: { opacity: 0, y: 50, scale: 0.9 },
     visible: {
       opacity: 1,
       y: 0,
       scale: 1,
       transition: {
         duration: 0.6,
-        delay: index * 0.15,
+        delay: index * 0.1,
         ease: "easeOut",
       },
     },
   }
 
-  const iconVariants = {
-    hidden: { scale: 0, rotate: -180 },
-    visible: {
-      scale: 1,
-      rotate: 0,
-      transition: {
-        duration: 0.8,
-        delay: index * 0.15 + 0.3,
-        ease: "backOut",
-      },
-    },
+  const startCounting = () => {
+    if (hasAnimated) return
+    setHasAnimated(true)
+
+    let start = 0
+    const increment = targetNumber / 60
+    const timer = setInterval(() => {
+      start += increment
+      if (start >= targetNumber) {
+        setCount(targetNumber)
+        clearInterval(timer)
+      } else {
+        setCount(Math.floor(start))
+      }
+    }, 33)
   }
 
   return (
@@ -53,97 +59,67 @@ const CounterItem: React.FC<CounterItemProps> = ({ icon, targetNumber, suffix, l
       initial="hidden"
       whileInView="visible"
       viewport={{ once: true, amount: 0.3 }}
-      whileHover={{ scale: 1.05 }}
-      className="flex flex-col items-center text-center group relative"
+      onViewportEnter={startCounting}
+      whileHover={{
+        scale: 1.05,
+        boxShadow: "0 20px 40px rgba(210, 157, 105, 0.15)",
+      }}
+      className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 dark:border-gray-700"
     >
-      {/* Decorative elements */}
+      {/* Icon */}
       <motion.div
-        className="absolute -top-4 -left-4 w-16 h-16 bg-[#A1D302]/20 dark:bg-[#006174]/20 rounded-full blur-xl"
-        whileHover={{ scale: 1.5 }}
-        transition={{ duration: 0.7 }}
-      />
-      <motion.div
-        className="absolute -bottom-4 -right-4 w-12 h-12 bg-[#006174]/10 dark:bg-[#A1D302]/10 rounded-full blur-lg"
-        whileHover={{ scale: 1.25 }}
-        transition={{ duration: 0.5 }}
-      />
-
-      {/* Floating particles */}
-      <div className="absolute inset-0 pointer-events-none">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-${i === 0 ? "2" : "1"} h-${i === 0 ? "2" : "1"} bg-[#A1D302]/80 dark:bg-[#00A9BB]/80 rounded-full`}
-            style={{
-              top: `${25 + i * 25}%`,
-              left: `${25 + i * 25}%`,
-            }}
-            animate={{ y: [-10, 10, -10] }}
-            transition={{
-              duration: 3 + i,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: i,
-            }}
-          />
-        ))}
-      </div>
-
-      {/* Icon container */}
-      <motion.div
-        variants={iconVariants}
-        className="relative mb-4 p-4 rounded-xl bg-gray-200 dark:bg-[#0F172A] border border-gray-200/60 dark:border-gray-700/60 group-hover:bg-white dark:group-hover:bg-gray-800 group-hover:shadow-2xl group-hover:shadow-[#006174]/20 dark:group-hover:shadow-[#A1D302]/20 transition-all duration-500 shadow-xl backdrop-blur-sm"
-        whileHover={{ scale: 1.05 }}
+        className="w-16 h-16 mb-6 text-[#D29D69] dark:text-[#F8BB7C]"
+        initial={{ scale: 0, rotate: -180 }}
+        whileInView={{ scale: 1, rotate: 0 }}
+        viewport={{ once: true }}
+        transition={{
+          duration: 0.8,
+          delay: index * 0.1 + 0.3,
+          type: "spring",
+          stiffness: 200,
+        }}
       >
-        <div className="text-[#00A9BB] dark:text-[#A1D302] w-8 h-8">{icon}</div>
+        {icon}
       </motion.div>
 
-      {/* Counter with Framer Motion animation */}
+      {/* Counter Number */}
       <motion.div
-        className="text-4xl md:text-5xl font-bold text-gray-100 dark:text-white mb-2 drop-shadow-lg"
+        className="text-5xl md:text-6xl font-bold text-gray-900 dark:text-white mb-4"
         initial={{ opacity: 0 }}
         whileInView={{ opacity: 1 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: index * 0.15 + 0.5 }}
+        transition={{ duration: 0.5, delay: index * 0.1 + 0.5 }}
       >
-        <motion.span
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 2, delay: index * 0.15 + 0.6 }}
-          onViewportEnter={() => {
-            let start = 0
-            const increment = targetNumber / 60
-            const timer = setInterval(() => {
-              start += increment
-              if (start >= targetNumber) {
-                setCount(targetNumber)
-                clearInterval(timer)
-              } else {
-                setCount(Math.floor(start))
-              }
-            }, 33)
-          }}
-        >
-          {count}
-          {suffix}
-        </motion.span>
+        {count}
+        {suffix}
       </motion.div>
 
-      {/* Label */}
-      <motion.div
-        className="text-sm text-gray-100 dark:text-gray-200 uppercase tracking-wide font-medium drop-shadow-sm"
+      {/* Title */}
+      <motion.h3
+        className="text-xl font-semibold text-[#D29D69] dark:text-[#F8BB7C] mb-3 uppercase tracking-wide"
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
-        transition={{ duration: 0.5, delay: index * 0.15 + 0.8 }}
+        transition={{ duration: 0.5, delay: index * 0.1 + 0.7 }}
       >
-        {label}
-      </motion.div>
+        {title}
+      </motion.h3>
+
+      {/* Description */}
+      <motion.p
+        className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed"
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.5, delay: index * 0.1 + 0.9 }}
+      >
+        {description}
+      </motion.p>
     </motion.div>
   )
 }
 
-const CounterNumber: React.FC<CounterNumberProps> = ({ backgroundImage }) => {
+const CounterStats: React.FC<CounterStatsProps> = ({ backgroundImage }) => {
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
@@ -151,60 +127,126 @@ const CounterNumber: React.FC<CounterNumberProps> = ({ backgroundImage }) => {
   }, [])
 
   const counters = [
-    { icon: <Award className="w-full h-full" />, targetNumber: 27, suffix: "+", label: "Logros Totales" },
-    { icon: <GraduationCap className="w-full h-full" />, targetNumber: 145, suffix: "+", label: "Estudiantes Totales" },
-    { icon: <Users className="w-full h-full" />, targetNumber: 10, suffix: "k", label: "Instructores Totales" },
-    { icon: <Globe className="w-full h-full" />, targetNumber: 214, suffix: "+", label: "En Todo el Mundo" },
+    {
+      icon: <BarChart3 className="w-full h-full" />,
+      targetNumber: 150,
+      suffix: "",
+      title: "Proyectos",
+      description:
+        "Finalizados satisfactoriamente a nivel nacional e internacional, proporcionando soluciones avanzadas en regiones previamente inaccesibles.",
+    },
+    {
+      icon: <ThumbsUp className="w-full h-full" />,
+      targetNumber: 100,
+      suffix: "%",
+      title: "Satisfacción del Cliente",
+      description: "Reflejando la eficacia de nuestros técnicos y de la calidad del servicio en los proyectos.",
+    },
+    {
+      icon: <Users className="w-full h-full" />,
+      targetNumber: 5,
+      suffix: " M+",
+      title: "PERUANOS CONECTADOS",
+      description: "En diferentes proyectos de implementación de redes de fibra óptica a lo largo y ancho del país.",
+    },
+    {
+      icon: <Award className="w-full h-full" />,
+      targetNumber: 5000,
+      suffix: " +",
+      title: "Personas Certificadas",
+      description:
+        "Validando sus competencias y ayudándolas a adquirir los conocimientos necesarios para sobresalir en las telecomunicaciones.",
+    },
   ]
 
   if (!isClient) return null
 
   return (
-    <motion.div
-      className="w-full relative overflow-hidden min-h-[350px]"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true }}
-      transition={{ duration: 1 }}
-    >
-      {/* Background with parallax effect */}
-      <motion.div
-        className="absolute inset-0 w-full h-full bg-cover bg-center bg-no-repeat bg-fixed"
-        style={{ backgroundImage: `url('image/background/one.jpg')` }}
-        initial={{ scale: 1.1 }}
-        whileInView={{ scale: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 1.5 }}
-      />
-
-      {/* Overlays */}
-      <div className="absolute inset-0 bg-gray-900/45 dark:bg-gray-900/60" />
-      <div className="absolute inset-0 bg-gradient-to-br from-[#006174]/10 via-transparent to-[#006174]/15 dark:from-[#20252b]/30 dark:via-[#1a1f24]/20 dark:to-[#20252b]/30" />
-
-      {/* Animated background patterns */}
-      <div className="absolute inset-0 opacity-20 dark:opacity-10">
-        {[...Array(3)].map((_, i) => (
-          <motion.div
-            key={i}
-            className={`absolute w-${20 + i * 4} h-${20 + i * 4} bg-[#A1D302]/70 dark:bg-[#006174]/30 rounded-full blur-2xl`}
-            style={{
-              top: `${20 + i * 30}%`,
-              left: `${20 + i * 30}%`,
-            }}
-            animate={{ scale: [1, 1.2, 1], opacity: [0.3, 0.7, 0.3] }}
-            transition={{
-              duration: 4 + i,
-              repeat: Number.POSITIVE_INFINITY,
-              delay: i * 0.5,
-            }}
+    <div className="w-full relative overflow-hidden ">
+      {/* Background */}
+      <div className="absolute inset-0">
+        {backgroundImage ? (
+          <div
+            className="w-full h-full bg-cover bg-center bg-no-repeat"
+            style={{ backgroundImage: `url(${backgroundImage})` }}
           />
-        ))}
+        ) : (
+          <div className="w-full h-full bg-gradient-to-br from-[#D29D69] via-[#F8BB7C] to-[#D29D69] dark:from-[#D29D69] dark:via-[#F8BB7C] dark:to-[#D29D69]" />
+        )}
+
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/20 dark:bg-black/40" />
+
+        {/* Animated background elements */}
+        <div className="absolute inset-0 opacity-30">
+          {[...Array(5)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full bg-white/10"
+              style={{
+                width: `${100 + i * 50}px`,
+                height: `${100 + i * 50}px`,
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+              }}
+              animate={{
+                y: [-20, 20, -20],
+                x: [-10, 10, -10],
+                scale: [1, 1.1, 1],
+              }}
+              transition={{
+                duration: 4 + i,
+                repeat: Number.POSITIVE_INFINITY,
+                delay: i * 0.5,
+              }}
+            />
+          ))}
+        </div>
       </div>
 
-      {/* Main content */}
+      {/* Content */}
       <div className="relative z-10 container mx-auto px-4 py-16">
+        {/* Header Section */}
         <motion.div
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-16"
+          className="text-center mb-16"
+          initial={{ opacity: 0, y: -50 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+        >
+          <motion.h1
+            className="text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-6 leading-tight"
+            initial={{ opacity: 0, y: -30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            Nuestros <span className="text-[#F8BB7C] dark:text-[#D29D69]">Logros</span> en Números
+          </motion.h1>
+
+          <motion.p
+            className="text-lg md:text-xl text-gray-200 dark:text-gray-300 max-w-4xl mx-auto leading-relaxed px-4"
+            initial={{ opacity: 0, y: -20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
+            Conectando el Perú a través de tecnología de vanguardia. Más de una década transformando las
+            telecomunicaciones y capacitando profesionales en todo el territorio nacional.
+          </motion.p>
+
+          <motion.div
+            className="mt-8 flex justify-center"
+            initial={{ opacity: 0, scale: 0.8 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.6 }}
+          >
+            <div className="w-24 h-1 bg-gradient-to-r from-[#D29D69] to-[#F8BB7C] rounded-full"></div>
+          </motion.div>
+        </motion.div>
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, amount: 0.2 }}
@@ -216,16 +258,14 @@ const CounterNumber: React.FC<CounterNumberProps> = ({ backgroundImage }) => {
               icon={counter.icon}
               targetNumber={counter.targetNumber}
               suffix={counter.suffix}
-              label={counter.label}
+              title={counter.title}
+              description={counter.description}
             />
           ))}
         </motion.div>
       </div>
-
-      {/* Bottom gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-20 bg-gradient-to-t from-white/50 to-transparent dark:from-gray-900/50" />
-    </motion.div>
+    </div>
   )
 }
 
-export default CounterNumber
+export default CounterStats

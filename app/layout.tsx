@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/layout/header";
-import Footer from "@/components/layout/footer";
+import {Footer} from "@/components/layout/footer";
 import WhatsAppWidget from "@/components/widgets/whatsapp-widget";
 import GoogleAnalytics from "@/components/analytics/google-analytics";
 import { ThemeProvider } from "next-themes";

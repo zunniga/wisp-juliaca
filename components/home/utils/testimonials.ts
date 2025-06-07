@@ -1,82 +1,70 @@
 export const testimonials = [
   {
     id: 1,
-    name: "Yadhira Avila",
-    role: "Estudiante",
-    image:
-      "image/testimonials/picture6.png",
-    quote:
-      "Los cursos brindados son muy interesantes y nos ayudan a seguir creciendo profesionalmente",
+    name: "María López",
+    role: "Cliente",
+    image: "image/testimonials/picture6.png",
+    quote: "El servicio de instalación fue rápido y profesional. Ahora tengo internet estable en toda mi casa.",
     rating: 5,
   },
   {
     id: 2,
-    name: "Jean Pierre",
-    role: "Estudiante",
-    image:
-       "image/testimonials/picture5.png",
-    quote:
-      "Los temas son muy interesantes y nos ayudan a fortalecer nuestros conocimientos",
+    name: "Carlos Ramírez",
+    role: "Cliente",
+    image: "image/testimonials/picture5.png",
+    quote: "Desde que contraté el servicio, mi conexión es mucho más rápida. Ideal para el teletrabajo.",
     rating: 5,
   },
   {
     id: 3,
-    name: "Lorenzo Rosas Vargas",
-    role: "Estudiante",
-    image:
-       "image/testimonials/picture4.png",
+    name: "Rosa Gutiérrez",
+    role: "Cliente",
+    image: "image/testimonials/picture4.png",
     quote:
-      "La corporación Inalta, es de las mejores en cuanto a temas de capacitación, me permitió aprender y entender de mejor el funcionamiento de los cultivos agrícolas y el riego eficiente.",
+      "La atención al cliente fue excelente. Me ayudaron a solucionar un problema de conexión en menos de una hora.",
     rating: 5,
   },
   {
     id: 4,
-    name: "Brigida CQ",
-    role: "Estudiante",
-    image:
-      "image/testimonials/picture3.png",
+    name: "Luis Fernando Torres",
+    role: "Cliente",
+    image: "image/testimonials/picture3.png",
     quote:
-      "Los cursos de Corporación Inalta han sido una gran experiencia. Todo el material es claro y actualizado, y el soporte que brindan es excelente. ¡Totalmente recomendado para quienes buscan seguir creciendo profesionalmente!",
+      "El equipo técnico fue puntual y dejó todo funcionando perfectamente. Muy buen servicio y atención.",
     rating: 5,
   },
   {
     id: 5,
-    name: "Kevin Chavez",
-    role: "Estudiante",
-    image:
-      "image/testimonials/picture2.png",
-    quote:
-      "Los cursos de Corporación Inalta me han ayudado mucho en mi conocimiento profesional",
+    name: "Paola Meneses",
+    role: "Cliente",
+    image: "image/testimonials/picture2.png",
+    quote: "Estoy muy satisfecha con el servicio de internet. La velocidad es constante y sin interrupciones.",
     rating: 5,
   },
   {
     id: 6,
-    name: "Yesica Canahuire",
-    role: "Estudiante",
-    image:
-       "image/testimonials/picture.png",
-    quote:
-      "INALTA, Ofrece las mejores capacitaciones con los. Mejores ponentes, recomendado",
+    name: "José Delgado",
+    role: "Cliente",
+    image: "image/testimonials/picture.png",
+    quote: "Una empresa muy confiable. Me ofrecieron un plan ideal para mi hogar a un excelente precio.",
     rating: 5,
   },
   {
     id: 7,
-    name: "Kiara Fc",
-    role: "Estudiante",
-    image:
-       "image/testimonials/pic7.png",
+    name: "Andrea Cáceres",
+    role: "Cliente",
+    image: "image/testimonials/pic7.png",
     quote:
-      "Recomiendo ampliamente a la Corporación INALTA por ofrecer diplomados y cursos de excelente calidad, fruto de su firme compromiso con la educación continua que promueve.",
+      "Muy contenta con el servicio. La instalación fue rápida, el soporte técnico muy amable y el internet funciona perfecto.",
     rating: 5,
   },
   {
     id: 8,
-    name: "Elvis Escobedo Salazar",
-    role: "Estudiante",
-    image:
-       "image/testimonials/pic8.png",
+    name: "Diego Paredes",
+    role: "Cliente",
+    image: "image/testimonials/pic8.png",
     quote:
-      "La corporación Inalta, es de las mejores en cuanto a temas de capacitación, me permitió aprender y entender de mejor el funcionamiento de los cultivos agrícolas y el riego eficiente.",
+      "Gracias a esta empresa ahora tengo conexión estable en toda mi oficina. El soporte técnico fue muy eficiente.",
     rating: 5,
   },
-]
+];

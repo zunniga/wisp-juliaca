@@ -1,21 +1,20 @@
 import type { Metadata } from "next";
 import HeroSection from "@/components/home/hero-section";
-import ServicesOverview from "@/components/home/graduates-view";
+import { Clients } from "@/components/home/graduates-view";
 import WhyChooseUsSection from "@/components/home/courses-view";
 import TestimonialsSection from "@/components/home/testimonials-section";
-import FirstSection from "@/components/home/first-section";
+import { FirstSection } from "@/components/home/first-section";
 import InstagramSection from "@/components/home/instagram-section";
 import CTASection from "@/components/home/cta-section";
 import CounterNumbers from "@/components/home/counter-number";
-import ContactView from "@/components/home/contact-view";
+import { ContactView } from "@/components/home/contact-view";
 
 export const metadata: Metadata = {
-  title: "INALTA",
+  title: "WISP",
   icons: {
     icon: "/icon-inalta.png",
   },
-  description:
-    "Corporación INALTA es una empresa dedicada a la enzeñanza de diplomas y cursos de alta calidad en el área de la salud y la educación. Contamos con un equipo de profesionales altamente capacitados y con amplia experiencia en el sector. Nuestro objetivo es brindar una formación integral y actualizada a nuestros estudiantes, para que puedan destacar en su campo laboral.",
+  description: "Empresa de Telecomunicaciones",
 };
 
 export default function Home() {
@@ -23,10 +22,12 @@ export default function Home() {
     <>
       <HeroSection />
       <FirstSection />
-      <ServicesOverview />
-      <TestimonialsSection />
-      <WhyChooseUsSection />
+
       <CounterNumbers />
+      <Clients />
+
+      <TestimonialsSection />
+
       <ContactView />
     </>
   );
