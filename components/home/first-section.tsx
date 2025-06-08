@@ -1,28 +1,29 @@
-"use client"
+"use client";
 
-import { useEffect, useRef, useState } from "react"
-import { Button } from "@/components/ui/button"
-import { motion, useAnimation, useInView } from "framer-motion"
+import { useEffect, useRef, useState } from "react";
+import { Button } from "@/components/ui/button";
+import { motion, useAnimation, useInView } from "framer-motion";
+import Link from "next/link";
 
 export function FirstSection() {
-  const ref = useRef(null)
-  const isInView = useInView(ref, { once: true })
-  const controls = useAnimation()
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true });
+  const controls = useAnimation();
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     if (isInView) {
-      controls.start("visible")
+      controls.start("visible");
     }
-  }, [isInView, controls])
+  }, [isInView, controls]);
 
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentImageIndex((prev) => (prev + 1) % 3)
-    }, 6000) // Cambiar cada 5 segundos en lugar de 4
+      setCurrentImageIndex((prev) => (prev + 1) % 3);
+    }, 6000); // Cambiar cada 5 segundos en lugar de 4
 
-    return () => clearInterval(interval)
-  }, [])
+    return () => clearInterval(interval);
+  }, []);
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -33,7 +34,7 @@ export function FirstSection() {
         delayChildren: 0.3,
       },
     },
-  }
+  };
 
   const itemVariants = {
     hidden: { y: 20, opacity: 0 },
@@ -46,7 +47,7 @@ export function FirstSection() {
         damping: 10,
       },
     },
-  }
+  };
 
   return (
     <section
@@ -61,7 +62,13 @@ export function FirstSection() {
 
       <div className="container mx-auto px-4 z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div ref={ref} variants={containerVariants} initial="hidden" animate={controls} className="space-y-6">
+          <motion.div
+            ref={ref}
+            variants={containerVariants}
+            initial="hidden"
+            animate={controls}
+            className="space-y-6"
+          >
             <motion.div variants={itemVariants} className="inline-block">
               <div className="flex items-center mb-2">
                 <span className="text-[#D29D69] dark:text-[#F8BB7C] font-semibold text-sm tracking-wider uppercase">
@@ -86,26 +93,43 @@ export function FirstSection() {
               SERVICIO EN REDES Y TELECOMUNICACIONES
             </motion.h2>
 
-            <motion.p variants={itemVariants} className="text-gray-600 dark:text-gray-400 text-lg max-w-lg">
-              Somos una empresa de redes y telecomunicaciones que garantizan una conectividad eficiente y una seguridad
-              confiable. Creemos firmemente en que cada servicio es una oportunidad para conectarnos con nuestros
-              clientes. Confiar en nosotros significa optar por experiencia, innovación y un servicio excepcional.
+            <motion.p
+              variants={itemVariants}
+              className="text-gray-600 dark:text-gray-400 text-lg max-w-lg"
+            >
+              Somos una empresa de redes y telecomunicaciones que garantizan una
+              conectividad eficiente y una seguridad confiable. Creemos
+              firmemente en que cada servicio es una oportunidad para
+              conectarnos con nuestros clientes. Confiar en nosotros significa
+              optar por experiencia, innovación y un servicio excepcional.
             </motion.p>
 
-            <motion.div variants={itemVariants} className="pt-4 flex flex-wrap gap-4">
-              <Button
-                className="bg-[#D29D69] hover:bg-[#c08b5a] text-white dark:bg-[#F8BB7C] dark:hover:bg-[#e9ac6d] dark:text-gray-900"
-                size="lg"
+            <motion.div
+              variants={itemVariants}
+              className="pt-4 flex flex-wrap gap-4"
+            >
+              <Link href="/#servicios">
+                <Button
+                  className="bg-[#D29D69] hover:bg-[#c08b5a] text-white dark:bg-[#F8BB7C] dark:hover:bg-[#e9ac6d] dark:text-gray-900"
+                  size="lg"
+                >
+                  Nuestros Servicios
+                </Button>
+              </Link>
+
+              <Link
+                href="https://wa.me/51990807069?text=Hola,%20deseo%20más%20información"
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                Nuestros Servicios
-              </Button>
-              <Button
-                variant="outline"
-                className="border-[#D29D69] text-[#D29D69] hover:bg-[#D29D69] hover:text-white dark:border-[#F8BB7C] dark:text-[#F8BB7C] dark:hover:bg-[#F8BB7C] dark:hover:text-gray-900"
-                size="lg"
-              >
-                Contáctanos
-              </Button>
+                <Button
+                  variant="outline"
+                  className="border-[#D29D69] text-[#D29D69] hover:bg-[#D29D69] hover:text-white dark:border-[#F8BB7C] dark:text-[#F8BB7C] dark:hover:bg-[#F8BB7C] dark:hover:text-gray-900"
+                  size="lg"
+                >
+                  Contáctanos
+                </Button>
+              </Link>
             </motion.div>
           </motion.div>
 
@@ -196,5 +220,5 @@ export function FirstSection() {
         </div>
       </div>
     </section>
-  )
+  );
 }

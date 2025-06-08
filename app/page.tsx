@@ -14,7 +14,7 @@ import ServiciosPage from "@/components/home/services-view"
 export const metadata: Metadata = {
   title: "WISP",
   icons: {
-    icon: "/icon-inalta.png",
+    icon: "/log.png",
   },
   description: "Empresa de Telecomunicaciones",
 };

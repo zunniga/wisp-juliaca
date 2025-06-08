@@ -15,7 +15,7 @@ const navItems = [
   { name: "PROYECTOS", href: "/proyectos" },
   { name: "PRODUCTOS", href: "/services" },
   { name: "CONTACTO", href: "#contacto" },
-  { name: "COBERTURA", href: "/axion-market", special: true },
+  { name: "COBERTURA", href: "/cobertura"},
 ]
 
 export default function Header() {
@@ -124,11 +124,9 @@ export default function Header() {
                   <Link
                     href={item.href}
                     className={`px-4 py-2 text-sm font-medium transition-all duration-200 hover:scale-105 ${
-                      item.special
-                        ? "text-white dark:text-[#333] hover:text-[#333] dark:hover:text-white"
-                        : pathname === item.href
-                          ? "text-[#333] dark:text-white border-b-2 border-[#333] dark:border-white"
-                          : "text-white/90 dark:text-[#333]/90 hover:text-white dark:hover:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10 rounded-md"
+                      pathname === item.href
+                        ? "text-[#333] dark:text-white border-b-2 border-[#333] dark:border-white"
+                        : "text-white/90 dark:text-[#333]/90 hover:text-white dark:hover:text-[#333] hover:bg-white/10 dark:hover:bg-[#333]/10 rounded-md"
                     }`}
                   >
                     {item.name}

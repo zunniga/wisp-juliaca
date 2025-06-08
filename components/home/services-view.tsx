@@ -18,8 +18,7 @@ export default function ServiciosPage() {
           <span className="text-[#D29D69] dark:text-[#F8BB7C]">Servicios</span>
         </h2>
         <p className="text-gray-600 dark:text-gray-300 mt-2 max-w-2xl mx-auto">
-          Conexión sin complicaciones para tu hogar o negocio. ¡Disfruta de
-          internet y comunicaciones sin límites!
+          Conexión sin complicaciones para tu hogar o negocio. ¡Disfruta de internet y comunicaciones sin límites!
         </p>
       </motion.div>
 
@@ -48,8 +47,7 @@ const servicios: Servicio[] = [
     imagen: "image/service/fibra.jpg",
     duracion: "1h",
     precio: "S/ 150",
-    descripcion:
-      "Conexión ultrarrápida con fibra óptica de última generación. Ideal para hogares con múltiples dispositivos y streaming en 4K.",
+    descripcion: "Conexión ultrarrápida con fibra óptica de última generación. Ideal para hogares con múltiples dispositivos y streaming en 4K.",
   },
   {
     id: 2,
@@ -57,8 +55,7 @@ const servicios: Servicio[] = [
     imagen: "image/service/inalambrico.jpg",
     duracion: "2h",
     precio: "S/ 300",
-    descripcion:
-      "Solución perfecta para zonas sin cobertura de cable. Conexión estable y de alta velocidad sin necesidad de cableado.",
+    descripcion: "Solución perfecta para zonas sin cobertura de cable. Conexión estable y de alta velocidad sin necesidad de cableado.",
   },
   {
     id: 3,
@@ -66,8 +63,7 @@ const servicios: Servicio[] = [
     imagen: "image/service/satelital.png",
     duracion: "1h 30 min",
     precio: "S/ 200",
-    descripcion:
-      "Conectividad garantizada en zonas rurales o remotas. Tecnología satelital para llegar donde otros servicios no pueden.",
+    descripcion: "Conectividad garantizada en zonas rurales o remotas. Tecnología satelital para llegar donde otros servicios no pueden.",
   },
   {
     id: 4,
@@ -75,8 +71,7 @@ const servicios: Servicio[] = [
     imagen: "image/service/camarass.png",
     duracion: "1h",
     precio: "S/ 50",
-    descripcion:
-      "Protege tu hogar o negocio con sistemas de vigilancia HD. Monitoreo remoto desde cualquier dispositivo.",
+    descripcion: "Protege tu hogar o negocio con sistemas de vigilancia HD. Monitoreo remoto desde cualquier dispositivo.",
   },
   {
     id: 5,
@@ -84,8 +79,7 @@ const servicios: Servicio[] = [
     imagen: "image/service/alarma.jpg",
     duracion: "1h",
     precio: "Gratis",
-    descripcion:
-      "Sistemas de alarma inteligentes con sensores de movimiento y notificaciones en tiempo real. Instalación gratuita con contrato.",
+    descripcion: "Sistemas de alarma inteligentes con sensores de movimiento y notificaciones en tiempo real. Instalación gratuita con contrato.",
   },
   {
     id: 6,
@@ -93,18 +87,15 @@ const servicios: Servicio[] = [
     imagen: "image/service/ffth.jpg",
     duracion: "1h",
     precio: "S/ 50",
-    descripcion:
-      "Tecnología híbrida que combina fibra óptica y conexión inalámbrica para máxima eficiencia y cobertura.",
+    descripcion: "Tecnología híbrida que combina fibra óptica y conexión inalámbrica para máxima eficiencia y cobertura.",
   },
 ];
 
-function ServiceCard({
-  servicio,
-  index,
-}: {
-  servicio: Servicio;
-  index: number;
-}) {
+function ServiceCard({ servicio, index }: { servicio: Servicio; index: number }) {
+  const whatsappNumber = "990807069";
+  const mensaje = `Hola, deseo más información sobre ${servicio.titulo}`;
+  const whatsappURL = `https://wa.me/51${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 50 }}
@@ -185,15 +176,18 @@ function ServiceCard({
             </motion.div>
           </div>
 
-          <motion.button
+          <motion.a
+            href={whatsappURL}
+            target="_blank"
+            rel="noopener noreferrer"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 + 0.6 }}
             whileTap={{ scale: 0.95 }}
-            className="w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+            className="block text-center w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
           >
             Reservar ahora
-          </motion.button>
+          </motion.a>
         </div>
       </Card>
     </motion.div>
