@@ -171,7 +171,7 @@ const CounterStats: React.FC<CounterStatsProps> = ({ backgroundImage }) => {
             style={{ backgroundImage: `url(${backgroundImage})` }}
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-[#D29D69] via-[#F8BB7C] to-[#D29D69] dark:from-[#D29D69] dark:via-[#F8BB7C] dark:to-[#D29D69]" />
+          <div className="w-full h-full bg-[#D29D69] dark:bg-[#030712]" />
         )}
 
         {/* Overlay */}

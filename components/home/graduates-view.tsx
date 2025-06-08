@@ -66,7 +66,7 @@ export function Clients() {
   ]
 
   return (
-    <section id="clientes" className="py-20 bg-gray-50 dark:bg-gray-900">
+    <section id="clientes" className="py-20 bg-gray-50 dark:bg-[#030712]">
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900 dark:text-white">

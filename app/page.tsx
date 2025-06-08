@@ -8,6 +8,8 @@ import InstagramSection from "@/components/home/instagram-section";
 import CTASection from "@/components/home/cta-section";
 import CounterNumbers from "@/components/home/counter-number";
 import { ContactView } from "@/components/home/contact-view";
+import ServiciosPage from "@/components/home/services-view"
+
 
 export const metadata: Metadata = {
   title: "WISP",
@@ -22,12 +24,10 @@ export default function Home() {
     <>
       <HeroSection />
       <FirstSection />
-
       <CounterNumbers />
-      <Clients />
-
+      <ServiciosPage/>
       <TestimonialsSection />
-
+       <Clients/>
       <ContactView />
     </>
   );

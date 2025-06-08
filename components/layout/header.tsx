@@ -10,11 +10,11 @@ import { motion } from "framer-motion"
 
 const navItems = [
   { name: "INICIO", href: "/" },
-  { name: "NOSOTROS", href: "/nosotros" },
-  { name: "SERVICIOS", href: "/servicios" },
+  { name: "NOSOTROS", href: "#nosotros" },
+  { name: "SERVICIOS", href: "#servicios" },
   { name: "PROYECTOS", href: "/proyectos" },
-  { name: "CONTACTO", href: "/contacto" },
-  { name: "DISEÑA TU RED", href: "/disena-tu-red", special: true },
+  { name: "PRODUCTOS", href: "/services" },
+  { name: "CONTACTO", href: "#contacto" },
   { name: "COBERTURA", href: "/axion-market", special: true },
 ]
 

@@ -17,7 +17,7 @@ export const testimonials = [
   },
   {
     id: 3,
-    name: "Rosa Gutiérrez",
+    name: "Javier Gonzales",
     role: "Cliente",
     image: "image/testimonials/picture4.png",
     quote:
@@ -26,7 +26,7 @@ export const testimonials = [
   },
   {
     id: 4,
-    name: "Luis Fernando Torres",
+    name: "Camila Zapana Mayta",
     role: "Cliente",
     image: "image/testimonials/picture3.png",
     quote:
@@ -43,7 +43,7 @@ export const testimonials = [
   },
   {
     id: 6,
-    name: "José Delgado",
+    name: "Yesica Puma",
     role: "Cliente",
     image: "image/testimonials/picture.png",
     quote: "Una empresa muy confiable. Me ofrecieron un plan ideal para mi hogar a un excelente precio.",

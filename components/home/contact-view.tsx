@@ -65,7 +65,7 @@ export function ContactView() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium text-gray-900 dark:text-white">Teléfono</h4>
-                  <p className="text-gray-600 dark:text-gray-400">+51 123 456 789</p>
+                  <p className="text-gray-600 dark:text-gray-400">+51 990 807 069</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -74,7 +74,7 @@ export function ContactView() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium text-gray-900 dark:text-white">Email</h4>
-                  <p className="text-gray-600 dark:text-gray-400">contacto@imversit.com</p>
+                  <p className="text-gray-600 dark:text-gray-400">wisp123redes@gmail.com</p>
                 </div>
               </div>
               <div className="flex items-start">
@@ -83,7 +83,7 @@ export function ContactView() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium text-gray-900 dark:text-white">Dirección</h4>
-                  <p className="text-gray-600 dark:text-gray-400">Lima, Perú</p>
+                  <p className="text-gray-600 dark:text-gray-400">Juliaca, Puno, Perú</p>
                 </div>
               </div>
             </div>
@@ -92,7 +92,7 @@ export function ContactView() {
               <h4 className="text-lg font-medium text-gray-900 dark:text-white mb-4">Síguenos</h4>
               <div className="flex space-x-4">
                 <a
-                  href="#"
+                  href="https://www.facebook.com/profile.php?id=61576155001274" target="_blank"
                   className="w-10 h-10 rounded-full bg-[#D29D69] dark:bg-[#F8BB7C] text-white dark:text-gray-900 flex items-center justify-center hover:opacity-80 transition-opacity"
                 >
                   <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">

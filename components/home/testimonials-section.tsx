@@ -226,7 +226,7 @@ export default function TestimonialsSection() {
       whileInView="visible"
       viewport={{ once: true, margin: "-100px" }}
     >
-      <div className="bg-gray-100 dark:bg-[#0F172A] relative transition-colors duration-300">
+      <div className="bg-gray-100 dark:bg-[#030712] relative transition-colors duration-300">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 lg:py-16">
           <div className="max-w-7xl mx-auto">
             {/* Mobile Layout */}

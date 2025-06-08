@@ -50,7 +50,7 @@ export function FirstSection() {
 
   return (
     <section
-      id="inicio"
+      id="nosotros"
       className="relative p-24 flex items-center pt-16 bg-gradient-to-b from-white to-gray-100 dark:from-gray-950 dark:to-gray-900"
     >
       {/* Background Pattern */}
