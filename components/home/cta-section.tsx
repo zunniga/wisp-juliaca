@@ -28,7 +28,7 @@ export default function CTASection() {
             size="lg"
             className="bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full shadow-md"
           >
-            <Link href="/booking">Book Your Appointment Now</Link>
+            <Link href="">Book Your Appointment Now</Link>
           </Button>
         </div>
       </div>

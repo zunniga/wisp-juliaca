@@ -47,7 +47,7 @@ export default function ServiceCard({ service }: ServiceProps) {
           asChild
           className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90 rounded-full shadow-md"
         >
-          <Link href={`/booking?service=${encodeURIComponent(service.name)}`}>Book Now</Link>
+          <Link href={``}>Book Now</Link>
         </Button>
       </div>
     </div>
