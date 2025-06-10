@@ -16,6 +16,7 @@ export default function ProductCatalog() {
     name: string
     description: string
     brand: string
+    price: number
     image?: string
     features: string[]
     resolution?: string
@@ -225,6 +226,7 @@ export default function ProductCatalog() {
                     </div>
                     <div className="p-4">
                       <h3 className="font-bold text-lg mb-2">{product.name}</h3>
+                      <p className="font-semibold mb-4 text-xl dark:text-[#D29D69] text-[#F8BB7C]">s/ {product.price}.00</p>
                       <p className="text-sm mb-4 line-clamp-2">{product.description}</p>
                       <div className="flex justify-between items-center">
                         <p className="font-semibold">Marca: {product.brand}</p>
@@ -286,7 +288,8 @@ export default function ProductCatalog() {
                         </div>
                         <div className="p-4">
                           <h3 className="font-bold text-lg mb-2">{product.name}</h3>
-                          <p className="text-sm mb-4 line-clamp-2">{product.description}</p>
+                            <p className="font-semibold mb-4 text-xl dark:text-[#D29D69] text-[#F8BB7C]">s/ {product.price}.00</p>
+                            <p className="text-sm mb-4 line-clamp-2">{product.description}</p>
                           <div className="flex justify-between items-center">
                             <p className="font-semibold">Marca: {product.brand}</p>
                             <Button
@@ -325,6 +328,7 @@ export default function ProductCatalog() {
                 />
               </div>
               <div>
+                <p className="text-end font-semibold text-xl dark:text-[#D29D69] text-[#F8BB7C]">s/ {selectedProduct.price}.00</p>
                 <h4 className="font-semibold mb-2">Descripción:</h4>
                 <p className="mb-4">{selectedProduct.description}</p>
 

@@ -3,6 +3,7 @@ export const productData = {
     {
       name: "Cámara Domo FullHD ColorV U con AUDIO",
       brand: "Hikvision",
+      price: 195.00,
       description: "Domo interior con audio, alta durabilidad",
       resolution: "2 MP, lente fija 2.8 mm o 3.6 mm",
       features: [
@@ -17,6 +18,7 @@ export const productData = {
     {
       name: "4 MP Smart Hybrid Light Fixed Bullet Network Camera",
       brand: "Hikvision",
+      price: 250.00,
       description: "Bala fija IP con luz híbrida",
       resolution: "4 MP (2560×1440 px)",
       features: [
@@ -31,6 +33,7 @@ export const productData = {
     {
       name: "Cámara domo EYEBALL FULL COLOR 2 MP 2.8 mm",
       brand: "Hikvision",
+      price: 155.00,
       description: "Domo interior con visión a color 24/7",
       resolution: "2 MP, lentes 2.8/3.6/6 mm",
       features: [
@@ -44,6 +47,7 @@ export const productData = {
     {
       name: "Cámara tubo IR bullet 1 MP P 2.8 mm",
       brand: "Hikvision",
+      price: 250.00,
       description: "Bala analógica para exteriores",
       resolution: "2 MP, lente varifocal 2.7–12 mm",
       features: ["IR nocturno hasta 60 m", "IP67", "Varifocal motorizado"],
@@ -52,6 +56,7 @@ export const productData = {
     {
       name: "Cámara de seguridad inteligente para exteriores H9c Dual",
       brand: "Ezviz",
+      price: 245.00,
       description: "PT 360° Wi‑Fi con seguimiento IA",
       resolution: "Dual 2K (2304×1296 px)",
       features: [
@@ -67,6 +72,7 @@ export const productData = {
     {
       name: "Cámara de red Hikvision EXIR Fixed Mini Bullet 2 MP H.265+",
       brand: "Hikvision",
+      price: 170.00,
       description: "Bala IP compacta exterior",
       resolution: "2 MP, lente fija 2.8 mm",
       features: [
@@ -81,6 +87,7 @@ export const productData = {
     {
       name: "Cámara bala IP ColorVu MD 2.0 AcuSense HD+ 6 Mpx 2.8 mm WDR 120 dB",
       brand: "Hikvision",
+      price: 280.00,
       description: "Bala IP 6 MP con IA y visión nocturna a color",
       resolution: "6 MP, lente 2.8 mm",
       features: [
@@ -98,14 +105,16 @@ export const productData = {
     {
       name: "Switch sobremesa 8 puertos 10/100/1000 Mbps",
       brand: "TP‑Link",
+      price: 125.00,
       description: "Switch Gigabit para hogar/oficina",
       ports: "8 × RJ45",
       features: ["QoS", "Metal", "MDI/MDIX", "Plug & Play"],
-       image: "image/switch/1.png",
+      image: "image/switch/1.png",
     },
     {
       name: "Conmutador Gigabit no gestionado 5 puertos",
       brand: "Genérico",
+      price: 115.00,
       description: "Switch de escritorio sin ventilador",
       ports: "5 × RJ45 Gigabit",
       features: ["Carcasa metálica", "IEEE 802.3/802.3u/x"],
@@ -114,14 +123,16 @@ export const productData = {
     {
       name: "Switch TP‑Link LS1008G (8 puertos 10/100/1000 Mbps)",
       brand: "TP‑Link",
+      price: 130.00,
       description: "Switch Gigabit para videovigilancia",
       ports: "8 × RJ45",
       features: ["No bloqueante", "Ideal para archivos pesados"],
-     image: "image/switch/3.png",
+      image: "image/switch/3.png",
     },
     {
       name: "Switch sobremesa 5 puertos 10/100/1000 Mbps",
       brand: "Genérico",
+      price: 110.00,
       description: "Expansión de red con ahorro energético",
       ports: "5 × RJ45",
       features: ["Auto‑Neg", "Auto‑MDI/MDIX", "Green Ethernet"],
@@ -132,6 +143,7 @@ export const productData = {
     {
       name: "Router Mercusys Rompe Muro 3 Antenas MW330HP 7 dBi",
       brand: "Mercusys",
+      price: 201.00,
       description: "Router/Repetidor/WISP de largo alcance",
       speed: "300 Mbps, 2.4 GHz",
       features: ["Botón Turbo", "Chip PA", "Antenas 7 dBi"],
@@ -140,6 +152,7 @@ export const productData = {
     {
       name: "TL‑WR840N TP‑Link Router Inalámbrico Wi‑Fi 2.4 GHz",
       brand: "TP‑Link",
+      price: 215.00,
       description: "Router doméstico básico",
       speed: "300 Mbps, 2.4 GHz",
       features: ["WPS", "Control ancho de banda", "WDS"],
@@ -148,22 +161,25 @@ export const productData = {
     {
       name: "Adaptador Wifi USB 5 dBi Rompe Muro 300 Mbps MW300UH",
       brand: "Mercusys",
+      price: 230.00,
       description: "Adaptador de alta ganancia para PC",
       speed: "300 Mbps",
       features: ["2× antenas 5 dBi", "2×2 MIMO", "Compatible Windows"],
-       image: "image/router/3.png",
+      image: "image/router/3.png",
     },
     {
       name: "Router inalámbrico N 2.4 GHz 300 Mbps",
       brand: "Mercusys",
+      price: 220.00,
       description: "Router con 3 antenas externas",
       speed: "300 Mbps, 2.4 GHz",
       features: ["4 modos", "Control parental", "Compatible IPv6/IPTV"],
-       image: "image/router/4.png",
+      image: "image/router/4.png",
     },
     {
       name: "Access Point TP‑Link TL‑WA801N 300 Mbps",
       brand: "TP‑Link",
+      price: 180.00,
       description: "Punto de acceso/cliente/repetidor",
       speed: "300 Mbps, 2.4 GHz",
       features: ["WPA/WPA2", "PoE pasivo", "2 antenas"],
@@ -174,6 +190,7 @@ export const productData = {
     {
       name: "ALARMA SMART RESIDENCIAL CONTRA ROBO Hagroy HS‑X",
       brand: "Hagroy",
+      price: 150.00,
       description: "Kit inteligente con integración de cámaras",
       features: [
         "8 zonas cableadas",
@@ -183,11 +200,12 @@ export const productData = {
         "App iHagroy",
         "Central GSM/4G",
       ],
-       image: "image/alarm/1.png",
+      image: "image/alarm/1.png",
     },
     {
       name: "ALARMA COMUNITARIA ALCOM MAX RED 4G LTE ALMX4G",
       brand: "Genérico",
+      price: 170.00,
       description: "Sistema de alarma comunitaria avanzada",
       features: [
         "Hasta 2000 usuarios y controles",
@@ -196,7 +214,7 @@ export const productData = {
         "Monitoreo web",
         "Salidas para luces/reflectores",
       ],
-       image: "image/alarm/2.png",
+      image: "image/alarm/2.png",
     },
   ],
 };
