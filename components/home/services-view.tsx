@@ -92,7 +92,7 @@ const servicios: Servicio[] = [
 ];
 
 function ServiceCard({ servicio, index }: { servicio: Servicio; index: number }) {
-  const whatsappNumber = "990807069";
+  const whatsappNumber = "931090909";
   const mensaje = `Hola, deseo más información sobre ${servicio.titulo}`;
   const whatsappURL = `https://wa.me/51${whatsappNumber}?text=${encodeURIComponent(mensaje)}`;
 
@@ -140,7 +140,7 @@ function ServiceCard({ servicio, index }: { servicio: Servicio; index: number })
             {servicio.descripcion}
           </motion.p>
 
-          <div className="flex justify-between items-center mb-4">
+          {/* <div className="flex justify-between items-center mb-4">
             <motion.div
               className="flex items-center"
               initial={{ opacity: 0, x: -20 }}
@@ -174,7 +174,7 @@ function ServiceCard({ servicio, index }: { servicio: Servicio; index: number })
             >
               {servicio.precio}
             </motion.div>
-          </div>
+          </div> */}
 
           <motion.a
             href={whatsappURL}
@@ -184,7 +184,7 @@ function ServiceCard({ servicio, index }: { servicio: Servicio; index: number })
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 + 0.6 }}
             whileTap={{ scale: 0.95 }}
-            className="block text-center w-full bg-gray-900 dark:bg-white text-white dark:text-gray-900 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors"
+            className="block mt-10 font-semibold text-center w-full bg-[#D29D69] dark:bg-[#F8BB7C] text-white dark:text-gray-900 py-2 rounded-md hover:bg-gray-800 dark:hover:bg-gray-100 transition-colors hover:text-[#F8BB7C] hover:dark:text-[#D29D69]"
           >
             Reservar ahora
           </motion.a>

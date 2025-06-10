@@ -65,7 +65,7 @@ export function ContactView() {
                 </div>
                 <div className="ml-4">
                   <h4 className="text-lg font-medium text-gray-900 dark:text-white">Teléfono</h4>
-                  <p className="text-gray-600 dark:text-gray-400">+51 990 807 069</p>
+                  <p className="text-gray-600 dark:text-gray-400">+51 931 090 909</p>
                 </div>
               </div>
               <div className="flex items-start">

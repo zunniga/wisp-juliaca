@@ -35,7 +35,7 @@ export default function ProductCatalog() {
 
   const contactWhatsApp = (productName: string) => {
     const message = encodeURIComponent(`Hola, estoy interesado en ${productName}. ¿Podría darme más información?`)
-    window.open(`https://wa.me/990807069?text=${message}`, "_blank")
+    window.open(`https://wa.me/51931090909?text=${message}`, "_blank")
   }
 
   const getAllProducts = () => {
@@ -244,7 +244,7 @@ export default function ProductCatalog() {
           ) : (
             // Mostrar pestañas normales cuando no hay búsqueda
             <>
-              <TabsList className="grid w-full grid-cols-4 mb-8">
+              <TabsList className="grid w-full grid-cols-4 mb-8 bg-[#D29D69] text-white">
                 <TabsTrigger value="camaras">Cámaras</TabsTrigger>
                 <TabsTrigger value="switches">Switches</TabsTrigger>
                 <TabsTrigger value="routers">Routers</TabsTrigger>
@@ -254,7 +254,7 @@ export default function ProductCatalog() {
               {(Object.keys(productData) as Array<keyof typeof productData>).map((category) => (
                 <TabsContent key={category} value={category} className="mt-0">
                   <motion.div
-                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6"
+                    className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-16"
                     variants={container}
                     initial="hidden"
                     animate="show"

@@ -169,7 +169,7 @@ export default function Header() {
                 className="bg-[#25D366] hover:bg-[#20b358] text-white font-medium px-4 py-2 rounded-full transition-all duration-200 hover:scale-105"
               >
                 <Link
-                  href="https://wa.me/1234567890"
+                  href="https://wa.me/51931090909?text=Hola,%20deseo%20más%20información%20sobre%20los%20servicios%20y%20productos"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center space-x-2"

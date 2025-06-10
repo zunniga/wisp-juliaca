@@ -118,7 +118,7 @@ export function FirstSection() {
               </Link>
 
               <Link
-                href="https://wa.me/51990807069?text=Hola,%20deseo%20más%20información"
+                href="https://wa.me/51931090909?text=Hola,%20deseo%20más%20información%20sobre%20los%20servicios%20y%20productos"
                 target="_blank"
                 rel="noopener noreferrer"
               >

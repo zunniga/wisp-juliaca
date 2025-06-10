@@ -5,7 +5,7 @@ import { MapPin, Phone, Mail, Wifi, Shield, Network, Facebook, Instagram, Twitte
 
 export function Footer() {
   const handlePhoneClick = () => {
-    window.open("https://wa.me/51990807069", "_blank")
+    window.open("https://wa.me/51931090909", "_blank")
   }
 
   const containerVariants = {
@@ -145,7 +145,7 @@ export function Footer() {
                 >
                   <Phone className="h-4 w-4 md:h-5 md:w-5 text-[#D29D69] dark:text-[#F8BB7C] flex-shrink-0" />
                   <p className="group-hover:text-[#D29D69] dark:group-hover:text-[#F8BB7C] transition-colors duration-300 text-xs md:text-sm">
-                    +51 990 807 069
+                    +51 931 090 909
                   </p>
                 </motion.div>
 
