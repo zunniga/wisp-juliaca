@@ -15,21 +15,21 @@ const poppins = Poppins({
 });
 
 export const metadata: Metadata = {
-  title: "Corporación Inalta - Formación Profesional de Alto Nivel",
+  title: "Wisp - Soluciones en Telecomunicaciones de Alta Calidad",
   description:
-    "Corporación Inalta es una empresa peruana especializada en ofrecer cursos y diplomados para profesionales de diversos sectores, promoviendo el desarrollo y la capacitación continua.",
+    "Wisp es una empresa peruana especializada en brindar soluciones integrales en telecomunicaciones, ofreciendo servicios de internet, redes y conectividad para hogares y empresas.",
   keywords:
-    "Corporación Inalta, cursos profesionales, diplomados en Perú, capacitación continua, educación para profesionales, formación especializada, cursos en línea",
+    "Wisp, telecomunicaciones Perú, internet empresarial, servicios de conectividad, redes inalámbricas, soluciones en telecomunicaciones, Wisp Perú",
   openGraph: {
-    title: "Corporación Inalta - Formación Profesional de Alto Nivel",
+    title: "Wisp - Soluciones en Telecomunicaciones de Alta Calidad",
     description:
-      "Corporación Inalta ofrece cursos y diplomados en Perú para profesionales de distintos rubros. Impulsa tu desarrollo con formación especializada y de calidad.",
+      "Wisp brinda servicios de telecomunicaciones en Perú, con soluciones personalizadas de internet, redes y conectividad para hogares, negocios e instituciones.",
     images: ["/images/og-image.jpg"],
     type: "website",
     locale: "es_PE",
   },
-
 };
+
 
 export default function RootLayout({
   children,
